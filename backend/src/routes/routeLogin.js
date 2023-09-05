@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const routelogin = express();
 
 // esto es para ver los registros cargados
-routelogin.get('/verRegistros', (req,res) =>{
+routelogin.get('/verRegistros', (req, res) =>{
     
     mysqlconnecction.query('select * from usuario', (err, registros) =>{
     
@@ -25,7 +25,7 @@ routelogin.get('/verRegistros', (req,res) =>{
 routelogin.post('/Registrar', bodyparser.json(), (req, res) =>{
 
     // variables de los datos a resivir
-    const {nombre, apellido, edad, usuario, correo, contraseña} = req.body;
+    const {nombre, apellido, edad, usuario, correo, contraseña, roles} = req.body;
     // variable a encriptar
     let hash = bcrypt.hashSync(contraseña, 10);
 
@@ -74,10 +74,12 @@ routelogin.post('/Registrar', bodyparser.json(), (req, res) =>{
 
 
     // buscar los registros y comparar 
-    mysqlconnecction.query('select * from usuario where correo =?', [correo], (err,reg) =>{
+    mysqlconnecction.query('select * from usuario where correo =?', [correo], (err, reg) =>{
     
         if(err){
-            console.log('Error en la base de datos --> ', err);
+
+            console.log('Error en la base de datos al buscar los registros --> ', err);
+      
         }else{
             
             if(reg.length > 0){
@@ -85,12 +87,17 @@ routelogin.post('/Registrar', bodyparser.json(), (req, res) =>{
                     status:false,
                     mensaje:"El registro ya existe"
                 })
+
             }else{
-                mysqlconnecction.query('insert into usuario(nombre, apellido, edad, usuario, correo, contraseña) value (?,?,?,?,?,?)', [nombre, apellido, edad, usuario, correo, hash], (err, reg) =>{
+
+                mysqlconnecction.query('insert into usuario(nombre, apellido, edad, usuario, correo, contraseña, roles) value (?,?,?,?,?,?,?)', [nombre, apellido, edad, usuario, correo, hash, roles], (err, reg) =>{
 
                     if(err){
-                        console.log('Error en la base de datos --> ', err);
+      
+                        console.log('Error en la base de datos al registrar un nuevo usuario --> ', err);
+      
                     }else{
+      
                         res.json({
                             status:true,
                             mensaje:"El registro a sido exitoso"
@@ -103,41 +110,56 @@ routelogin.post('/Registrar', bodyparser.json(), (req, res) =>{
 })
 
 // logear usuario
-routelogin.post('/Login', bodyparser.json(), (req,res)=>{
+routelogin.post('/Login', bodyparser.json(), (req, res)=>{
 
     const {correo,contraseña} = req.body;
     console.log(correo);
 
     if(!correo){
+      
         res.json({
             status:false,
             mensaje:"El correo es un campo obligatorio"
         })
+   
     }else if(!contraseña){
+   
         res.json({
             status:false,
             mensaje:"La contraseña es un campo obligatorio"
         })
+   
     }else{
+   
         mysqlconnecction.query('select * from usuario where correo =?', [correo], (err, reg)=>{
             
             if(err){
-                console.log('Error en la base de datos --> ', err);
+   
+                console.log('Error en la base de datos al buscar el registro del usuario --> ', err);
+   
             }else{
+   
                 if(reg.length > 0){
+   
                     const compare = bcrypt.compareSync(contraseña, reg[0].contraseña);
+   
                     if(compare){
+   
                         res.json({
                             status:true,
                             mensaje:"EL correo y la contraseña son correctos"
                         })
+   
                     }else{
+   
                         res.json({
                             status:false,
                             mensaje:"La contraseña es incorrecta"
                         })
                     }
+   
                 }else{
+   
                     res.json({
                         status:false,
                         mensaje:"El ususario es incorrecto"
@@ -168,7 +190,7 @@ routelogin.delete('/ClearLog', bodyparser.json(), (req, res) =>{
 
     mysqlconnecction.query('delete from usuario where correo =? ', [correo], (err,reg)=>{
         if(err){
-            console.log('Error en la base de datos al borrar --> ', err);
+            console.log('Error en la base de datos al borrar al ususario --> ', err);
         }else{
             res.send('El registro se borro de forma exitosa');
         }
