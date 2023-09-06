@@ -50,7 +50,7 @@ routeEstado.post('/cargarEstado', bodyparser.json(), (req, res)=>{
             console.log("Error en la base de datos al cargar un estado --> ", err);
         }else{
             res.json({
-                status:false,
+                status:true,
                 mensaje:"El estado se cargo correctamente"
             })
         }
