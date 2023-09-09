@@ -12,12 +12,19 @@ app.set('puerto', 2000);
 app.use(morgan('dev'));
 
 // Rutas
+// LOGIN
 app.use(require('./routes/routeLogin.js'));
+// EMPRESAS
 app.use(require('./routes/routeEmpresas.js'));
+// ESTADOS
 app.use(require('./routes/routeEstado.js'));
+// DROIDES
 app.use(require('./routes/routeDroides.js'));
+// MODELOS
 app.use(require('./routes/routeModelos.js'));
+// VEHICULOS
 app.use(require('./routes/routeVehiculos.js'));
+// TIPO DE PRODUCTOS
 app.use(require('./routes/routeTipoProducto.js'));
 
 // prueba de si funcionan los methodos de llamada

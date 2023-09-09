@@ -73,7 +73,113 @@ routeEmpresas.post('/cargarEmpresas', bodyparser.json(), (req, res)=>{
     })
 })
 
+// ACA VOY A PONER LOS METHODOS PARA VER LOS REGISTROS LAS FORMAS DE LLAMAR Y VER LOS REGISTROS
 
+// LLAMAR TODOS LOS REGISTROS ENLAZANDO TODAS LAS TABLAS 
+ 
+routeEmpresas.get('/verTodasLasEmpresas', (req, res) =>{
 
+    mysqlconnecction.query('select emp.idempresas, emp.nombre_empresa, modelo.nombre_modelos, droide.nombre_droides, vehiculo.nombre_vehiculos, estado.nombre_estados, tipo_producto.nombre_tipo_productos from empresas as emp left join modelos as modelo on modelo.codigo = emp.codigo_modelo left join droides as droide on droide.codigo = emp.codigo_droides left join vehiculos as vehiculo on vehiculo.codigo = emp.codigo_vehiculos left join estados as estado on estado.codigo = emp.codigo_estado left join tipo_productos as tipo_producto on tipo_producto.codigo = emp.codigo_tipo_producto', (err, reg)=>{
+        if(err){
+            console.log("Error en la base de datos al buscar todos los registros por los codigos --> ", err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
 
+// TRAER LAS EMPRESAS POR EL MODELO
+routeEmpresas.get('/verlosmodelosdelasempresas', (req,res)=>{
+
+    mysqlconnecction.query('select emp.nombre_empresa, modelo.nombre_modelos from empresas as emp left join modelos as modelo on modelo.codigo = emp.codigo_modelo', (err, reg)=>{
+        if(err){
+            console.log("Error en la base de datos al buscar los registros por los modelos --> ", err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
+
+// TRAER LAS EMPRESAS POR LOS DROIDES
+routeEmpresas.get('/verlosdroidesdelasempresas', (req,res)=>{
+
+    mysqlconnecction.query('select emp.nombre_empresa, droide.nombre_droides from empresas as emp left join droides as droide on droide.codigo = emp.codigo_droides',(err,reg)=>{
+        if(err){
+            console.log("Error en la base de datos al buscar los registros por los droides --> ", err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
+
+//  TRAER LAS EMPRESAS POR LOS VEHICULOS
+routeEmpresas.get('/verlosvehiculosdelasempresas', (req,res)=>{
+
+    mysqlconnecction.query('select emp.nombre_empresa, vehiculo.nombre_vehiculos from empresas as emp left join vehiculos as vehiculo on vehiculo.codigo = emp.codigo_vehiculos', (err, reg) =>{
+        if(err){
+            console.log("Error en la base de datos al bucar los registros por vehiculo --> ", err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
+
+// TREAR LAS EMPRESAS POR LOS ESTADOS
+routeEmpresas.get('/verlosestadosdelasempresas', (req, res) =>{
+
+    mysqlconnecction.query('select emp.nombre_empresa, estado.nombre_estados from empresas as emp left join estados as estado on estado.codigo = emp.codigo_estado', (err, reg)=>{
+        if(err){
+            console.log("Error en la base de datos al buscar los registros por los estados --> ", err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
+
+// TRAER LAS EMPRESAS POR LOS TIPO DE PRODUCTOS
+routeEmpresas.get('/verlostipoproductodelasempresas', (req, res)=>{
+
+    mysqlconnecction.query('select emp.nombre_empresa, tipo_producto.nombre_tipo_productos from empresas as emp left join tipo_productos as tipo_producto on tipo_producto.codigo = emp.codigo_tipo_producto', (err, reg)=>{
+        if(err){
+            console.log("Error en la base de datos al buscar los registros por los tipo de producto --> ", err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
+
+// MODIFICAR LOS DATOS DE LAS EMPRESAS
+routeEmpresas.put('/modificarEmpresas', bodyparser.json(),(req,res)=>{
+
+    const {nombre_empresa, codigo_modelo, codigo_droides, codigo_vehiculos, codigo_estado, codigo_tipo_producto, idempresas} = req.body;
+
+    mysqlconnecction.query('update empresas set nombre_empresas = ?, codigo_modelo = ?, codigo_droides = ?, codigo_vehiculos = ?, codigo_estado = ?, codigo_tipo_producto = ? where idempresas = ?', [nombre_empresa,codigo_modelo,codigo_droides,codigo_vehiculos,codigo_estado,codigo_tipo_producto], (err, reg)=>{
+        if(err){
+            console.log("Error en la base de datos al modificar una empresa --> ", err);
+        }else{
+            res.json({
+                status:true,
+                mensaje:"La empresa se modifico de manera correcta"
+            })
+        }
+    })
+})
+
+// verificar el token del usuario
+function verificationToken (req,res,next){
+
+    const bearer = req.headers['authorization'];
+
+    if(typeof bearer !== 'undefined'){
+
+        const token = bearer.split(" ")[1];
+
+        req.token = token;
+
+        next();
+    }else{
+
+        res.send('Debe contener un token');
+    }
+}
 module.exports = routeEmpresas;

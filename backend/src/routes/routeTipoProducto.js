@@ -104,4 +104,21 @@ routeTipo_producto.delete('/BorrarTipoProducto', bodyparser.json(), (req, res)=>
     })
 })
 
+// verificar el token del usuario
+function verificationToken (req,res,next){
+
+    const bearer = req.headers['authorization'];
+
+    if(typeof bearer !== 'undefined'){
+
+        const token = bearer.split(" ")[1];
+
+        req.token = token;
+
+        next();
+    }else{
+
+        res.send('Debe contener un token');
+    }
+}
 module.exports = routeTipo_producto;

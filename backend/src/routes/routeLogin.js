@@ -7,18 +7,32 @@ const jwt = require('jsonwebtoken');
 
 const routelogin = express();
 
-// esto es para ver los registros cargados
-routelogin.get('/verRegistros', (req, res) =>{
+// esto es para ver los registros cargados Y verificando si esta el usuario logeado con el token 
+routelogin.get('/verRegistros', verificationToken, (req, res) =>{
     
-    mysqlconnecction.query('select * from usuario', (err, registros) =>{
-    
+    jwt.verify(req.token,'251778',(err, reg)=>{
+        
         if(err){
-            console.log('error en la base de datos ---> ', err);
+        
+            res.send('Algo anda mal con el token');
+
         }else{
-            res.json(registros);
+          
+            mysqlconnecction.query('select * from usuario', (err, registros) =>{
+    
+                if(err){
+                   
+                    console.log('error en la base de datos ---> ', err);
+                
+                }else{
+                
+                    res.json(registros);
+                
+                }
+            })
         }
     })
-
+  
 })
 
 // registrar a los usuarios
@@ -145,10 +159,22 @@ routelogin.post('/Login', bodyparser.json(), (req, res)=>{
    
                     if(compare){
    
-                        res.json({
-                            status:true,
-                            mensaje:"EL correo y la contraseña son correctos"
-                        })
+                       // generar el token
+                     /*  jwt.sign({reg},'251778',(err,token)=>{
+                       
+                            res.json({
+                                status:true,
+                                dato:correo,
+                                mensaje:token
+                            })
+                       })*/
+
+                       // mientras se pureban las funciones sin la seguridad del token
+                       res.json({
+                        status:true,
+                        dato:correo,
+                        mensaje:"El usuario y la contraseña son correctas"
+                       })
    
                     }else{
    
@@ -196,5 +222,23 @@ routelogin.delete('/ClearLog', bodyparser.json(), (req, res) =>{
         }
     })
 })
+
+// verificar el token del usuario
+function verificationToken (req,res,next){
+
+    const bearer = req.headers['authorization'];
+
+    if(typeof bearer !== 'undefined'){
+
+        const token = bearer.split(" ")[1];
+
+        req.token = token;
+
+        next();
+    }else{
+
+        res.send('Debe contener un token');
+    }
+}
 
 module.exports = routelogin;
