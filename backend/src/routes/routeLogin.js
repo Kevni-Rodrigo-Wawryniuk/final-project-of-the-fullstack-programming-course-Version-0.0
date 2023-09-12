@@ -36,7 +36,7 @@ routelogin.get('/verRegistros', verificationToken, (req, res) =>{
 })
 
 // registrar a los usuarios
-routelogin.post('/Registrar', bodyparser.json(), (req, res) =>{
+routelogin.post('/Registros', bodyparser.json(), (req, res) =>{
 
     // variables de los datos a resivir
     const {nombre, apellido, edad, usuario, correo, contraseña, roles} = req.body;
@@ -127,6 +127,7 @@ routelogin.post('/Registrar', bodyparser.json(), (req, res) =>{
 routelogin.post('/Login', bodyparser.json(), (req, res)=>{
 
     const {correo,contraseña} = req.body;
+
     console.log(correo);
 
     if(!correo){
@@ -173,7 +174,7 @@ routelogin.post('/Login', bodyparser.json(), (req, res)=>{
                        res.json({
                         status:true,
                         dato:correo,
-                        mensaje:"El usuario y la contraseña son correctas"
+                        mensaje:"El correo y la contraseña son correctas"
                        })
    
                     }else{
@@ -188,7 +189,7 @@ routelogin.post('/Login', bodyparser.json(), (req, res)=>{
    
                     res.json({
                         status:false,
-                        mensaje:"El ususario es incorrecto"
+                        mensaje:"El correo es incorrecto"
                     })
                 }
             }

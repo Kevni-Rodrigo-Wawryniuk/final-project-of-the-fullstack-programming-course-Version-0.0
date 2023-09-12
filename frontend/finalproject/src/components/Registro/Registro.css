@@ -1,6 +1,20 @@
+body{
+    min-width: 20px;
+    min-width: 20px;
+
+    margin: 0%;
+    padding: 0%;
+}
+
 .containeBodyRegistro{
-    width: 993pt;
-    height: 501pt;
+    min-width: 20px;
+    min-height: 20px;
+
+    width: 1325px;
+    height: 1000px;
+
+    position: fixed;
+    top:0px;
 
     background-image: url(../images/abstracto-nebulosa-ultra-detalladoavif.avif);
     background-position: center center;
@@ -35,12 +49,14 @@
 .containeRegistros{
     min-width: 20px;
     min-height: 20px;
+    max-width: 400px;
+    max-height: 500px;
 
     position: fixed;
-    top: 15%;
-    bottom: 25%;
+    top: 10%;
+    bottom: 50%;
     right: 35%;
-    left: 34%;
+    left: 35%;
 
     display: flex;
     flex-direction: column;
