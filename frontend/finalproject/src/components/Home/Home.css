@@ -1,0 +1,16 @@
+.containeBodyHome{
+    width: 993pt;
+    height: 501pt;
+
+    background-image: url(../images/Atardecer.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
