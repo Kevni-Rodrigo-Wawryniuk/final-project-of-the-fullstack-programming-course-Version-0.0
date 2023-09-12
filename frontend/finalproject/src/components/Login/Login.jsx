@@ -1,10 +1,12 @@
 //import React,{useState} from "react";
 import './Login.css';
+// esto es para redireccionar a otra pagina
 import { Link } from "react-router-dom";
 
 function Login() {
 
     return (
+        // el primer div es el que use para el fondo de pantalla 
         <div className='bodyContaine'>
             <div>
                 <div className='containeRegistro'>
@@ -19,13 +21,13 @@ function Login() {
 
                     <input
                         type='text'
-                        value='usuario'
+                        //value=''
                         //    onChange={}
-                        placeholder='Usuario'
+                        placeholder='Correo'
                     />
                     <input
                         type='password'
-                        value='Contraseña'
+                        //value=''
                         //    onChange={}
                         placeholder='Password'
                     />

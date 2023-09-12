@@ -14,3 +14,66 @@
     align-items: center;
     justify-content: center;
 }
+
+.containeLogin{
+    min-height: 20px;
+    min-width:  20px;
+
+    position: fixed;
+    left: 10px;
+    top: 10px;
+
+    border-radius: 2px;
+}
+.containeLogin button:hover{
+    background-color: blue;
+}
+.containeLogin button:active{
+    background-color: white;
+}
+
+.containeRegistros{
+    min-width: 20px;
+    min-height: 20px;
+
+    position: fixed;
+    top: 15%;
+    bottom: 25%;
+    right: 35%;
+    left: 34%;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+    height: 500px;
+    width: 400px;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: transparent;
+    box-shadow: 1px 1px 10px black;
+}
+.containeRegistros h5{
+    text-decoration: underline;
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+.containeRegistros input{
+    width: 90%;
+    height: 25px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+.containeRegistros button:hover{
+    background-color: blue;
+}
+.containeRegistros button:active{
+    background-color: white;
+}

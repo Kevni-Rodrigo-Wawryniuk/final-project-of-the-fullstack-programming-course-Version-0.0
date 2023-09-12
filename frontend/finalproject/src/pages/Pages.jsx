@@ -1,3 +1,4 @@
+// aqui estan todas las paginas o archivos jsx para que solo se tenga que llamar un componente
 
 // pagina de login
 import Login from "../components/Login/Login.jsx";

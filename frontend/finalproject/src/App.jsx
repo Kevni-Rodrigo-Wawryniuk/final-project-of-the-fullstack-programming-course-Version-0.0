@@ -3,6 +3,7 @@
 //import { useState } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router';
+//Estas son las rutas de las paginas
 import { Empresa, Homes, Logins, Registros } from './pages/Pages';
 
 function App() {
