@@ -7,7 +7,7 @@ function Home() {
         <div className='containeBodyHome'>
             <div className='containeHomeButtons'>
                 <h2> Tablas </h2>
-                <Link>
+                <Link to='/Empresas'>
                     <button>Empresas</button>
                 </Link>
                 <Link>

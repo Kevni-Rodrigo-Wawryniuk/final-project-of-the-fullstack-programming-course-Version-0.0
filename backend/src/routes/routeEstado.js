@@ -104,7 +104,7 @@ routeEstado.delete('/borrarEstado', bodyparser.json(), (req,res) =>{
     if(!codigo){
         res.json({
             status:false,
-            mensaje:"El nombre del estado a borrar es un campo obligatorio"
+            mensaje:"El codigo del estado a borrar es un campo obligatorio"
         })
     }
 

@@ -165,6 +165,36 @@ routeEmpresas.put('/modificarEmpresas', bodyparser.json(),(req,res)=>{
     })
 })
 
+// BORRAR LOS DATOS DE LAS EMPRESAS
+routeEmpresas.delete('/BorrarEmpresa', bodyparser.json(), (req, res)=>{
+
+    const {idempresas} = req.body;
+
+    if(!idempresas){
+
+        res.json({
+            status:false,
+            mensaje:"El id de la empresa a borrar es un campo obligatorio"
+        })
+
+    }
+
+    mysqlconnecction.query('delete from empresas where idempresas =?', [idempresas], (err, registro)=>{
+
+        if(err){
+
+            console.log("Error en la base de datos al borrar un estado --> ", err);
+
+        }else{
+            res.json({
+                status:true,
+                mensaje:"La empresa se a borrado de manera correcta"
+            })
+        }
+
+    })
+})
+
 // verificar el token del usuario
 function verificationToken (req,res,next){
 

@@ -33,7 +33,8 @@
     align-items: center;
     justify-content: center;
 
-    border: 2px solid black;
+    border: 1px solid black;
+    box-shadow: 1px 1px 20px black;
 }
 .containeHomeButtons h2{
     color: black;
