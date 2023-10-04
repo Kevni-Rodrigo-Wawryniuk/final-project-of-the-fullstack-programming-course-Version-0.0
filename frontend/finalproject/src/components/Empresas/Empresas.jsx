@@ -22,19 +22,19 @@ function Empresas() {
                 <Link to='/Home'>
                     <button> volver </button>
                 </Link>
-                <Link to=''>
+                <Link to='/Droides'>
                     <button> Droides </button>
                 </Link>
-                <Link to=''>
+                <Link to='/Vehiculos'>
                     <button> Vehiculos </button>
                 </Link>
-                <Link to=''>
+                <Link to='/Estados'>
                     <button> Estado </button>
                 </Link>
-                <Link to=''>
+                <Link to='/Modelos'>
                     <button> Modelos </button>
                 </Link>
-                <Link to=''>
+                <Link to='/TipoDeProductos'>
                     <button> Tipo de productos </button>
                 </Link>
             </div>

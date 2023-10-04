@@ -21,11 +21,29 @@ routeDroides.get('/verDriodes', (req,res)=>{
         }
     })
 })
+// ver Droides
+routeDroides.get('/verDriode/:id_droides', (req,res)=>{
+
+    const {id_droides} = req.params;
+
+    mysqlconnecction.query('select * from droides where id_droides =?', [id_droides], (err, registro)=>{
+       
+        if(err){
+       
+            console.log('Error en la base de datos --> ', err);
+       
+        }else{
+       
+            res.json(registro);
+        }
+    })
+})
+
 
 // Cargar datos de los droides
 routeDroides.post('/cargarDroides', bodyparser.json(), (req, res)=>{
     
-    const {nombre_Droide, codigo} = req.body;
+    const {nombre_droides, codigo} = req.body;
 
     if(!codigo){
         res.json({
@@ -34,7 +52,7 @@ routeDroides.post('/cargarDroides', bodyparser.json(), (req, res)=>{
         })
     }
 
-    if(!nombre_Droide){
+    if(!nombre_droides){
         
         res.json({
         
@@ -43,7 +61,7 @@ routeDroides.post('/cargarDroides', bodyparser.json(), (req, res)=>{
         })
     }
 
-    mysqlconnecction.query('insert into droides (nombre_droides, codigo) value (?,?)', [nombre_Droide,codigo], (err, registro)=>{
+    mysqlconnecction.query('insert into droides (nombre_droides, codigo) value (?,?)', [nombre_droides,codigo], (err, registro)=>{
         
         if(err){
 
@@ -59,9 +77,10 @@ routeDroides.post('/cargarDroides', bodyparser.json(), (req, res)=>{
 })
 
 // modificar datos de los droides
-routeDroides.put('/modificarDroides', bodyparser.json(), (req, res)=>{
+routeDroides.put('/modificarDroides/:id_droide', bodyparser.json(), (req, res)=>{
     
-    const {codigo, nuevoDroide} = req.body;
+    const {id_droide} = req.params;
+    const {codigo, nombre_droides} = req.body;
 
     if(!codigo){
      
@@ -71,7 +90,7 @@ routeDroides.put('/modificarDroides', bodyparser.json(), (req, res)=>{
         })
     
     }
-    if(!nuevoDroide){
+    if(!nombre_droides){
 
         res.json({
             status:false,
@@ -79,7 +98,7 @@ routeDroides.put('/modificarDroides', bodyparser.json(), (req, res)=>{
         })
     }
 
-    mysqlconnecction.query('update droides set nombre_droides = ? where codigo =?', [nuevoDroide, codigo], (err, registro) =>{
+    mysqlconnecction.query('update droides set nombre_droides = ?, codigo =? where id_droides =?', [nombre_droides, codigo, id_droide], (err, registro) =>{
                     
         if(err){
                         
@@ -97,18 +116,12 @@ routeDroides.put('/modificarDroides', bodyparser.json(), (req, res)=>{
 })
 
 // borrar Droides
-routeDroides.delete('/BorrarDroide',bodyparser.json(), (req,res)=>{
+routeDroides.delete('/BorrarDroide/:id_droides', (req,res)=>{
 
-    const {codigo} = req.body;
+    const {id_droides} = req.params;
 
-    if(!codigo){
-        res.json({
-            status:false,
-            mensaje:"El codigo es un campo obligatorio"
-        })
-    }
 
-    mysqlconnecction.query('delete from droides where codigo =?',[codigo],(err,reg)=>{
+    mysqlconnecction.query('delete from droides where id_droides =?',[id_droides],(err,reg)=>{
 
         if(err){
             console.log("Error en la base de datos al borrar el droide --> ", err);

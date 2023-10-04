@@ -42,27 +42,36 @@ alter table stockst.empresas change column nombre_empresa nombre_empresa varchar
 select * from stockst.empresas;
 -- drop table stockst.empresas;
 
-
+select * from stockst.droides;
 -- tabla Droides
 create table droides(
 id_droides int not null auto_increment,
 nombre_droides varchar(100) not null,
+codigo varchar(50) not null,
 primary key(id_droides)
 );
 alter table droides add column codigo varchar(50) not null;
-alter table stockst.droides change column codigo codigo varchar(3) not null;
+alter table stockst.droides change column codigo codigo varchar(50) not null;
+
+select * from stockst.vehiculos;
 -- tabla vehiculos
 create table vehiculos(
 id_vehiculos int not null auto_increment,
 nombre_vehiculos varchar(100) not null,
+codigo varchar(50) not null,
 primary key (id_vehiculos)
 );
-alter table stockst.vehiculos change column codigo codigo varchar(3) not null;
+alter table stockst.vehiculos add column codigo varchar(3) not null;
 
+delete from stockst.estados where id_estados = 1;
+update stockst.estados set nombre_estados = 'kevin', codigo = '001' where id_estados = 1;
+
+select * from stockst.estados;
 -- tabla estados
 create table estados(
 id_estados int not null auto_increment,
 nombre_estados varchar(100) not null,
+codigo varchar(50) not null,
 primary key (id_estados)
 );
 alter table  stockst.estados change column codigo codigo varchar(50) not null;
@@ -71,6 +80,7 @@ alter table  stockst.estados change column codigo codigo varchar(50) not null;
 create table modelos(
 id_modelos int not null auto_increment,
 nombre_modelos varchar(100) not null,
+codigo varchar(50) not null,
 primary key (id_modelos)
 );
 alter table stockst.modelos change column codigo codigo varchar(50) not null;
@@ -79,6 +89,7 @@ alter table stockst.modelos change column codigo codigo varchar(50) not null;
 create table tipo_productos(
 id_tipo_productos int not null auto_increment,
 nombre_tipo_productos varchar(100) not null,
+codigo varchar(50) not null,
 primary key (id_tipo_productos)
 );
 alter table stockst.tipo_productos change column codigo codigo varchar(50) not null;
@@ -100,3 +111,11 @@ select emp.nombre_empresa, modelo.nombre_modelos, droide.nombre_droides, vehicul
 -- select * from stockst.tipo_productos;
         
 -- update stockst.tipo_productos set codigo = '002' where id_tipo_productos = 3;
+
+-- por problemas de coneccion 
+
+-- con esto se pueden ver los usuarios
+select user, plugin from mysql.user;
+
+-- con esto se puede moficicar el usuario y conteraseña
+alter user 'root'@'localhost' identified with mysql_native_password by 'root';

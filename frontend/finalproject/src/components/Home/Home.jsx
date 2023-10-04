@@ -10,19 +10,19 @@ function Home() {
                 <Link to='/Empresas'>
                     <button>Empresas</button>
                 </Link>
-                <Link>
+                <Link to='/Droides'>
                     <button>Droides</button>
                 </Link>
-                <Link>
+                <Link to='/Vehiculos'>
                     <button>Vehiculos</button>
                 </Link>
-                <Link>
+                <Link to='/Modelos'>
                     <button>Modelos</button>
                 </Link>
-                <Link>
+                <Link to='/TipoDeProductos'>
                     <button>Tipos de productos</button>
                 </Link>
-                <Link>
+                <Link to='/Estados'>
                     <button>Estados</button>
                 </Link>
                 <Link to='/'>

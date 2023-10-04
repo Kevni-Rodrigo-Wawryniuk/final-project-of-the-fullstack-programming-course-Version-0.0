@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const routeTipo_producto = express();
 
-// ver Modelos
+// ver tipo de productos
 routeTipo_producto.get('/verTipoProducto', (req,res)=>{
 
     mysqlconnecction.query('select * from tipo_productos',(err,reg)=>{
@@ -19,12 +19,28 @@ routeTipo_producto.get('/verTipoProducto', (req,res)=>{
     })
 })
 
-// cargar modelos
+// ver tipo de producto por id
+routeTipo_producto.get('/verTipoProductos/:id_tipo_productos', (req,res)=>{
+
+    const {id_tipo_productos} = req.params;
+
+    mysqlconnecction.query('select * from tipo_productos where id_tipo_productos =?', [id_tipo_productos],(err,reg)=>{
+
+        if(err){
+            console.log("Error en la base de datos --> ", err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
+
+
+// cargar tipo de productos
 routeTipo_producto.post('/cargarTipoProducto', bodyparser.json(),(req,res)=>{
 
-    const {nombre_tipo_producto, codigo} = req.body;
+    const {nombre_tipo_productos, codigo} = req.body;
 
-    if(!nombre_tipo_producto){
+    if(!nombre_tipo_productos){
         res.json({
             status:false,
             mensaje:"El nombre del Tipo de producto es un campo obligatorio"
@@ -37,7 +53,7 @@ routeTipo_producto.post('/cargarTipoProducto', bodyparser.json(),(req,res)=>{
         })
     }
 
-    mysqlconnecction.query('insert into tipo_productos (nombre_tipo_productos, codigo) value (?,?)', [nombre_tipo_producto,codigo], (err,reg)=>{
+    mysqlconnecction.query('insert into tipo_productos (nombre_tipo_productos, codigo) value (?,?)', [nombre_tipo_productos,codigo], (err,reg)=>{
 
         if(err){
             console.log("Error en la base de datos al cargar un tipo de producto --> ", err);
@@ -50,12 +66,13 @@ routeTipo_producto.post('/cargarTipoProducto', bodyparser.json(),(req,res)=>{
     })
 })
 
-// modificar modelos
-routeTipo_producto.put('/modificarTipoProducto', bodyparser.json(), (req,res)=>{
+// modificar tipo de productos
+routeTipo_producto.put('/modificarTipoProducto/:id_tipo_productos', bodyparser.json(), (req,res)=>{
 
-    const {nombre_tipo_producto, codigo} = req.body;
+    const {id_tipo_productos} = req.params;
+    const {nombre_tipo_productos, codigo} = req.body;
 
-    if(!nombre_tipo_producto){
+    if(!nombre_tipo_productos){
         res.json({
             status:false,
             mensaje:"El nombre tipo de producto es un campo obligatorio"
@@ -68,7 +85,7 @@ routeTipo_producto.put('/modificarTipoProducto', bodyparser.json(), (req,res)=>{
         })
     }
 
-    mysqlconnecction.query('update tipo_productos set nombre_tipo_productos =? where codigo =?', [nombre_tipo_producto, codigo], (err,reg)=>{
+    mysqlconnecction.query('update tipo_productos set nombre_tipo_productos =?, codigo =? where id_tipo_productos =?', [nombre_tipo_productos, codigo, id_tipo_productos], (err,reg)=>{
         if(err){
             console.log("Error en la base de datos al modificar un tipo de producto --> ", err);
         }else{
@@ -81,18 +98,11 @@ routeTipo_producto.put('/modificarTipoProducto', bodyparser.json(), (req,res)=>{
 })
 
 // borrar modelos
-routeTipo_producto.delete('/BorrarTipoProducto', bodyparser.json(), (req, res)=>{
+routeTipo_producto.delete('/BorrarTipoProducto/:id_tipo_productos', bodyparser.json(), (req, res)=>{
 
-    const {codigo} = req.body;
+    const {id_tipo_productos} = req.params;
 
-    if(!codigo){
-        res.json({
-            status:false,
-            mensaje:"El codigo es un campo obligatorio"
-        })
-    }
-
-    mysqlconnecction.query('delete from tipo_productos where codigo =?', [codigo], (err, reg)=>{
+    mysqlconnecction.query('delete from tipo_productos where id_tipo_productos =?', [id_tipo_productos], (err, reg)=>{
         if(err){
             console.log("Error en la base de datos al borrar un tipo de producto --> ", err);
         }else{

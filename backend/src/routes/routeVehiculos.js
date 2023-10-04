@@ -19,12 +19,28 @@ routeVehiculos.get('/verVehiculos', (req,res)=>{
     })
 })
 
+// ver modelos por id
+routeVehiculos.get('/verVehiculo/:id_vehiculos', (req,res)=>{
+
+    const {id_vehiculos} = req.params;
+
+    mysqlconnecction.query('select * from vehiculos where id_vehiculos =?', [id_vehiculos],(err,reg)=>{
+
+        if(err){
+            console.log("Error en la base de datos --> ", err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
+
+
 // cargar modelos
 routeVehiculos.post('/cargarVehiculos', bodyparser.json(),(req,res)=>{
 
-    const {nombre_vehiculo, codigo} = req.body;
+    const {nombre_vehiculos, codigo} = req.body;
 
-    if(!nombre_vehiculo){
+    if(!nombre_vehiculos){
         res.json({
             status:false,
             mensaje:"El nombre del vehiculo es un campo obligatorio"
@@ -37,7 +53,7 @@ routeVehiculos.post('/cargarVehiculos', bodyparser.json(),(req,res)=>{
         })
     }
 
-    mysqlconnecction.query('insert into vehiculos (nombre_vehiculos, codigo) value (?,?)', [nombre_vehiculo,codigo], (err,reg)=>{
+    mysqlconnecction.query('insert into vehiculos (nombre_vehiculos, codigo) value (?,?)', [nombre_vehiculos,codigo], (err,reg)=>{
 
         if(err){
             console.log("Error en la base de datos al cargar un vehiculo --> ", err);
@@ -51,11 +67,13 @@ routeVehiculos.post('/cargarVehiculos', bodyparser.json(),(req,res)=>{
 })
 
 // modificar modelos
-routeVehiculos.put('/modificarVehiculos', bodyparser.json(), (req,res)=>{
+routeVehiculos.put('/modificarVehiculos/:id_vehiculos', bodyparser.json(), (req,res)=>{
 
-    const {nombre_vehiculo, codigo} = req.body;
+    const {id_vehiculos} = req.params;
 
-    if(!nombre_vehiculo){
+    const {nombre_vehiculos, codigo} = req.body;
+
+    if(!nombre_vehiculos){
         res.json({
             status:false,
             mensaje:"El nombre es un campo obligatorio"
@@ -68,7 +86,7 @@ routeVehiculos.put('/modificarVehiculos', bodyparser.json(), (req,res)=>{
         })
     }
 
-    mysqlconnecction.query('update vehiculos set nombre_vehiculos =? where codigo =?', [nombre_vehiculo, codigo], (err,reg)=>{
+    mysqlconnecction.query('update vehiculos set nombre_vehiculos =?, codigo =? where id_vehiculos =?', [nombre_vehiculos, codigo, id_vehiculos], (err,reg)=>{
         if(err){
             console.log("Error en la base de datos al modificar un Vehiculo --> ", err);
         }else{
@@ -81,18 +99,11 @@ routeVehiculos.put('/modificarVehiculos', bodyparser.json(), (req,res)=>{
 })
 
 // borrar modelos
-routeVehiculos.delete('/BorrarVehiculo', bodyparser.json(), (req, res)=>{
+routeVehiculos.delete('/BorrarVehiculo/:id_vehiculos', (req, res)=>{
 
-    const {codigo} = req.body;
+    const {id_vehiculos} = req.params;
 
-    if(!codigo){
-        res.json({
-            status:false,
-            mensaje:"El codigo es un campo obligatorio"
-        })
-    }
-
-    mysqlconnecction.query('delete from vehiculos where codigo =?', [codigo], (err, reg)=>{
+    mysqlconnecction.query('delete from vehiculos where id_vehiculos =?', [id_vehiculos], (err, reg)=>{
         if(err){
             console.log("Error en la base de datos al borrar un vehiculo --> ", err);
         }else{

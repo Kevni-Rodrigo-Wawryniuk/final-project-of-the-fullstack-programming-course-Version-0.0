@@ -19,12 +19,27 @@ routeModelos.get('/verModelos', (req,res)=>{
     })
 })
 
+// ver modelos por id
+routeModelos.get('/verModelo/:id_modelos', (req,res)=>{
+    
+    const {id_modelos} = req.params;
+
+    mysqlconnecction.query('select * from modelos where id_modelos =?', [id_modelos],(err,reg)=>{
+
+        if(err){
+            console.log("Error en la base de datos --> ", err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
+
 // cargar modelos
 routeModelos.post('/cargarModelos', bodyparser.json(),(req,res)=>{
 
-    const {nombre_modelo, codigo} = req.body;
+    const {nombre_modelos, codigo} = req.body;
 
-    if(!nombre_modelo){
+    if(!nombre_modelos){
         res.json({
             status:false,
             mensaje:"El nombre del modelo es un campo obligatorio"
@@ -37,7 +52,7 @@ routeModelos.post('/cargarModelos', bodyparser.json(),(req,res)=>{
         })
     }
 
-    mysqlconnecction.query('insert into modelos (nombre_modelos, codigo) value (?,?)', [nombre_modelo,codigo], (err,reg)=>{
+    mysqlconnecction.query('insert into modelos (nombre_modelos, codigo) value (?,?)', [nombre_modelos,codigo], (err,reg)=>{
 
         if(err){
             console.log("Error en la base de datos al cargar un modelo --> ", err);
@@ -51,11 +66,13 @@ routeModelos.post('/cargarModelos', bodyparser.json(),(req,res)=>{
 })
 
 // modificar modelos
-routeModelos.put('/modificarModelo', bodyparser.json(), (req,res)=>{
+routeModelos.put('/modificarModelo/:id_modelos', bodyparser.json(), (req,res)=>{
 
-    const {nombre_modelo, codigo} = req.body;
+    const {id_modelos} = req.params;
 
-    if(!nombre_modelo){
+    const {nombre_modelos, codigo} = req.body;
+
+    if(!nombre_modelos){
         res.json({
             status:false,
             mensaje:"El nombre es un campo obligatorio"
@@ -68,7 +85,7 @@ routeModelos.put('/modificarModelo', bodyparser.json(), (req,res)=>{
         })
     }
 
-    mysqlconnecction.query('update modelos set nombre_modelos =? where codigo =?', [nombre_modelo, codigo], (err,reg)=>{
+    mysqlconnecction.query('update modelos set nombre_modelos =?, codigo =? where id_modelos =?', [nombre_modelos, codigo, id_modelos], (err,reg)=>{
         if(err){
             console.log("Error en la base de datos al modificar un modelo --> ", err);
         }else{
@@ -81,18 +98,11 @@ routeModelos.put('/modificarModelo', bodyparser.json(), (req,res)=>{
 })
 
 // borrar modelos
-routeModelos.delete('/BorrarModelo', bodyparser.json(), (req, res)=>{
+routeModelos.delete('/BorrarModelo/:id_modelos', bodyparser.json(), (req, res)=>{
 
-    const {codigo} = req.body;
+    const {id_modelos} = req.params;
 
-    if(!codigo){
-        res.json({
-            status:false,
-            mensaje:"El codigo es un campo obligatorio"
-        })
-    }
-
-    mysqlconnecction.query('delete from modelos where codigo =?', [codigo], (err, reg)=>{
+    mysqlconnecction.query('delete from modelos where id_modelos =?', [id_modelos], (err, reg)=>{
         if(err){
             console.log("Error en la base de datos al borrar un modelo --> ", err);
         }else{
