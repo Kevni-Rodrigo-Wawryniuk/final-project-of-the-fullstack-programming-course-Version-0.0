@@ -16,6 +16,7 @@ function TipoDeProductos() {
 
         event.preventDefault();
         
+        // eslint-disable-next-line no-unused-vars
         const request = await API.deleteTipoDeProductos(id_tipo_productos);
 
         window.location.href='/TipoDeProductos';

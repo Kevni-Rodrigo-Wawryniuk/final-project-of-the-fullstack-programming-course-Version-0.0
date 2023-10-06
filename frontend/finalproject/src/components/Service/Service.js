@@ -450,8 +450,22 @@ export async function getEmpreas(){
 
     return dato;    
 }
+
+// TRAER LOS DATOS POR ID
+export async function getEmpresasByID(id_Empresa){
+
+    const Options={
+        method:'GET',
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    }
+    const request = await fetch(`${URL}/VerEmpresas/${id_Empresa}`, Options);
+    const dato = await request.json();
+    return dato [0];
+}
 // MODIFICAR LOS DATOS
-export async function updateEmpresas(id_Empresa, modificar){
+export async function putEmpresas(id_Empresa, modificar){
 
     const Options={
         method:'PUT',
@@ -468,7 +482,7 @@ export async function updateEmpresas(id_Empresa, modificar){
     return dato;
 }
 // CARGAR DATOS
-export async function addEmpresas(date){
+export async function postEmpresas(date){
 
     const Options={
         method:'POST',
@@ -485,17 +499,17 @@ export async function addEmpresas(date){
     return dato;
 }
 // BORRAR DATOS
-/*
-export async function deleteEmpresas(id_Empresa, borrar){
+export async function deleteEmpresas(idempresa){
 
     const Options = {
         method:'DELETE',
-        body: JSON.stringify(borrar),
         headers: {
             'Content-Type': 'application/json',
         }
     }
 
-    //const request = await fetch(`${URL}/`)
-}*/
+    const request = await fetch(`${URL}/BorrarEmpresa/${idempresa}`, Options);
+    const dato = request.json();
+    return dato;
+}
 ///////////////////////////////////////////////////////

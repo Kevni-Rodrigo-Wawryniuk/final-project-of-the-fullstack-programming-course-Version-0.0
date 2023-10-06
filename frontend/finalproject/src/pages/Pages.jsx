@@ -22,6 +22,16 @@ export const Homes = () => <Home />;
 import Empresas from "../components/Empresas/Empresas.jsx";
 
 export const Empresa = () => <Empresas />;
+
+// CARGAR EMPRESAS
+import CargarEmpresas from "../components/Empresas/CargarEmpresas.jsx";
+
+export const CargarEmpresa = () => <CargarEmpresas />
+
+// EDITAR EMPRESAS
+import EditarEmpresas from "../components/Empresas/EditarEmpresas.jsx";
+
+export const EditarEmpresa = () => <EditarEmpresas />;
 //////////////////////////////////////////////////////////////////////////////////////////
 
 

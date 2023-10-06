@@ -2,7 +2,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router';
 //Estas son las rutas de las paginas
-import { Empresa, Homes, Logins, Registros, Droide, CargarDroide, Estado, CargarEstado, EditarEstado, EditarDroide, Vehiculo, Modelo, CargarModelo, EditarModelo, TipoDeProducto, EditarTipoDeProducto, CargarTipoDeProducto, CargarVehiculo, EditarVehiculo } from './pages/Pages.jsx';
+import { Empresa, Homes, Logins, Registros, Droide, CargarDroide, Estado, CargarEstado, EditarEstado, EditarDroide, Vehiculo, Modelo, CargarModelo, EditarModelo, TipoDeProducto, EditarTipoDeProducto, CargarTipoDeProducto, CargarVehiculo, EditarVehiculo, CargarEmpresa, EditarEmpresa } from './pages/Pages.jsx';
 
 
 
@@ -18,6 +18,8 @@ function App() {
         <Route path='/Home' element={<Homes />} />
 
         <Route path='/Empresas' element={<Empresa />} />
+        <Route path='/AgregarEmpresas' element={<CargarEmpresa />} />
+        <Route path='/ModificarEmpresas/:idempresas' element={<EditarEmpresa />} />
 
         <Route path='/Droides' element={<Droide />} />
         <Route path='/AgregarDroides' element={<CargarDroide />} />

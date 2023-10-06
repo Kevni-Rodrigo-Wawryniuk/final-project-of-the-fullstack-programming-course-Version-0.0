@@ -12,6 +12,18 @@ function Empresas() {
         API.getEmpreas().then(setEmpresas)
     }, [])
 
+    // borrar datos
+
+    const borrarEmpresa = async (event, idempresa) => {
+
+        event.preventDefault();
+
+        // eslint-disable-next-line no-unused-vars
+        const request = await API.deleteEmpresas(idempresa);
+
+        window.location.href ='/Empresas';
+    }
+
     return (
         <div className='containeBodyEmpresa'>
             <div className='containeTituloEmpresa'>
@@ -39,7 +51,7 @@ function Empresas() {
                 </Link>
             </div>
             <div className='containeButtonCargarEmpresa'>
-                <button>cargar</button>
+                <Link to='/AgregarEmpresas'> <button> Cargar </button> </Link>
             </div>
             <div className='containeTablaEmpresa'>
                 <table>
@@ -59,8 +71,8 @@ function Empresas() {
                             // eslint-disable-next-line react/jsx-key
                             <tr>
                                 <td>
-                                    <Link> <button> Editar </button> </Link>
-                                    <Link> <button> Borrar </button> </Link>
+                                    <Link to={`/ModificarEmpresas/${emps.idempresas}`}> <button> Editar </button> </Link>
+                                    <button onClick={(event) => borrarEmpresa(event, emps.idempresas)}> Borrar </button>
                                 </td>
                                 <td>{emps.nombre_empresa}</td>
                                 <td>{emps.nombre_droides}</td>
