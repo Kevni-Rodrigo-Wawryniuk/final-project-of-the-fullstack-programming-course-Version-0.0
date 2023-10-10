@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import './Estados.css';
 import * as API from '../Service/Service.js';
 import { useState, useEffect } from 'react';
@@ -66,7 +67,6 @@ function Estados() {
                         </thead>
                         <tbody>
                             {estados.map((estad) => (
-                                // eslint-disable-next-line react/jsx-key
                                 <tr>
                                     <td>
                                         <Link to={`/ModificarEstados/${estad.id_estados}`}> <button> Editar </button> </Link>

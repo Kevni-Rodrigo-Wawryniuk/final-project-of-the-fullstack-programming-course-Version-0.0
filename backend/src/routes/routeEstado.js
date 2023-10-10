@@ -7,37 +7,49 @@ const jwt = require('jsonwebtoken');
 const routeEstado = express();
 
 // ver los estados disponibles
-routeEstado.get('/verEstados', (req, res) => {
+routeEstado.get('/verEstados', verificationToken, (req, res) => {
 
-    mysqlconnecction.query('select * from estados', (err, registro) => {
+    jwt.verify(req.token, 'Pase', (error, valido) => {
 
-        if (err) {
-
-            console.log('Error en la base de datos --> ', err);
-
+        if (error) {
+            res.sendStatus(403);
         } else {
+            mysqlconnecction.query('select * from estados', (err, registro) => {
 
-            res.json(registro);
+                if (err) {
+
+                    console.log('Error en la base de datos --> ', err);
+
+                } else {
+
+                    res.json(registro);
+                }
+            })
         }
     })
 })
 // ver los fabricantes por id
-routeEstado.get('/verEstado/:id_estados', (req, res) => {
-    
-    const {id_estados} = req.params;
+routeEstado.get('/verEstado/:id_estados', verificationToken, (req, res) => {
 
-    mysqlconnecction.query('select * from estados where id_estados =?', [id_estados], (err, reg) => {
-        if (err) {
-            console.log('Error en la base de datos --> ', err);
+    const { id_estados } = req.params;
+    
+    jwt.verify(req.token, 'Pase', (error, valido)=>{
+        if(error){
+            res.sendStatus(403);
         }else{
-            res.json(reg);
+            mysqlconnecction.query('select * from estados where id_estados =?', [id_estados], (err, reg) => {
+                if (err) {
+                    console.log('Error en la base de datos --> ', err);
+                } else {
+                    res.json(reg);
+                }
+            })
         }
     })
-
 })
 
 // insertar los estados disponibles
-routeEstado.post('/cargarEstado', bodyparser.json(), (req, res) => {
+routeEstado.post('/cargarEstado', verificationToken, bodyparser.json(), (req, res) => {
 
     const { nombre_estado, codigos } = req.body;
 
@@ -59,23 +71,28 @@ routeEstado.post('/cargarEstado', bodyparser.json(), (req, res) => {
         })
     }
 
-    mysqlconnecction.query('insert into estados (nombre_estados, codigo) value (?,?)', [nombre_estado, codigos], (err, reg) => {
-        if (err) {
-            console.log("Error en la base de datos al cargar un estado --> ", err);
-        } else {
-            res.json({
-                status: true,
-                mensaje: "El estado se cargo correctamente"
-            })
+    jwt.verify(req.token, 'Pase', (error, valido)=>{
+        if(error){
+            res.sendStatus(403);
+        }else{
+            mysqlconnecction.query('insert into estados (nombre_estados, codigo) value (?,?)', [nombre_estado, codigos], (err, reg) => {
+                if (err) {
+                    console.log("Error en la base de datos al cargar un estado --> ", err);
+                } else {
+                    res.json({
+                        status: true,
+                        mensaje: "El estado se cargo correctamente"
+                    })
+                }
+            })        
         }
     })
-
 })
 
 // modificar los estados
-routeEstado.put('/modificarEstado/:id_estados', bodyparser.json(), (req, res) => {
+routeEstado.put('/modificarEstado/:id_estados', verificationToken, bodyparser.json(), (req, res) => {
 
-    const {id_estados} = req.params;
+    const { id_estados } = req.params;
 
     const { nombre_estado, codigo } = req.body;
 
@@ -94,42 +111,54 @@ routeEstado.put('/modificarEstado/:id_estados', bodyparser.json(), (req, res) =>
             mensaje: "El nuevo estado es un campo obligatorio"
         })
     }
-    mysqlconnecction.query('update estados set nombre_estados = ?, codigo = ?', [nombre_estado, codigo], (err, registro) => {
 
-        if (err) {
+    jwt.verify(req.token, 'Pase', (error, valido)=>{
+        if(error){
+            res.sendStatus(403);
+        }else{
+            mysqlconnecction.query('update estados set nombre_estados = ?, codigo = ? where id_estados =?', [nombre_estado, codigo, id_estados], (err, registro) => {
 
-            console.log("Error en la base de datos al modificar el estado --> ", err);
-
-        } else {
-
-            res.json({
-                status: true,
-                mensaje: "El estado se a modificado de manera correcta"
+                if (err) {
+        
+                    console.log("Error en la base de datos al modificar el estado --> ", err);
+        
+                } else {
+        
+                    res.json({
+                        status: true,
+                        mensaje: "El estado se a modificado de manera correcta"
+                    })
+        
+                }
             })
-
         }
     })
 })
 
 // Borrar datos
-routeEstado.delete('/borrarEstado/:id_estados', (req, res) => {
+routeEstado.delete('/borrarEstado/:id_estados', verificationToken, (req, res) => {
 
-    const {id_estados} = req.params;
+    const { id_estados } = req.params;
 
-    mysqlconnecction.query('delete from estados where id_estados =?', [id_estados], (err, registro) => {
+    jwt.verify(req.token, 'Pase', (error, valido)=>{
+        if(error){
+            res.sendStatus(403);
+        }else{
+            mysqlconnecction.query('delete from estados where id_estados =?', [id_estados], (err, registro) => {
 
-        if (err) {
-
-            console.log("Error en la base de datos al borrar un estado --> ", err);
-
-        } else {
-            res.json({  
-                status: true,
-                mensaje: "El registro se borro correctamente"
-            })
+                if (err) {
+        
+                    console.log("Error en la base de datos al borrar un estado --> ", err);
+        
+                } else {
+                    res.json({
+                        status: true,
+                        mensaje: "El registro se borro correctamente"
+                    })
+                }
+            })        
         }
     })
-
 })
 
 // verificar el token del usuario
@@ -149,5 +178,23 @@ function verificationToken(req, res, next) {
         res.send('Debe contener un token');
     }
 }
+
+// otra forma de verificar el token
+/*
+function verificarToken(req, res, next){
+    const authHeader = req.headers["Authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if(token == null){
+        return res.sendStatus(403);
+    }
+    jwt.verify(token, "Pase", (err, user)=>{
+        if(err){
+            return res.sendStatus(404);
+        }else{
+            req.user = user;
+        }
+        next();
+    })
+}*/
 
 module.exports = routeEstado;

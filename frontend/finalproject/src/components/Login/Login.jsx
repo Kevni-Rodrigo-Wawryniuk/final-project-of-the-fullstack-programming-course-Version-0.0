@@ -21,6 +21,8 @@ function Login() {
 
         if(ingreos.status){
             //alert('Pase Señor');
+            window.localStorage.setItem('correo', JSON.stringify(ingreos.dato[0]));
+            window.localStorage.setItem('token', JSON.stringify(ingreos.token));
             window.location.href='/Home';
         }else{
             alert(ingreos.mensaje);

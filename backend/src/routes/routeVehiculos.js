@@ -7,127 +7,160 @@ const jwt = require('jsonwebtoken');
 const routeVehiculos = express();
 
 // ver Modelos
-routeVehiculos.get('/verVehiculos', (req,res)=>{
+routeVehiculos.get('/verVehiculos', verificationToken, (req, res) => {
 
-    mysqlconnecction.query('select * from vehiculos',(err,reg)=>{
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403, '>>>  Error al enivar el token');
+        } else {
 
-        if(err){
-            console.log("Error en la base de datos --> ", err);
-        }else{
-            res.json(reg);
+            mysqlconnecction.query('select * from vehiculos', (err, reg) => {
+
+                if (err) {
+                    console.log("Error en la base de datos --> ", err);
+                } else {
+                    res.json(reg);
+                }
+            })
         }
     })
 })
 
 // ver modelos por id
-routeVehiculos.get('/verVehiculo/:id_vehiculos', (req,res)=>{
+routeVehiculos.get('/verVehiculo/:id_vehiculos', verificationToken, (req, res) => {
 
-    const {id_vehiculos} = req.params;
+    const { id_vehiculos } = req.params;
 
-    mysqlconnecction.query('select * from vehiculos where id_vehiculos =?', [id_vehiculos],(err,reg)=>{
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403);
+        } else {
 
-        if(err){
-            console.log("Error en la base de datos --> ", err);
-        }else{
-            res.json(reg);
+            mysqlconnecction.query('select * from vehiculos where id_vehiculos =?', [id_vehiculos], (err, reg) => {
+
+                if (err) {
+                    console.log("Error en la base de datos --> ", err);
+                } else {
+                    res.json(reg);
+                }
+            })
         }
     })
 })
 
-
 // cargar modelos
-routeVehiculos.post('/cargarVehiculos', bodyparser.json(),(req,res)=>{
+routeVehiculos.post('/cargarVehiculos', verificationToken, bodyparser.json(), (req, res) => {
 
-    const {nombre_vehiculos, codigo} = req.body;
+    const { nombre_vehiculos, codigo } = req.body;
 
-    if(!nombre_vehiculos){
+    if (!nombre_vehiculos) {
         res.json({
-            status:false,
-            mensaje:"El nombre del vehiculo es un campo obligatorio"
+            status: false,
+            mensaje: "El nombre del vehiculo es un campo obligatorio"
         })
     }
-    if(!codigo){
+    if (!codigo) {
         res.json({
-            status:false,
-            mensaje:"El codigo es un campo obligatorio"
+            status: false,
+            mensaje: "El codigo es un campo obligatorio"
         })
     }
 
-    mysqlconnecction.query('insert into vehiculos (nombre_vehiculos, codigo) value (?,?)', [nombre_vehiculos,codigo], (err,reg)=>{
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403);
+        } else {
 
-        if(err){
-            console.log("Error en la base de datos al cargar un vehiculo --> ", err);
-        }else{
-            res.json({
-                status:true,
-                mensaje:"El vehiculo se cargo correctamente"
+            mysqlconnecction.query('insert into vehiculos (nombre_vehiculos, codigo) value (?,?)', [nombre_vehiculos, codigo], (err, reg) => {
+
+                if (err) {
+                    console.log("Error en la base de datos al cargar un vehiculo --> ", err);
+                } else {
+                    res.json({
+                        status: true,
+                        mensaje: "El vehiculo se cargo correctamente"
+                    })
+                }
             })
         }
     })
 })
 
 // modificar modelos
-routeVehiculos.put('/modificarVehiculos/:id_vehiculos', bodyparser.json(), (req,res)=>{
+routeVehiculos.put('/modificarVehiculos/:id_vehiculos', verificationToken, bodyparser.json(), (req, res) => {
 
-    const {id_vehiculos} = req.params;
+    const { id_vehiculos } = req.params;
 
-    const {nombre_vehiculos, codigo} = req.body;
+    const { nombre_vehiculos, codigo } = req.body;
 
-    if(!nombre_vehiculos){
+    if (!nombre_vehiculos) {
         res.json({
-            status:false,
-            mensaje:"El nombre es un campo obligatorio"
+            status: false,
+            mensaje: "El nombre es un campo obligatorio"
         })
     }
-    if(!codigo){
+    if (!codigo) {
         res.json({
-            status:false,
-            mensaje:"El codigo es un campo obligatorio"
+            status: false,
+            mensaje: "El codigo es un campo obligatorio"
         })
     }
 
-    mysqlconnecction.query('update vehiculos set nombre_vehiculos =?, codigo =? where id_vehiculos =?', [nombre_vehiculos, codigo, id_vehiculos], (err,reg)=>{
-        if(err){
-            console.log("Error en la base de datos al modificar un Vehiculo --> ", err);
-        }else{
-            res.json({
-                status:true,
-                mensaje:"El vehiculo se modifico de manera correcta"
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403);
+        } else {
+            mysqlconnecction.query('update vehiculos set nombre_vehiculos =?, codigo =? where id_vehiculos =?', [nombre_vehiculos, codigo, id_vehiculos], (err, reg) => {
+                if (err) {
+                    console.log("Error en la base de datos al modificar un Vehiculo --> ", err);
+                } else {
+                    res.json({
+                        status: true,
+                        mensaje: "El vehiculo se modifico de manera correcta"
+                    })
+                }
             })
         }
     })
 })
 
 // borrar modelos
-routeVehiculos.delete('/BorrarVehiculo/:id_vehiculos', (req, res)=>{
+routeVehiculos.delete('/BorrarVehiculo/:id_vehiculos', verificationToken, (req, res) => {
 
-    const {id_vehiculos} = req.params;
+    const { id_vehiculos } = req.params;
 
-    mysqlconnecction.query('delete from vehiculos where id_vehiculos =?', [id_vehiculos], (err, reg)=>{
-        if(err){
-            console.log("Error en la base de datos al borrar un vehiculo --> ", err);
-        }else{
-            res.json({
-                status:true,
-                mensaje:"El vehiculo se borro correctamente"
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403);
+        } else {
+
+            mysqlconnecction.query('delete from vehiculos where id_vehiculos =?', [id_vehiculos], (err, reg) => {
+                if (err) {
+                    console.log("Error en la base de datos al borrar un vehiculo --> ", err);
+                } else {
+                    res.json({
+                        status: true,
+                        mensaje: "El vehiculo se borro correctamente"
+                    })
+                }
             })
         }
     })
 })
 
 // verificar el token del usuario
-function verificationToken (req,res,next){
+function verificationToken(req, res, next) {
 
     const bearer = req.headers['authorization'];
 
-    if(typeof bearer !== 'undefined'){
+    if (typeof bearer !== 'undefined') {
 
         const token = bearer.split(" ")[1];
 
         req.token = token;
 
         next();
-    }else{
+    } else {
 
         res.send('Debe contener un token');
     }

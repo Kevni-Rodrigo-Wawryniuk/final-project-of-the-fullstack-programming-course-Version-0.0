@@ -20,7 +20,7 @@ function CargarDroides() {
             setmensaje(respuesta.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href = '/Droides';
+                window.location.href ='/Droides';
             }, 2500);
         } else {
             setmensaje(respuesta.mensaje);

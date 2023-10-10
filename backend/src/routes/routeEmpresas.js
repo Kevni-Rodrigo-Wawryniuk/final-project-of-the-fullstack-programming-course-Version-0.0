@@ -7,80 +7,163 @@ const jwt = require('jsonwebtoken');
 const routeEmpresas = express();
 
 // Traer todos los datos de la tabla empresas
-routeEmpresas.get('/Vertodoslosregistros', (req, res) => {
+routeEmpresas.get('/Vertodoslosregistros', verificationToken, (req, res) => {
 
-    mysqlconnecction.query('select * from empresas', (err, reg) => {
-        if (err) {
-            console.log("Error en la base de datos al traer todos los registros de las empresas --> ", err);
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403);
         } else {
-            res.json(reg);
+            mysqlconnecction.query('select * from empresas', (err, reg) => {
+                if (err) {
+                    console.log("Error en la base de datos al traer todos los registros de las empresas --> ", err);
+                } else {
+                    res.json(reg);
+                }
+            })
         }
     })
+
 })
 
-routeEmpresas.get('/VerEmpresas/:idempresas', (req, res)=>{
+routeEmpresas.get('/VerEmpresas/:idempresas', verificationToken, (req, res) => {
 
-    const {idempresas} = req.params;
-   
-    mysqlconnecction.query('select emp.idempresas, emp.nombre_empresa, model.nombre_modelos, droid.nombre_droides, vehi.nombre_vehiculos, esta.nombre_estados, tipoprod.nombre_tipo_productos from empresas as emp inner join modelos as model on model.id_modelos = emp.id_modelo inner join droides as droid on droid.id_droides = emp.id_droides inner join vehiculos as vehi on vehi.id_vehiculos = emp.id_vehiculos inner join estados as esta on esta.id_estados = emp.id_estado inner join tipo_productos as tipoprod on tipoprod.id_tipo_productos = emp.id_tipo_producto where emp.idempresas =?', [idempresas], (err, reg) => {
-        
-        if (err) {
-            console.log("Error en la base de datos al buscar todos los registros por los codigos --> ", err);
+    const { idempresas } = req.params;
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403);
         } else {
-            res.json(reg);
+            mysqlconnecction.query('select emp.idempresas, emp.nombre_empresa, model.nombre_modelos, droid.nombre_droides, vehi.nombre_vehiculos, esta.nombre_estados, tipoprod.nombre_tipo_productos from empresas as emp inner join modelos as model on model.id_modelos = emp.id_modelo inner join droides as droid on droid.id_droides = emp.id_droides inner join vehiculos as vehi on vehi.id_vehiculos = emp.id_vehiculos inner join estados as esta on esta.id_estados = emp.id_estado inner join tipo_productos as tipoprod on tipoprod.id_tipo_productos = emp.id_tipo_producto where emp.idempresas =?', [idempresas], (err, reg) => {
+
+                if (err) {
+                    console.log("Error en la base de datos al buscar todos los registros por los codigos --> ", err);
+                } else {
+                    res.json(reg);
+                }
+            })
         }
     })
+
 })
 
 // cargar datos 
-routeEmpresas.post('/cargarEmpresas', bodyparser.json(), (req, res) => { 
+routeEmpresas.post('/cargarEmpresas', verificationToken, bodyparser.json(), (req, res) => {
 
     const { nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto } = req.body;
 
-    if(!id_modelo){
+    if (!id_modelo) {
         res.json({
-            status:false,
-            mensaje:"El modelo es un campo obligatorio"
+            status: false,
+            mensaje: "El modelo es un campo obligatorio"
         })
     }
-    if(!id_droides){
+    if (!id_droides) {
         res.json({
-            status:false,
-            mensaje:"El droide es un campo obligatorio"
+            status: false,
+            mensaje: "El droide es un campo obligatorio"
         })
     }
-    if(!id_vehiculos){
+    if (!id_vehiculos) {
         res.json({
-            status:false,
-            mensaje:"El Vehiculo es un campo obligatorio"
+            status: false,
+            mensaje: "El Vehiculo es un campo obligatorio"
         })
     }
-    if(!id_estado){
+    if (!id_estado) {
         res.json({
-            status:false,
-            mensaje:"El estado es un campo obligatorio"
+            status: false,
+            mensaje: "El estado es un campo obligatorio"
         })
     }
-    if(!id_tipo_producto){
+    if (!id_tipo_producto) {
         res.json({
-            status:false,
-            mensaje:"El tipo de producto es un campo obligatorio"
+            status: false,
+            mensaje: "El tipo de producto es un campo obligatorio"
         })
-    } 
-    
+    }
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403);
+        } else {
+            mysqlconnecction.query('insert into empresas (nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto) value (?,?,?,?,?,?)', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto], (err, reg) => {
 
-    mysqlconnecction.query('insert into empresas (nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto) value (?,?,?,?,?,?)', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto], (err, reg) => {
+                if (err) {
+                    console.log("Error en la base de datos al cargar una nueva empresa --> ", err);
+                } else {
+                    res.json({
+                        status: true,
+                        mensaje: "La empresa se acargado de manera correcta"
+                    })
+                }
+            })
+        }
+    })
 
+
+})
+
+// MODIFICAR LOS DATOS DE LAS EMPRESAS
+routeEmpresas.put('/modificarEmpresas/:idempresas', verificationToken, bodyparser.json(), (req, res) => {
+
+    const { idempresas } = req.params;
+    const { nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto } = req.body;
+
+    mysqlconnecction.query('update empresas set nombre_empresa = ?, id_modelo = ?, id_droides = ?, id_vehiculos = ?, id_estado = ?, id_tipo_producto = ? where idempresas = ?', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto, idempresas], (err, reg) => {
         if (err) {
-            console.log("Error en la base de datos al cargar una nueva empresa --> ", err);
+            console.log("Error en la base de datos al modificar una empresa --> ", err);
         } else {
             res.json({
                 status: true,
-                mensaje: "La empresa se acargado de manera correcta"
+                mensaje: "La empresa se modifico de manera correcta"
             })
         }
     })
 })
+
+// BORRAR LOS DATOS DE LAS EMPRESAS
+routeEmpresas.delete('/BorrarEmpresa/:idempresas', verificationToken, (req, res) => {
+
+    const { idempresas } = req.params;
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403);
+        } else {
+            mysqlconnecction.query('delete from empresas where idempresas = ?', [idempresas], (err, registro) => {
+
+                if (err) {
+
+                    console.log("Error en la base de datos al borrar un estado --> ", err);
+
+                } else {
+                    res.json({
+                        status: true,
+                        mensaje: "La empresa se a borrado de manera correcta"
+                    })
+                }
+
+            })
+        }
+    })
+
+})
+
+// verificar el token del usuario
+function verificationToken(req, res, next) {
+
+    const bearer = req.headers['authorization'];
+
+    if (typeof bearer !== 'undefined') {
+
+        const token = bearer.split(" ")[1];
+
+        req.token = token;
+
+        next();
+    } else {
+
+        res.send('Debe contener un token');
+    }
+}
+
 
 // ACA VOY A PONER LOS METHODOS PARA VER LOS REGISTROS LAS FORMAS DE LLAMAR Y VER LOS REGISTROS
 
@@ -89,7 +172,7 @@ routeEmpresas.post('/cargarEmpresas', bodyparser.json(), (req, res) => {
 routeEmpresas.get('/verTodasLasEmpresas', (req, res) => {
 
     mysqlconnecction.query('select emp.idempresas, emp.nombre_empresa, model.nombre_modelos, droid.nombre_droides, vehi.nombre_vehiculos, esta.nombre_estados, tipoprod.nombre_tipo_productos from empresas as emp inner join modelos as model on model.id_modelos = emp.id_modelo inner join droides as droid on droid.id_droides = emp.id_droides inner join vehiculos as vehi on vehi.id_vehiculos = emp.id_vehiculos inner join estados as esta on esta.id_estados = emp.id_estado inner join tipo_productos as tipoprod on tipoprod.id_tipo_productos = emp.id_tipo_producto', (err, reg) => {
-        
+
         if (err) {
             console.log("Error en la base de datos al buscar todos los registros por los codigos --> ", err);
         } else {
@@ -158,60 +241,8 @@ routeEmpresas.get('/verlostipoproductodelasempresas', (req, res) => {
     })
 })
 
-// MODIFICAR LOS DATOS DE LAS EMPRESAS
-routeEmpresas.put('/modificarEmpresas/:idempresas', bodyparser.json(), (req, res) => {
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const { idempresas } = req.params;
-    const {  nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto } = req.body;
 
-    mysqlconnecction.query('update empresas set nombre_empresa = ?, id_modelo = ?, id_droides = ?, id_vehiculos = ?, id_estado = ?, id_tipo_producto = ? where idempresas = ?', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto, idempresas], (err, reg) => {
-        if (err) {
-            console.log("Error en la base de datos al modificar una empresa --> ", err);
-        } else {
-            res.json({
-                status: true,
-                mensaje: "La empresa se modifico de manera correcta"
-            })
-        }
-    })
-})
-
-// BORRAR LOS DATOS DE LAS EMPRESAS
-routeEmpresas.delete('/BorrarEmpresa/:idempresas', (req, res) => {
-
-    const { idempresas } = req.params;
-
-    mysqlconnecction.query('delete from empresas where idempresas = ?', [idempresas], (err, registro) => {
-
-        if (err) {
-
-            console.log("Error en la base de datos al borrar un estado --> ", err);
-
-        } else {
-            res.json({
-                status: true,
-                mensaje: "La empresa se a borrado de manera correcta"
-            })
-        }
-
-    })
-})
-
-// verificar el token del usuario
-function verificationToken(req, res, next) {
-
-    const bearer = req.headers['authorization'];
-
-    if (typeof bearer !== 'undefined') {
-
-        const token = bearer.split(" ")[1];
-
-        req.token = token;
-
-        next();
-    } else {
-
-        res.send('Debe contener un token');
-    }
-}
 module.exports = routeEmpresas;

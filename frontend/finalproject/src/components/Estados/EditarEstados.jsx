@@ -45,9 +45,9 @@ function EditarEstados() {
 
     return (
         <>
-            <div>{mensaje}</div>
             <div className='containeBodyEstados'>
                 <h4> Estado a cambiar </h4>
+                <div>{mensaje}</div>
                 <table>
                     <thead>
                         <tr>
