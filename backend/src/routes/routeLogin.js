@@ -216,6 +216,80 @@ routelogin.delete('/ClearLog', bodyparser.json(), (req, res) => {
     })
 })
 
+// restaurar la contraseña
+// buscar el correo
+routelogin.post('/traerCorreo', bodyparser.json(), (req, res) => {
+
+    const { correo } = req.body;
+
+    if (!correo) {
+        res.json({
+            status: false,
+            mensaje: "El correo es un campo obligatorio"
+        })
+    } else {
+        mysqlconnecction.query("select * from usuario where correo =?", [correo], (err, reg) => {
+            if (err) {
+                console.log("Error en la base de datos ----> ", err);
+            } else {
+                res.json({
+                    status: true,
+                    mensaje: "Se a encontrado el correo"
+                })
+            }
+        })
+    }
+
+})
+
+// traer id por correo 
+routelogin.get('/usuarios/:correo', bodyparser.json(), (req, res)=>{
+
+    const { correo } = req.body;
+
+    mysqlconnecction.query('select * from usuario where correo =?', [correo],(err, reg)=>{
+        if(err){
+            console.log('Error en la base de datos --->', err);
+        }else{
+            res.json(reg);
+        }
+    })
+})
+// modificar contraseña
+routelogin.put('/restaurar/:correo', bodyparser.json(), (req, res) => {
+
+    const { contraseña, correo } = req.body;
+
+    let hash = bcrypt.hashSync(contraseña, 10);
+
+    if (!correo) {
+        res.json({
+            status: false,
+            mensaje: "El correo es un campo obligatorio"
+        })
+    } else if (!contraseña) {
+        res.json({
+            status: false,
+            mensaje: "La nueva contraseña es un campo obligatorio"
+        })
+    } else {
+
+        mysqlconnecction.query('update usuario set contraseña =? where correo =?', [hash, correo], (err, reg) => {
+            if (err) {
+                res.send("Error en la base de datos ----> ", err);
+            } else {
+                res.json({
+                    status: true,
+                    mensaje: "La contraseña se a modificado de manera correcta"
+                })
+            }
+        })
+
+    }
+
+
+})
+
 // verificar el token del usuario
 function verificationToken(req, res, next) {
 

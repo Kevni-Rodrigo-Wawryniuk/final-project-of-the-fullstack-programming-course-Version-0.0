@@ -61,7 +61,7 @@ function Login() {
                     <button type='submit'> ingresar </button>
 
                     <p>
-                        <a href="#"> olvidaste tu Contraseña </a>
+                        <a href="/OlvidelaContraseña"> olvidaste tu Contraseña </a>
                     </p>
 
                 </form>

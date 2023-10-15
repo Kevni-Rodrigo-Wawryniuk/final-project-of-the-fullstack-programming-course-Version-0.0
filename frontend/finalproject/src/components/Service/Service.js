@@ -35,6 +35,57 @@ export async function registrar(date){
 
     return dato;
 }
+
+export async function postCorreo(date){
+    
+    const options={
+
+        method:'POST',
+        body:JSON.stringify(date),
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    }
+
+    const request = await fetch(`${URL}/traerCorreo`,options);
+
+    const dato = await request.json();
+
+    return dato;
+}
+
+export async function putContraseña(date){
+
+    const Options={
+        method:'PUT',
+        body: JSON.stringify(date),
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    }
+    
+    const request = await fetch(`${URL}/restaurar/${date}`, Options);
+
+    const dato = await request.json();
+
+    return dato;
+}
+
+export async function getUsuario(correo){
+   
+    const Options={
+        method:'GET',
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    }
+
+    const request = await fetch(`${URL}/usuarios/${correo}`, Options);
+ 
+    const dato = await request.json();
+ 
+    return dato[0];
+}
 ///////////////////////////////////////////////////////////////////////////
 
 

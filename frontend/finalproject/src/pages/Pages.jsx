@@ -1,5 +1,7 @@
 // aqui estan todas las paginas o archivos jsx para que solo se tenga que llamar un componente
 
+
+///////////////////////////////// PAGINAS DE LOGIN / REGISTRO / RECUPERACION DE CUENTA /////////////////////////////////////////////////
 // pagina de login
 import Login from "../components/Login/Login.jsx";
 
@@ -10,10 +12,20 @@ import Registro from "../components/Registro/Registro.jsx";
 
 export const Registros = () => <Registro />;
 
-// Pagina Home Donde se pueden obtener todas las rutas disponibles
+// RESTAURAR LA CONTRASEÑA
+import OlvideContraseña from "../components/OlvideLaContraseña/OlvideContraseñas.jsx";
+
+export const OlvideContraseñas = () => <OlvideContraseña />;
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+/////////////////////////////////// PAGINAS CON TODAS LAS RUTAS /////////////////////////////
 import Home from "../components/Home/Home.jsx";
 
 export const Homes = () => <Home />;
+////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
