@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 
 function Home() {
 
+    const LoqOut = () =>{
+        localStorage.removeItem('correo');
+        window.location.href='/';
+    }
+
     return (
         <div className='containeBodyHome'>
             <div className='containeHomeButtons'>
@@ -25,9 +30,9 @@ function Home() {
                 <Link to='/Estados'>
                     <button>Estados</button>
                 </Link>
-                <Link to='/'>
-                    <button>Salir</button>
-                </Link>
+                
+                <button onClick={(event) =>LoqOut(event)}> Salir </button>
+                
             </div>
         </div>
     )
