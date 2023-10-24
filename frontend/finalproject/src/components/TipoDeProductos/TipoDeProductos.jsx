@@ -7,20 +7,42 @@ function TipoDeProductos() {
 
     const [tipoProductos, setTipoDeProducto] = useState([]);
 
-    useEffect(() =>{
+    useEffect(() => {
         API.getTipoDeProductos().then(setTipoDeProducto);
     }, []);
 
     // datos a borrar
-    const borrarTipoDeProductos = async (event, id_tipo_productos) =>{
+    const borrarTipoDeProductos = async (event, id_tipo_productos) => {
 
         event.preventDefault();
-        
+
         // eslint-disable-next-line no-unused-vars
         const request = await API.deleteTipoDeProductos(id_tipo_productos);
 
-        window.location.href='/TipoDeProductos';
+        window.location.href = '/TipoDeProductos';
     }
+    // verificar usuarios
+    const userVerification = async () => {
+
+        let correo;
+        let token;
+
+        correo = localStorage.getItem('correo');
+        token = localStorage.getItem('token');
+
+        const traerCorreo = await API.postCorreo({ correo });
+
+        if (traerCorreo.status && token) {
+            console.log('El usuario esta logeado');
+
+        } else {
+            window.location.href = '/';
+            console.log('El usuario no esta logeado');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', userVerification());
+    
     return (
         <>
             <div className='containtBodyTipoDeProductos'>
@@ -64,16 +86,16 @@ function TipoDeProductos() {
                             </tr>
                         </thead>
                         <tbody>
-                            {tipoProductos.map((tipoProd) =>(
-                            // eslint-disable-next-line react/jsx-key
-                            <tr>
-                                <td>
-                                    <Link to={`/ModificarTipoDeProductos/${tipoProd.id_tipo_productos}`}> <button> Editar </button> </Link>
-                                    <button onClick={(event) => borrarTipoDeProductos (event, tipoProd.id_tipo_productos)} > Borrar </button>
-                                </td>
-                                <td>{tipoProd.nombre_tipo_productos}</td>
-                                <td>{tipoProd.codigo}</td>
-                            </tr>
+                            {tipoProductos.map((tipoProd) => (
+                                // eslint-disable-next-line react/jsx-key
+                                <tr>
+                                    <td>
+                                        <Link to={`/ModificarTipoDeProductos/${tipoProd.id_tipo_productos}`}> <button> Editar </button> </Link>
+                                        <button onClick={(event) => borrarTipoDeProductos(event, tipoProd.id_tipo_productos)} > Borrar </button>
+                                    </td>
+                                    <td>{tipoProd.nombre_tipo_productos}</td>
+                                    <td>{tipoProd.codigo}</td>
+                                </tr>
                             ))}
                         </tbody>
                     </table>

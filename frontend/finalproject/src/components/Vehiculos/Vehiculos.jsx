@@ -14,14 +14,36 @@ function Vehiculos() {
     }, []);
 
     // borrar datos
-    const borrarDato = async (event, id_Vehiculo) =>{
+    const borrarDato = async (event, id_Vehiculo) => {
 
         event.preventDefault();
 
         const request = await API.deleteVehiculos(id_Vehiculo);
 
-        window.location.href='/Vehiculos'
+        window.location.href = '/Vehiculos'
     }
+    // verificar usuarios
+    const userVerification = async () => {
+
+        let correo;
+        let token;
+
+        correo = localStorage.getItem('correo');
+        token = localStorage.getItem('token');
+
+        const traerCorreo = await API.postCorreo({ correo });
+
+        if (traerCorreo.status && token) {
+            console.log('El usuario esta logeado');
+
+        } else {
+            window.location.href = '/';
+            console.log('El usuario no esta logeado');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', userVerification());
+
 
     return (
         <>
@@ -71,7 +93,7 @@ function Vehiculos() {
                                 <tr>
                                     <td>
                                         <Link to={`/ModificarVehiculos/${vehi.id_vehiculos}`}> <button> Editar </button> </Link>
-                                        <button onClick={(event) => borrarDato(event,vehi.id_vehiculos)} > Borrar </button>
+                                        <button onClick={(event) => borrarDato(event, vehi.id_vehiculos)} > Borrar </button>
                                     </td>
                                     <td>{vehi.nombre_vehiculos}</td>
                                     <td>{vehi.codigo}</td>

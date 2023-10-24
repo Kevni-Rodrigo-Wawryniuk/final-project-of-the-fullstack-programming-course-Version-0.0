@@ -33,8 +33,6 @@ function OlvideContraseñas() {
 
     // traer datos a modificar
 
-    // juan@gmai.com
-
     // cambio de contraseña
     const [contraseña, setcontraseña] = useState('');
 
