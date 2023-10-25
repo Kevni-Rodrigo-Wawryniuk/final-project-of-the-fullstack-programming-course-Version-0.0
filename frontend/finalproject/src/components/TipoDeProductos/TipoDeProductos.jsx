@@ -24,10 +24,10 @@ function TipoDeProductos() {
     return (
         <>
             <div className='containtBodyTipoDeProductos'>
-                <div>
+                <div className='containeTituloTipoDeProductos'>
                     <h2> Tipo de Productos </h2>
                 </div>
-                <div>
+                <div className='containeButtonsTipoDeProductos'>
                     <Link to='/Home'>
                         <button> volver </button>
                     </Link>
@@ -48,13 +48,13 @@ function TipoDeProductos() {
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeButtonCargarTipoDeProductos'>
                     <Link to='/AgregarTipoDeProductos'>
                         <button> cargar </button>
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeTablaTipoDeProductos'>
                     <table>
                         <thead>
                             <tr>

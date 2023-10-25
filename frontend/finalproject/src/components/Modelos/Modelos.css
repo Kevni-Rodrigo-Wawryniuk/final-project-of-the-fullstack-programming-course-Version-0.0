@@ -1,16 +1,88 @@
-.containtBodyModelos{
-    width: 993pt;
-    height: 501pt;
-
-    background-image: url(../images/Empresas-tabla.avif);
+body{
+   
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    
+}
+
+.containtBodyModelos{
+    width: 993pt;
+    height: 501pt;
 
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
+    
+}
+
+.containeTituloModelos h2{
+    text-align: center;
+    
+
+    color: white;
+}
+.containeButtonsModelos{
+    position: relative;
+    top: 0px;
+    left: 20px;
+}
+.containeButtonsModelos button{
+    width: 190px;
+
+    margin-left: 20px;
+}
+
+.containeButtonCargarModelos{
+    position: relative;
+    top: 100px;
+}
+
+.containeTablaModelos{
+    position: relative;
+    top: 200px;
+
+    min-width: 320px;
+    min-height: 100vh;
+    max-width: 1366px;
+    
+    width: auto;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-direction: column;
+
+    color: yellow;
+}
+.containeTablaModelos table{
+    align-items: center;
     justify-content: center;
+    table-layout: fixed;
+    
+    font-size: 15px;
+
+    border-collapse: collapse;
+}
+.containeTablaModelos th{
+    
+    margin: 0;
+    padding: 20px 15px;
+
+    border: 2px solid black;
+
+    text-transform: uppercase;
+}
+.containeTablaModelos td{
+
+
+    margin: 0;
+    padding: 26.2px;
+
+    border: 2px solid black;
 }

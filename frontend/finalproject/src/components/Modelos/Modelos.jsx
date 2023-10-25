@@ -25,10 +25,10 @@ function Modelos() {
     return (
         <>
             <div className='containtBodyModelos'>
-                <div>
+                <div className='containeTituloModelos'>
                     <h2>Modelos</h2>
                 </div>
-                <div>
+                <div className='containeButtonsModelos'>
                     <Link to='/Home'>
                         <button> volver </button>
                     </Link>
@@ -49,13 +49,13 @@ function Modelos() {
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeButtonCargarModelos'>
                     <Link to='/AgregarModelos'>
                         <button> cargar </button>
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeTablaModelos'>
                     <table>
                         <thead>
                             <tr>

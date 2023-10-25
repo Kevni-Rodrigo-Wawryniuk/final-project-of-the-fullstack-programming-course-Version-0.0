@@ -1,16 +1,89 @@
-.containtBodyDroides{
-    width: 993pt;
-    height: 501pt;
 
-    background-image: url(../images/Empresas-tabla.avif);
+body{
+    
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    
+}
+
+.containtBodyDroides{
+    width: 993pt;
+    height: 501pt;
 
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
+    
+}
+
+.containeTituloDroides h2{
+    text-align: center;
+    
+
+    color: white;
+}
+.containeButtonsDroides{
+    position: relative;
+    top: 0px;
+    left: 20px;
+}
+.containeButtonsDroides button{
+    width: 190px;
+
+    margin-left: 20px;
+}
+
+.containeButtonCargarDroides{
+    position: relative;
+    top: 100px;
+}
+
+.containeTablaDroides{
+    position: relative;
+    top: 200px;
+
+    min-width: 320px;
+    min-height: 100vh;
+    max-width: 1366px;
+    
+    width: auto;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-direction: column;
+
+    color: yellow;
+}
+.containeTablaDroides table{
+    align-items: center;
     justify-content: center;
+    table-layout: fixed;
+    
+    font-size: 15px;
+
+    border-collapse: collapse;
+}
+.containeTablaDroides th{
+    
+    margin: 0;
+    padding: 20px 15px;
+
+    border: 2px solid black;
+
+    text-transform: uppercase;
+}
+.containeTablaDroides td{
+
+
+    margin: 0;
+    padding: 26.2px;
+
+    border: 2px solid black;
 }

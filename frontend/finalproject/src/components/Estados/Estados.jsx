@@ -26,10 +26,10 @@ function Estados() {
     return (
         <>
             <div className='containeBodyEstados'>
-                <div>
+                <div className='containeTituloEstados'>
                     <h2>Estados</h2>
                 </div>
-                <div>
+                <div className='containeButtonsEstados'>
                     <Link to='/Home'>
                         <button> volver </button>
                     </Link>
@@ -50,13 +50,13 @@ function Estados() {
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeButtonCargarEstados'>
                     <Link to='/AgregarEstados'>
                         <button>Cargar</button>
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeTablaEstados'>
                     <table>
                         <thead>
                             <tr>

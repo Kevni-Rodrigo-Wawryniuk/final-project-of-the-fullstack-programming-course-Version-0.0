@@ -56,49 +56,54 @@ export function CargarEmpresas() {
     return (
         <>
             <div className='containeBodyEmpresa'>
-                <main>
+                <main className='maincarga'>
                     <form onSubmit={cargarEmpresas}>
                         <div>
                             {mensaje}
                         </div>
-
+                        <div>
                         <input
                             type="text"
                             value={nombre_empresa}
                             onChange={(event) => setNombre(event.target.value)}
                             placeholder=" Nombre de la empresa "
                         />
-
+                        </div>
+                        <div>
                         <select onChange={(event) => setModelo(event.target.value)}>
                             {modelos.map((M) => (
                                 <option value={M.id_modelos}>{M.nombre_modelos}</option>
                             ))}
                         </select>
-
+                        </div>
+                        <div>
                         <select onChange={(event) => setDroide(event.target.value)}>
                             {droides.map((D) => (
                                 <option value={D.id_droides}>{D.nombre_droides}</option>
                             ))}
                         </select>
-
+                        </div>
+                        <div>
                         <select onChange={(event) => setVehiculo(event.target.value)}>
                             {vehiculos.map((V) => (
                                 <option value={V.id_vehiculos}>{V.nombre_vehiculos}</option>
                             ))}
                         </select>
-
+                        </div>
+                        <div>
                         <select onChange={(event) => setEstado(event.target.value)}>
                             {estados.map((E) => (
                                 <option value={E.id_estados}>{E.nombre_estados}</option>
                             ))}
                         </select>
-
+                        </div>
+                        <div>
                         <select onChange={(event) => setTipoProducto(event.target.value)}>
                             {tipoDeProducto.map((T) => (
                                 <option value={T.id_tipo_productos}>{T.nombre_tipo_productos}</option>
                             ))}
                         </select>
-
+                        </div>
                         <button type='submit'> Cargar </button>
                         <Link to='/Empresas'> <button> Volver </button> </Link>
 

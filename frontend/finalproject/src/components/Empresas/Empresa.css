@@ -1,29 +1,33 @@
+body{
+    background-image: url(../images/Atardecer.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+
 .containeBodyEmpresa{
     width: 993pt;
     height: 501pt;
 
-    background-image: url(../images/Empresas-tabla.avif);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
 
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
-    justify-content: center;
+    
 }
-.containeTituloEmpresa{
-    position: fixed;
-    top: 0;
-    left: unset;
-    right: unset;
-    bottom: unset;
+
+.containeTituloEmpresa h2{
+    text-align: center;
+    
+
+    color: white;
 }
 .containeButtonsEmpresa{
-    position: fixed;
-    top: 100px;
+    position: relative;
+    top: 0px;
     left: 20px;
 }
 .containeButtonsEmpresa button{
@@ -31,19 +35,22 @@
 
     margin-left: 20px;
 }
+
 .containeButtonCargarEmpresa{
-    position: fixed;
-    top: 150px;
+    position: relative;
+    top: 100px;
 }
+
 .containeTablaEmpresa{
-    position: fixed;
+    position: relative;
     top: 200px;
 
     min-width: 320px;
     min-height: 100vh;
+    max-width: 1366px;
     
     width: auto;
-    height: 50%;
+    height: auto;
 
     margin: 0;
     padding: 0;
@@ -81,3 +88,13 @@
 
     border: 2px solid black;
 }
+
+.maincarga{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 800px;
+    height: 500px;
+}
+

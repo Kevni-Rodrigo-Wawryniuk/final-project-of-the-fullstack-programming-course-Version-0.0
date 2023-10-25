@@ -1,16 +1,90 @@
-.containeBodyEstados{
-    width: 993pt;
-    height: 501pt;
-
-    background-image: url(../images/Empresas-tabla.avif);
+body{
+    
+    
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    
+}
+
+.containeBodyEstados{
+    width: 993pt;
+    height: 501pt;
 
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
-    justify-content: center;
+    
 }
+
+.containeTituloEstados h2{
+    text-align: center;
+    
+
+    color: white;
+}
+.containeButtonsEstados{
+    position: relative;
+    top: 0px;
+    left: 20px;
+}
+.containeButtonsEstados button{
+    width: 190px;
+
+    margin-left: 20px;
+}
+
+.containeButtonCargarEstados{
+    position: relative;
+    top: 100px;
+}
+
+.containeTablaEstados{
+    position: relative;
+    top: 200px;
+
+    min-width: 320px;
+    min-height: 100vh;
+    max-width: 1366px;
+    
+    width: auto;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-direction: column;
+
+    color: yellow;
+}
+.containeTablaEstados table{
+    align-items: center;
+    justify-content: center;
+    table-layout: fixed;
+    
+    font-size: 15px;
+
+    border-collapse: collapse;
+}
+.containeTablaEstados th{
+    
+    margin: 0;
+    padding: 20px 15px;
+
+    border: 2px solid black;
+
+    text-transform: uppercase;
+}
+.containeTablaEstados td{
+
+
+    margin: 0;
+    padding: 26.2px;
+
+    border: 2px solid black;
+}
+

@@ -29,10 +29,10 @@ function Droides() {
     return (
         <>
             <div className='containtBodyDroides'>
-                <div>
+                <div className='containeTituloDroides'>
                     <h2>Droides</h2>
                 </div>
-                <div>
+                <div className='containeButtonsDroides'>
                     <Link to='/Home'>
                         <button> volver </button>
                     </Link>
@@ -53,13 +53,13 @@ function Droides() {
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeButtonCargarDroides'>
                     <Link to='/AgregarDroides'>
                         <button> cargar </button>
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeTablaDroides'>
                     <table>
                         <thead>
                             <tr>

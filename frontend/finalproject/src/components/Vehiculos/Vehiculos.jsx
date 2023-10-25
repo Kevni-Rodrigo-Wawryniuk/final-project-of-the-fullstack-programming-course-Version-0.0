@@ -26,10 +26,10 @@ function Vehiculos() {
     return (
         <>
             <div className='containtBodyVehiculos'>
-                <div>
+                <div className='containeTituloVehiculos'>
                     <h2>Vehiculos</h2>
                 </div>
-                <div>
+                <div className='containeButtonsVehiculos'>
                     <Link to='/Home'>
                         <button> volver </button>
                     </Link>
@@ -50,13 +50,13 @@ function Vehiculos() {
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeButtonCargarVehiculos'>
                     <Link to='/AgregarVehiculos'>
                         <button> cargar </button>
                     </Link>
                 </div>
 
-                <div>
+                <div className='containeTablaVehiculos'>
                     <table>
                         <thead>
                             <tr>
