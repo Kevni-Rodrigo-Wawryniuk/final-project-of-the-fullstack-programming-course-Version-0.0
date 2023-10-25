@@ -70,32 +70,42 @@ export function CargarEmpresas() {
                         />
 
                         <select onChange={(event) => setModelo(event.target.value)}>
+
+                            <option value="" selected> Seleccione un Modelo </option>
                             {modelos.map((M) => (
                                 <option value={M.id_modelos}>{M.nombre_modelos}</option>
                             ))}
                         </select>
 
                         <select onChange={(event) => setDroide(event.target.value)}>
+
+                            <option value="" selected> Seleccione un Droide </option>
                             {droides.map((D) => (
-                                <option value={D.id_droides}>{D.nombre_droides}</option>
+                                <option value={D.id_droides} >{D.nombre_droides}</option>
                             ))}
                         </select>
 
                         <select onChange={(event) => setVehiculo(event.target.value)}>
+
+                            <option value="" selected> Seleccione un Vehiculo </option>
                             {vehiculos.map((V) => (
-                                <option value={V.id_vehiculos}>{V.nombre_vehiculos}</option>
+                                <option value={V.id_vehiculos} >{V.nombre_vehiculos}</option>
                             ))}
                         </select>
 
                         <select onChange={(event) => setEstado(event.target.value)}>
+
+                            <option value="" selected> Seleccione un Estado </option>
                             {estados.map((E) => (
-                                <option value={E.id_estados}>{E.nombre_estados}</option>
+                                <option value={E.id_estados} >{E.nombre_estados}</option>
                             ))}
                         </select>
 
                         <select onChange={(event) => setTipoProducto(event.target.value)}>
+
+                            <option value="" selected> Seleccione un Tipo de Producto </option>
                             {tipoDeProducto.map((T) => (
-                                <option value={T.id_tipo_productos}>{T.nombre_tipo_productos}</option>
+                                <option value={T.id_tipo_productos} disabled>{T.nombre_tipo_productos}</option>
                             ))}
                         </select>
 
