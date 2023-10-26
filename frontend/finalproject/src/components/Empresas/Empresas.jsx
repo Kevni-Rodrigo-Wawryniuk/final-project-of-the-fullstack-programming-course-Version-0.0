@@ -21,8 +21,30 @@ function Empresas() {
         // eslint-disable-next-line no-unused-vars
         const request = await API.deleteEmpresas(idempresa);
 
-        window.location.href ='/Empresas';
+        window.location.href = '/Empresas';
     }
+
+    // verificar usuarios
+    const userVerification = async () => {
+
+        let correo;
+        let token;
+        
+        correo = localStorage.getItem('correo');
+        token = localStorage.getItem('token');
+
+        const traerCorreo = await API.postCorreo({ correo });
+
+        if (traerCorreo.status && token) {
+            console.log('El usuario esta logeado');
+ 
+        } else {
+            window.location.href = '/';
+            console.log('El usuario no esta logeado');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', userVerification());
 
     return (
         <div className='containeBodyEmpresa'>
@@ -55,34 +77,38 @@ function Empresas() {
             </div>
             <div className='containeTablaEmpresa'>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Configuraciones</th>
-                            <th>Empresas</th>
-                            <th>Droides</th>
-                            <th>Vehiculos</th>
-                            <th>Estados</th>
-                            <th>Modelos</th>
-                            <th>Tipos de Productos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {empresas.map((emps) => (
-                            // eslint-disable-next-line react/jsx-key
+                    <nav>
+                        <thead>
                             <tr>
-                                <td>
-                                    <Link to={`/ModificarEmpresas/${emps.idempresas}`}> <button> Editar </button> </Link>
-                                    <button onClick={(event) => borrarEmpresa(event, emps.idempresas)}> Borrar </button>
-                                </td>
-                                <td>{emps.nombre_empresa}</td>
-                                <td>{emps.nombre_droides}</td>
-                                <td>{emps.nombre_vehiculos}</td>
-                                <td>{emps.nombre_estados}</td>
-                                <td>{emps.nombre_modelos}</td>
-                                <td>{emps.nombre_tipo_productos}</td>
+                                <th>Configuraciones</th>
+                                <th>Empresas</th>
+                                <th>Droides</th>
+                                <th>Vehiculos</th>
+                                <th>Estados</th>
+                                <th>Modelos</th>
+                                <th>Tipos de Productos</th>
                             </tr>
-                        ))}
-                    </tbody>
+
+                        </thead>
+
+                        <tbody>
+                            {empresas.map((emps) => (
+                                // eslint-disable-next-line react/jsx-key
+                                <tr>
+                                    <td>
+                                        <Link to={`/ModificarEmpresas/${emps.idempresas}`}> <button> Editar </button> </Link>
+                                        <button onClick={(event) => borrarEmpresa(event, emps.idempresas)}> Borrar </button>
+                                    </td>
+                                    <td>{emps.nombre_empresa}</td>
+                                    <td>{emps.nombre_droides}</td>
+                                    <td>{emps.nombre_vehiculos}</td>
+                                    <td>{emps.nombre_estados}</td>
+                                    <td>{emps.nombre_modelos}</td>
+                                    <td>{emps.nombre_tipo_productos}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </nav>
                 </table>
             </div>
         </div>

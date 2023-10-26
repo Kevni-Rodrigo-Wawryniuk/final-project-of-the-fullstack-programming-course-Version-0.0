@@ -1,17 +1,41 @@
 import './Home.css';
 import { Link } from 'react-router-dom';
+import * as API from '../Service/Service.js';
 
 function Home() {
 
-    const LoqOut = () =>{
+    const LoqOut = () => {
         localStorage.removeItem('correo');
-        window.location.href='/';
+        localStorage.removeItem('token');
+        window.location.href = '/';
     }
+    // verificar usuarios
+    const userVerification = async () => {
+
+        let correo;
+        let token;
+
+        correo = localStorage.getItem('correo');
+        token = localStorage.getItem('token');
+
+        const traerCorreo = await API.postCorreo({ correo });
+
+
+        if (traerCorreo.status && token) {
+            console.log('El usuario esta logeado');
+        } else {
+            window.location.href='/';
+            console.log('El usuario no esta logeado');
+        }
+    }
+    document.addEventListener('DOMContentLoaded', userVerification());
 
     return (
         <div className='containeBodyHome'>
             <div className='containeHomeButtons'>
+              
                 <h2> Tablas </h2>
+                
                 <Link to='/Empresas'>
                     <button>Empresas</button>
                 </Link>
@@ -30,9 +54,9 @@ function Home() {
                 <Link to='/Estados'>
                     <button>Estados</button>
                 </Link>
-                
-                <button onClick={(event) =>LoqOut(event)}> Salir </button>
-                
+
+                <button onClick={(event) => LoqOut(event)}> Salir </button>
+
             </div>
         </div>
     )

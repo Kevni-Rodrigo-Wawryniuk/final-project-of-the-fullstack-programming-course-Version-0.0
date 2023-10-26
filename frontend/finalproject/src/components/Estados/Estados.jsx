@@ -23,6 +23,29 @@ function Estados() {
 
         window.location.href = '/Estados'
     }
+
+    // verificar usuarios
+    const userVerification = async () => {
+
+        let correo;
+        let token;
+
+        correo = localStorage.getItem('correo');
+        token = localStorage.getItem('token');
+
+        const traerCorreo = await API.postCorreo({ correo });
+
+        if (traerCorreo.status && token) {
+            console.log('El usuario esta logeado');
+
+        } else {
+            window.location.href = '/';
+            console.log('El usuario no esta logeado');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', userVerification());
+
     return (
         <>
             <div className='containeBodyEstados'>

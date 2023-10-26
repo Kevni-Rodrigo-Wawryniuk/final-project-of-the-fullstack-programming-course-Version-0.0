@@ -8,8 +8,8 @@ body{
 
 
 .containeBodyEmpresa{
-    width: 993pt;
-    height: 501pt;
+    width: 1323px;
+    height: 667px;
 
 
     display: flex;
@@ -29,9 +29,10 @@ body{
     position: relative;
     top: 0px;
     left: 20px;
+    right: 20px;
 }
 .containeButtonsEmpresa button{
-    width: 190px;
+    width: 15%;
 
     margin-left: 20px;
 }
@@ -44,6 +45,8 @@ body{
 .containeTablaEmpresa{
     position: relative;
     top: 200px;
+    left: 150px;
+    right: 150px;
 
     min-width: 320px;
     min-height: 100vh;
