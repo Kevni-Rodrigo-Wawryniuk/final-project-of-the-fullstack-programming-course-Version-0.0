@@ -4,6 +4,7 @@ create schema stockST;
 -- usar la tabla
 use stockst;
 
+select * from stockst.usuario;
 -- talba usuario
 create table usuario(
 
@@ -14,7 +15,7 @@ edad int not null,
 usuario varchar(100) not null,
 correo varchar(200) not null,
 contraseña varchar(200) not null,
-roles int not null default(0),
+roles varchar(200) not null,
 primary key (idusuario)
 );
 

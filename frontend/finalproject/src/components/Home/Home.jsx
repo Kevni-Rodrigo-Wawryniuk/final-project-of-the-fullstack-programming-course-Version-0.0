@@ -4,9 +4,11 @@ import * as API from '../Service/Service.js';
 
 function Home() {
 
+    // salir del sistema
     const LoqOut = () => {
         localStorage.removeItem('correo');
         localStorage.removeItem('token');
+        localStorage.removeItem('usuario');
         window.location.href = '/';
     }
     // verificar usuarios
@@ -24,18 +26,28 @@ function Home() {
         if (traerCorreo.status && token) {
             console.log('El usuario esta logeado');
         } else {
-            window.location.href='/';
+            window.location.href = '/';
             console.log('El usuario no esta logeado');
         }
     }
+
     document.addEventListener('DOMContentLoaded', userVerification());
+
+    // traer al usuario para mostrarlo
+    const user = localStorage.getItem('usuario');
+
 
     return (
         <div className='containeBodyHome'>
+
+            <div>
+                <h3> EL usuario logeado es: {user} </h3>
+            </div>
+
             <div className='containeHomeButtons'>
-              
+
                 <h2> Tablas </h2>
-                
+
                 <Link to='/Empresas'>
                     <button>Empresas</button>
                 </Link>

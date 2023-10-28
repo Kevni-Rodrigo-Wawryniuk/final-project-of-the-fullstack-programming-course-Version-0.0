@@ -1,9 +1,9 @@
 //import React,{useState} from "react";
 import './Login.css';
 // esto es para redireccionar a otra pagina
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 
-import {useState} from 'react';
+import { useState } from 'react';
 
 import * as API from '../Service/Service.js';
 
@@ -14,20 +14,24 @@ function Login() {
     const [correo, setCorreo] = useState('');
     const [contraseña, setpassword] = useState('');
 
-    const ingreso = async(event) =>{
+    const ingreso = async (event) => {
 
         event.preventDefault();
-        const ingreos = await API.logeo({correo, contraseña});
 
-        if(ingreos.status){
+        const ingreos = await API.logeo({ correo, contraseña });
+        const user = await API.getUsuario(correo);
+        
+        if (ingreos.status) {
             //alert('Pase Señor');
             window.localStorage.setItem('correo', JSON.stringify(ingreos.dato[0]));
             window.localStorage.setItem('token', JSON.stringify(ingreos.token));
-            window.location.href='/Home';
-        }else{
+            window.localStorage.setItem('usuario', JSON.stringify(user.usuario));
+
+            window.location.href = '/Home';
+
+        } else {
             alert(ingreos.mensaje);
         }
-
     }
 
     return (
@@ -45,10 +49,11 @@ function Login() {
                     <h5> Login </h5>
 
                     <input
-                        type='text'
+                        type='email'
                         value={correo}
                         onChange={(event) => setCorreo(event.target.value)}
                         placeholder='Correo'
+                        required
                     />
 
                     <input
@@ -56,6 +61,10 @@ function Login() {
                         value={contraseña}
                         onChange={(event) => setpassword(event.target.value)}
                         placeholder='contraseña'
+                        minLength={10}
+                        maxLength={80}
+                        pattern='^([a-z] + [A-Z] + [0-9] + [!-?]) {10, 12}$'
+                        required
                     />
 
                     <button type='submit'> ingresar </button>
@@ -63,9 +72,7 @@ function Login() {
                     <p>
                         <a href="/OlvidelaContraseña"> olvidaste tu Contraseña </a>
                     </p>
-
                 </form>
-
             </div>
         </div>
     );

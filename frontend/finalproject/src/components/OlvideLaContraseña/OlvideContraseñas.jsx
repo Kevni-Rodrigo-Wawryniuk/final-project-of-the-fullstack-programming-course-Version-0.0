@@ -59,10 +59,11 @@ function OlvideContraseñas() {
                 {mensaje}
                 <form onSubmit={Vercorreo}>
                     <input
-                        type="text"
+                        type="email"
                         placeholder='Correo'
                         value={correo}
                         onChange={(event) => setCorreo(event.target.value)}
+                        required
                     />
                     <button type='submit'> cambiar contraseña </button>
                     <button> volver </button>
@@ -78,6 +79,10 @@ function OlvideContraseñas() {
                         placeholder='Nueva Contraseña'
                         value={contraseña}
                         onChange={(event) => setcontraseña(event.target.value)}
+                        pattern='^([a-z] + [A-Z] + [0-9] + [!-?]) {10, 12}$'
+                        required
+                        minLength={10}
+                        maxLength={80}
                     />
                     <button type='submit'> cambiar contraseña </button>
                     <button onClick={volver()}> volver </button>

@@ -8,31 +8,20 @@ const jwt = require('jsonwebtoken');
 const routelogin = express();
 
 // esto es para ver los registros cargados Y verificando si esta el usuario logeado con el token 
-routelogin.get('/verRegistros', verificationToken, (req, res) => {
+routelogin.get('/verRegistros', (req, res) => {
 
-    jwt.verify(req.token, '251778', (err, reg) => {
+    mysqlconnecction.query('select * from usuario', (err, registros) => {
 
         if (err) {
 
-            res.send('Algo anda mal con el token');
+            console.log('error en la base de datos ---> ', err);
 
         } else {
 
-            mysqlconnecction.query('select * from usuario', (err, registros) => {
+            res.json(registros);
 
-                if (err) {
-
-                    console.log('error en la base de datos ---> ', err);
-
-                } else {
-
-                    res.json(registros);
-
-                }
-            })
         }
     })
-
 })
 
 // registrar a los usuarios
@@ -42,6 +31,7 @@ routelogin.post('/Registros', bodyparser.json(), (req, res) => {
     const { nombre, apellido, edad, usuario, correo, contraseña, roles } = req.body;
     // variable a encriptar
     let hash = bcrypt.hashSync(contraseña, 10);
+    let hash_roles = bcrypt.hashSync(roles, 10);
 
     // datos obligatorios 
     if (!nombre) {
@@ -104,7 +94,7 @@ routelogin.post('/Registros', bodyparser.json(), (req, res) => {
 
             } else {
 
-                mysqlconnecction.query('insert into usuario(nombre, apellido, edad, usuario, correo, contraseña, roles) value (?,?,?,?,?,?,?)', [nombre, apellido, edad, usuario, correo, hash, roles], (err, reg) => {
+                mysqlconnecction.query('insert into usuario(nombre, apellido, edad, usuario, correo, contraseña, roles) value (?,?,?,?,?,?,?)', [nombre, apellido, edad, usuario, correo, hash, hash_roles], (err, reg) => {
 
                     if (err) {
 
@@ -243,17 +233,27 @@ routelogin.post('/traerCorreo', bodyparser.json(), (req, res) => {
 })
 
 // traer id por correo 
-routelogin.get('/usuarios/:correo', bodyparser.json(), (req, res)=>{
+routelogin.get('/usuarios/:correo', (req, res) => {
 
-    const { correo } = req.body;
+    const { correo } = req.params;
 
-    mysqlconnecction.query('select * from usuario where correo =?', [correo],(err, reg)=>{
-        if(err){
-            console.log('Error en la base de datos --->', err);
-        }else{
-            res.json(reg);
-        }
-    })
+    if (!correo) {
+        res.json({
+            status: false,
+            mensaje: 'falta usuario'
+        })
+    } else {
+        console.log( 'buscando usuario');
+
+        mysqlconnecction.query('select * from usuario where correo =?', [correo], (err, reg) => {
+
+            if (err) {
+                console.log('Error en la base de datos --->', err);
+            } else {
+                res.json(reg);
+            }
+        })
+    }
 })
 // modificar contraseña
 routelogin.put('/restaurar/:correo', bodyparser.json(), (req, res) => {

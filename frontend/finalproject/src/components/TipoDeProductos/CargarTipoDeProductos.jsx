@@ -38,7 +38,7 @@ function CargarTipoDeProductos() {
                             type="text"
                             value={nombre_tipo_productos}
                             onChange={(event) => setTipo_Producto(event.target.value)}
-                            placeholder='Nombre del Vehiculo'
+                            placeholder='Nombre del Producto'
                         />
 
                         <input

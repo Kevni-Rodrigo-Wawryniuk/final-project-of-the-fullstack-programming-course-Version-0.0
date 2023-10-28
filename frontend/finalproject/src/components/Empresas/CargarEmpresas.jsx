@@ -105,7 +105,7 @@ export function CargarEmpresas() {
 
                             <option value="" selected> Seleccione un Tipo de Producto </option>
                             {tipoDeProducto.map((T) => (
-                                <option value={T.id_tipo_productos} disabled>{T.nombre_tipo_productos}</option>
+                                <option value={T.id_tipo_productos}>{T.nombre_tipo_productos}</option>
                             ))}
                         </select>
 
