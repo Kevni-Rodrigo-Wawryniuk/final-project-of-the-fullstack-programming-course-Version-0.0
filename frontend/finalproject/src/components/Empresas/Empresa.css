@@ -8,52 +8,78 @@ body{
 
 
 .containeBodyEmpresa{
-    width: 1323px;
-    height: 667px;
 
+    min-width: 50% auto;
+    min-height: 50% auto;
 
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    top: 0%;
+
+    background-color: gray;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-.containeTituloEmpresa h2{
-    text-align: center;
+.containeTituloEmpresa{
+    position: fixed;
+    top: 0;
+    left: 46%;
+    right: unset;
+    bottom: unset;
     
-
-    color: white;
+    color: black;
+    text-decoration: underline;
 }
 .containeButtonsEmpresa{
-    position: relative;
-    top: 0px;
-    left: 20px;
-    right: 20px;
+    position: fixed;
+    top: 10%;
+    left: 2%;
+    right: 2%;
 }
 .containeButtonsEmpresa button{
     width: 15%;
+    height: 10%;
 
-    margin-left: 20px;
+    border-radius: 20px;
+
+    margin-left: 1%;
+}
+.containeButtonsEmpresa button:hover{
+    background-color: aqua;
+    color: blue;
 }
 
 .containeButtonCargarEmpresa{
-    position: relative;
-    top: 100px;
+    width: 20%;
+    position: fixed;
+    top: 23%;
+    left: 40%;
+    right: 47%;
+}
+.containeButtonCargarEmpresa button{
+    width: 100%;
+    border-radius: 20px;
+}
+.containeButtonCargarEmpresa button:hover{
+    background-color: aqua;
+    color: blue;
 }
 
-.containeTablaEmpresa{
-    position: relative;
-    top: 200px;
-    left: 150px;
-    right: 150px;
 
-    min-width: 320px;
-    min-height: 100vh;
-    max-width: 1366px;
-    
-    width: auto;
-    height: auto;
+.containeTablaEmpresa{
+    position: fixed;
+    top: 30%;
+
+    min-width: 80%;
+    min-height: 100%;
+
+    width: 100%;
+    height: 140%;
 
     margin: 0;
     padding: 0;
@@ -63,36 +89,55 @@ body{
     display: flex;
     flex-direction: column;
 
-    color: yellow;
+    color: black;
+}
+.containeTablaEmpresa button:hover{
+    background-color: aqua;
+    color: blue;
 }
 .containeTablaEmpresa table{
+    width: 100%;
+    height: 50%;
+
     align-items: center;
     justify-content: center;
     table-layout: fixed;
     
-    font-size: 15px;
+    font-size: 100%;
 
     border-collapse: collapse;
+
+    background-color: whitesmoke;
 }
 .containeTablaEmpresa th{
-    
-    margin: 0;
-    padding: 20px 15px;
+    width: 10%;
+    height: 10%;
 
     border: 2px solid black;
+
+    text-align: center;
 
     text-transform: uppercase;
 }
 .containeTablaEmpresa td{
+    width: auto;
+    height: auto;
 
-
-    margin: 0;
-    padding: 26.2px;
-
+    text-align: center;
+    
     border: 2px solid black;
 }
 
-.maincarga{
+nav,
+.scroll_containe{
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    border: 1px solid black;
+}
+.scroll_page{
     display: flex;
     justify-content: center;
     align-items: center;

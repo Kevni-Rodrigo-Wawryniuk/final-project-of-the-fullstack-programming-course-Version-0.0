@@ -37,7 +37,7 @@ function CargarModelos(){
                         type="text"
                         value={nombre_modelos}
                         onChange={(event) => setModelos(event.target.value)}
-                        placeholder='Nombre del Vehiculo' 
+                        placeholder='Nombre del Modelos' 
                         />
 
                         <input 

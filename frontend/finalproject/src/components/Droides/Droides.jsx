@@ -49,7 +49,7 @@ function Droides() {
     return (
         <>
             <div className='containtBodyDroides'>
-                <div className='containeTituloDroides'>
+                <div className='containTituloDroides'>
                     <h2>Droides</h2>
                 </div>
                 <div className='containeButtonsDroides'>
@@ -81,26 +81,28 @@ function Droides() {
 
                 <div className='containeTablaDroides'>
                     <table>
-                        <thead>
+                        <nav>                        <thead>
                             <tr>
                                 <th>Configuraciones</th>
                                 <th>nombre</th>
                                 <th>codigo</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {droides.map((droid) => (
-                                // eslint-disable-next-line react/jsx-key
-                                <tr>
-                                    <td>
-                                        <Link to={`/ModificarDroides/${droid.id_droides}`}> <button> Editar </button> </Link>
-                                        <button onClick={(event) => borrarDroide(event, droid.id_droides)}> Borrar </button>
-                                    </td>
-                                    <td>{droid.nombre_droides}</td>
-                                    <td>{droid.codigo}</td>
-                                </tr>
-                            ))}
-                        </tbody>
+                            <tbody>
+                                {droides.map((droid) => (
+                                    // eslint-disable-next-line react/jsx-key
+                                    <tr>
+                                        <td>
+                                            <Link to={`/ModificarDroides/${droid.id_droides}`}> <button> Editar </button> </Link>
+                                            <button onClick={(event) => borrarDroide(event, droid.id_droides)}> Borrar </button>
+                                        </td>
+                                        <td>{droid.nombre_droides}</td>
+                                        <td>{droid.codigo}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </nav>
+
                     </table>
                 </div>
             </div>

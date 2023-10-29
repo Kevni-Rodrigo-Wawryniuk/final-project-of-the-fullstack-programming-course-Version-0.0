@@ -113,6 +113,7 @@ function EditarEmpresas() {
                         />
 
                         <select onChange={(event) => setModelo(event.target.value)}>
+                            <option value="" selected> Seleccione un Modelo </option>
                             {modelo.map((m)=>(
                                 <option value={m.id_modelos}>{m.nombre_modelos}</option>
                             ))}
@@ -125,18 +126,24 @@ function EditarEmpresas() {
                         </select>
 
                         <select onChange={(event) => setVehiculos(event.target.value)}>
+                            
+                        <option value="" selected> Seleccione un Vehiculo </option>
                             {vehiculo.map((v)=>(
                                 <option value={v.id_vehiculos}>{v.nombre_vehiculos}</option>
                             ))}
                         </select>
 
                         <select onChange={(event) => setEstados(event.target.value)}>
+                            
+                        <option value="" selected> Seleccione un Estado </option>
                             {estado.map((e)=>(
                                 <option value={e.id_estados}>{e.nombre_estados}</option>
                             ))}
                         </select>
 
                         <select onChange={(event)=>setTipoProductos(event.target.value)}>
+                            
+                        <option value="" selected> Seleccione un Tipo de Producto </option>
                             {tipodeproducto.map((tp)=>(
                                 <option value={tp.id_tipo_productos}>{tp.nombre_tipo_productos}</option>
                             ))}

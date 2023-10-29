@@ -21,7 +21,8 @@ function Empresas() {
         // eslint-disable-next-line no-unused-vars
         const request = await API.deleteEmpresas(idempresa);
 
-        window.location.href = '/Empresas';
+        setInterval("location.reload()",1000);
+        //window.location.href = '/Empresas';
     }
 
     // verificar usuarios
@@ -29,7 +30,7 @@ function Empresas() {
 
         let correo;
         let token;
-        
+
         correo = localStorage.getItem('correo');
         token = localStorage.getItem('token');
 
@@ -37,7 +38,7 @@ function Empresas() {
 
         if (traerCorreo.status && token) {
             console.log('El usuario esta logeado');
- 
+
         } else {
             window.location.href = '/';
             console.log('El usuario no esta logeado');
@@ -51,27 +52,26 @@ function Empresas() {
             <div className='containeTituloEmpresa'>
                 <h2> Empresas </h2>
             </div>
-
-            <div className='containeButtonsEmpresa'>
-                <Link to='/Home'>
-                    <button> volver </button>
-                </Link>
-                <Link to='/Droides'>
-                    <button> Droides </button>
-                </Link>
-                <Link to='/Vehiculos'>
-                    <button> Vehiculos </button>
-                </Link>
-                <Link to='/Estados'>
-                    <button> Estado </button>
-                </Link>
-                <Link to='/Modelos'>
-                    <button> Modelos </button>
-                </Link>
-                <Link to='/TipoDeProductos'>
-                    <button> Tipo de productos </button>
-                </Link>
-            </div>
+                <div className='containeButtonsEmpresa'>
+                    <Link to='/Home'>
+                        <button> volver </button>
+                    </Link>
+                    <Link to='/Droides'>
+                        <button> Droides </button>
+                    </Link>
+                    <Link to='/Vehiculos'>
+                        <button> Vehiculos </button>
+                    </Link>
+                    <Link to='/Estados'>
+                        <button> Estado </button>
+                    </Link>
+                    <Link to='/Modelos'>
+                        <button> Modelos </button>
+                    </Link>
+                    <Link to='/TipoDeProductos'>
+                        <button> Tipo de productos </button>
+                    </Link>
+                </div>
             <div className='containeButtonCargarEmpresa'>
                 <Link to='/AgregarEmpresas'> <button> Cargar </button> </Link>
             </div>

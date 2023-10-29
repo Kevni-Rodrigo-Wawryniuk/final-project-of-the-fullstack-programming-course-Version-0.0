@@ -1,6 +1,22 @@
 const URL ='http://localhost:2000';
 
 ///////////////////////// LOGEO Y REGISTRO DE USUARIO /////////////////////
+export async function getRegistros(){
+   
+    const Options={
+        method:'GET',
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    }
+
+    const request = await fetch(`${URL}/verRegistros`, Options);
+ 
+    const dato = await request.json();
+ 
+    return dato;
+}
+
 export async function logeo(date){
 
     const options={
@@ -71,7 +87,7 @@ export async function putContraseña(date){
     return dato;
 }
 
-export async function getUsuario(correo){
+export async function getUsuario(date){
    
     const Options={
         method:'GET',
@@ -80,7 +96,7 @@ export async function getUsuario(correo){
         }
     }
 
-    const request = await fetch(`${URL}/usuarios/${correo}`, Options);
+    const request = await fetch(`${URL}/usuarios/${date}`, Options);
  
     const dato = await request.json();
  
