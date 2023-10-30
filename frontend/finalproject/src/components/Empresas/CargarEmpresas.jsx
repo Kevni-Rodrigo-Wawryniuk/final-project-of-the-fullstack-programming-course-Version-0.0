@@ -58,19 +58,19 @@ export function CargarEmpresas() {
             <div className='containeBodyEmpresa1'>
                 <main className='maincarga'>
                     <form onSubmit={cargarEmpresas}>
-                        <div>
+                        <div className='cont12'>
                             {mensaje}
                         </div>
-                        <div>
-                        <input
+                        <div className='cont1'>
+                        <input className='cont'
                             type="text"
                             value={nombre_empresa}
                             onChange={(event) => setNombre(event.target.value)}
                             placeholder=" Nombre de la empresa "
                         />
                         </div>
-                        <div>
-                        <select onChange={(event) => setModelo(event.target.value)}>
+                        <div className='cont1'>
+                        <select className='cont' onChange={(event) => setModelo(event.target.value)}>
 
                             <option value="" selected> Seleccione un Modelo </option>
                             {modelos.map((M) => (
@@ -78,8 +78,8 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <div>
-                        <select onChange={(event) => setDroide(event.target.value)}>
+                        <div className='cont1'>
+                        <select className='cont' onChange={(event) => setDroide(event.target.value)}>
 
                             <option value="" selected> Seleccione un Droide </option>
                             {droides.map((D) => (
@@ -87,8 +87,8 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <div>
-                        <select onChange={(event) => setVehiculo(event.target.value)}>
+                        <div className='cont1'>
+                        <select className='cont' onChange={(event) => setVehiculo(event.target.value)}>
 
                             <option value="" selected> Seleccione un Vehiculo </option>
                             {vehiculos.map((V) => (
@@ -96,8 +96,8 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <div>
-                        <select onChange={(event) => setEstado(event.target.value)}>
+                        <div className='cont1'>
+                        <select className='cont' onChange={(event) => setEstado(event.target.value)}>
 
                             <option value="" selected> Seleccione un Estado </option>
                             {estados.map((E) => (
@@ -105,8 +105,8 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <div>
-                        <select onChange={(event) => setTipoProducto(event.target.value)}>
+                        <div className='cont1'>
+                        <select className='cont' onChange={(event) => setTipoProducto(event.target.value)}>
 
                             <option value="" selected> Seleccione un Tipo de Producto </option>
                             {tipoDeProducto.map((T) => (
@@ -114,9 +114,10 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <button type='submit'> Cargar </button>
-                        <Link to='/Empresas'> <button> Volver </button> </Link>
-
+                        <div className='cont1'>
+                            <button type='submit'> Cargar </button>
+                            <Link to='/Empresas'> <button> Volver </button> </Link>
+                        </div>
                     </form>
                 </main>
             </div >

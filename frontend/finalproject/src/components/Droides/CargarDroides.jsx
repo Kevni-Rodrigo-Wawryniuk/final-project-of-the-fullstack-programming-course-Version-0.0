@@ -29,26 +29,31 @@ function CargarDroides() {
 
     return (
         <>
-            <div className='containtBodyDroides'>
+            <div className='containtBodyDroides1'>
                 {mensaje}
                 <div>
                     <form onSubmit={CargarDroide}>
-                        <input
+                        <div className='cont4'>
+                        <input className='cont5'
                             type="text"
                             value={nombre_droides}
                             onChange={(event) => setDroides(event.target.value)}
                             placeholder='Nombre del Droide'
                         />
-
-                        <input
-                            type="text"
+                        </div>
+                        <div className='cont4'>
+                        <input className='cont5'
+                            type="number"
+                            pattern="[0-9]"
                             value={codigo}
                             onChange={(event) => setCodigo(event.target.value)}
                             placeholder='Codigo'
                         />
-
+                        </div>
+                        <div className='cont4'>
                         <button type='submit'> Cargar </button>
                         <Link to='/Droides'> <button> volver </button></Link>
+                        </div>
                     </form>
                 </div>
             </div>

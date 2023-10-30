@@ -47,28 +47,39 @@ function Home() {
             <div className='containeHomeButtons'>
 
                 <h2> Tablas </h2>
-
+                <div className='re'>
                 <Link to='/Empresas'>
                     <button>Empresas</button>
                 </Link>
+                </div>
+                <div className='re'>
                 <Link to='/Droides'>
                     <button>Droides</button>
                 </Link>
+                </div>
+                <div className='re'>
                 <Link to='/Vehiculos'>
                     <button>Vehiculos</button>
                 </Link>
+                </div>
+                <div className='re'>
                 <Link to='/Modelos'>
                     <button>Modelos</button>
                 </Link>
+                </div>
+                <div className='re'>
                 <Link to='/TipoDeProductos'>
                     <button>Tipos de productos</button>
                 </Link>
+                </div>
+                <div className='re'>
                 <Link to='/Estados'>
                     <button>Estados</button>
                 </Link>
-
+                </div>
+                <div className='re'>
                 <button onClick={(event) => LoqOut(event)}> Salir </button>
-
+                </div>
             </div>
         </div>
     )

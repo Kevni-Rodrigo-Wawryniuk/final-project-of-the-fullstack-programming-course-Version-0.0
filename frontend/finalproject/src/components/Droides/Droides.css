@@ -3,28 +3,26 @@ body{
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    
+  
 }
-
-
-.containtBodyDroides{
-
-    min-width: 50% auto;
-    min-height: 50% auto;
-
+#root{
     width: 100%;
     height: 100%;
+}
+.containtBodyDroides1{
+   margin-top: 20%;
 
-    position: fixed;
-    top: 0%;
-
-    background-image: url(/frontend/finalproject/src/components/images/estrella-muertejpg.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+}
+.cont4{
+    margin: auto;
+    width: 400px;
+    height: 60px;
 }
 
+.cont5{
+    width: 350px;
+    height: 40px;
+}
 .containTituloDroides{
     position: fixed;
     top: 0;
@@ -99,9 +97,6 @@ body{
     width: 100%;
     height: 50%;
 
-    align-items: center;
-    justify-content: center;
-    table-layout: fixed;
     
     font-size: 100%;
 

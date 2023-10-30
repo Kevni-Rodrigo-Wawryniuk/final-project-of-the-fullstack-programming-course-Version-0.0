@@ -41,7 +41,8 @@ function CargarEstados() {
                         />
 
                         <input
-                            type='text'
+                            type="number"
+                            pattern="[0-9]"
                             value={codigos}
                             onChange={(event) => setCodigo(event.target.value)}
                             placeholder='Codigo'

@@ -41,7 +41,8 @@ function CargarModelos(){
                         />
 
                         <input 
-                        type="text" 
+                       type="number"
+                       pattern="[0-9]"
                         value={codigo}
                         onChange={(event) => setCodigo(event.target.value)}
                         placeholder='Codigo'
