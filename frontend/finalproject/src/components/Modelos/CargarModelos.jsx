@@ -28,28 +28,34 @@ function CargarModelos(){
     }
     return(
         <>
-            <div className='containtBodyModelos'>
-                <h2> Cargar Modelo </h2>
-                <div>
+            <div className='containtBodyModelos1'>
+                <div className='mensaje'>
+                <h3> Cargar Modelos </h3>
                     {mensaje}
+                </div>   
+                <div>
                     <form onSubmit={CargarModelo}>
-                        <input 
+                        <div className='cont4'>
+                        <input className='cont5'
                         type="text"
                         value={nombre_modelos}
                         onChange={(event) => setModelos(event.target.value)}
                         placeholder='Nombre del Modelos' 
                         />
-
-                        <input 
-                       type="number"
-                       pattern="[0-9]"
-                        value={codigo}
-                        onChange={(event) => setCodigo(event.target.value)}
-                        placeholder='Codigo'
-                        />
-
-                        <button type='submit'> Cargar </button>
-                        <Link to='/Modelos'> <button> volver </button> </Link>
+                        </div>
+                        <div className='cont4'>
+                            <input className='cont5'
+                                type="number"
+                                pattern="[0-9]"
+                                value={codigo}
+                                onChange={(event) => setCodigo(event.target.value)}
+                                placeholder='Codigo'
+                            />
+                        </div>
+                        <div className='cont4'>
+                            <button type='submit'> Cargar </button>
+                            <Link to='/Modelos'> <button> volver </button> </Link>
+                        </div>
                     </form>
                 </div>
             </div>

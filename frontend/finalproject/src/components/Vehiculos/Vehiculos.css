@@ -5,10 +5,16 @@ body{
     background-size:cover;
     
 }
-
+.mensaje{
+    color: white;
+}
+.containtBodyVehiculos1{
+    margin-top: 20%;
+}
 
 .containtBodyVehiculos{
 
+    
     min-width: 50% auto;
     min-height: 50% auto;
 

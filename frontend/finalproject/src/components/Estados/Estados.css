@@ -5,6 +5,12 @@ body{
     background-size:cover;
     
 }
+.mensaje{
+    color: white;
+}
+.containtBodyEstados1{
+    margin-top: 20%;
+}
 
 
 .containeBodyEstados{

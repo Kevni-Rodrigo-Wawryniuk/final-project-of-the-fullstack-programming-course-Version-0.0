@@ -30,7 +30,10 @@ function CargarDroides() {
     return (
         <>
             <div className='containtBodyDroides1'>
-                {mensaje}
+                <div className='mensaje'>
+                    <h3> Cargar de Droides</h3>
+                    {mensaje}
+                </div>   
                 <div>
                     <form onSubmit={CargarDroide}>
                         <div className='cont4'>
@@ -52,7 +55,7 @@ function CargarDroides() {
                         </div>
                         <div className='cont4'>
                         <button type='submit'> Cargar </button>
-                        <Link to='/Droides'> <button> volver </button></Link>
+                        <Link to='/Droides'> <button> Volver </button></Link>
                         </div>
                     </form>
                 </div>

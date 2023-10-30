@@ -29,28 +29,34 @@ function CargarVehiculos(){
 
     return(
         <>
-            <div className='containtBodyVehiculos'>
-                <h3> Cargar Vehiculos </h3>
-                {mensaje}
+            <div className='containtBodyVehiculos1'>
+                <div className='mensaje'>
+                    <h3> Cargar Vehiculos </h3>
+                    {mensaje}
+                </div>    
                 <div>
                     <form onSubmit={CargarVehiculo}>
-                        <input 
-                        type="text"
-                        value={nombre_vehiculos}
-                        onChange={(event) => setnombre_vehiculo(event.target.value)}
-                        placeholder='Nombre del Vehiculo' 
-                        />
-
-                        <input 
-                        type="number"
-                        pattern="[0-9]" 
-                        value={codigo}
-                        onChange={(event) => setCodigo(event.target.value)}
-                        placeholder='Codigo'
-                        />
-
-                        <button type='submit' > Cargar </button>
-                        <Link to='/Vehiculos'> <button> volver </button> </Link>
+                        <div className='cont4'>
+                            <input className='cont5'
+                            type="text"
+                            value={nombre_vehiculos}
+                            onChange={(event) => setnombre_vehiculo(event.target.value)}
+                            placeholder='Nombre del Vehiculo' 
+                            />
+                        </div>
+                        <div className='cont4'>
+                            <input className='cont5'
+                            type="number"
+                            pattern="[0-9]" 
+                            value={codigo}
+                            onChange={(event) => setCodigo(event.target.value)}
+                            placeholder='Codigo'
+                            />
+                        </div>  
+                        <div className='cont4'>
+                            <button type='submit' > Cargar </button>
+                            <Link to='/Vehiculos'> <button> Volver </button> </Link>
+                        </div>
                     </form>
                 </div>
             </div>
