@@ -52,6 +52,12 @@ function OlvideContraseñas() {
         }
     }
 
+    const volverAlaPaginaLogin = async (event) =>{
+        event.preventDefault();
+
+        window.location.href='/';
+    }
+
     return (
         <>
             <div id='Form0'>
@@ -66,7 +72,7 @@ function OlvideContraseñas() {
                         required
                     />
                     <button type='submit'> cambiar contraseña </button>
-                    <button> volver </button>
+                    <button onClick={(event) => volverAlaPaginaLogin(event)}> volver </button>
                 </form>
             </div>
 

@@ -41,7 +41,7 @@ function Home() {
         <div className='containeBodyHome'>
 
             <div className='usuario'>
-                <h3> EL usuario logeado es: {user} </h3>
+                <h3> Usuario: {user} </h3>
             </div>
 
             <div className='containeHomeButtons'>

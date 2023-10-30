@@ -32,11 +32,11 @@ routeEstado.get('/verEstados', verificationToken, (req, res) => {
 routeEstado.get('/verEstado/:id_estados', verificationToken, (req, res) => {
 
     const { id_estados } = req.params;
-    
-    jwt.verify(req.token, 'Pase', (error, valido)=>{
-        if(error){
+
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
             res.sendStatus(403);
-        }else{
+        } else {
             mysqlconnecction.query('select * from estados where id_estados =?', [id_estados], (err, reg) => {
                 if (err) {
                     console.log('Error en la base de datos --> ', err);
@@ -60,33 +60,32 @@ routeEstado.post('/cargarEstado', verificationToken, bodyparser.json(), (req, re
             status: false,
             mensaje: "El nombre del estado es un campo obligatorio"
         })
-    }
-
-    if (!codigos) {
+    } else if (!codigos) {
 
         res.json({
 
             status: false,
             mensaje: "El codigo del estado es un campo obligatorio"
         })
-    }
+    } else {
 
-    jwt.verify(req.token, 'Pase', (error, valido)=>{
-        if(error){
-            res.sendStatus(403);
-        }else{
-            mysqlconnecction.query('insert into estados (nombre_estados, codigo) value (?,?)', [nombre_estado, codigos], (err, reg) => {
-                if (err) {
-                    console.log("Error en la base de datos al cargar un estado --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El estado se cargo correctamente"
-                    })
-                }
-            })        
-        }
-    })
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('insert into estados (nombre_estados, codigo) value (?,?)', [nombre_estado, codigos], (err, reg) => {
+                    if (err) {
+                        console.log("Error en la base de datos al cargar un estado --> ", err);
+                    } else {
+                        res.json({
+                            status: true,
+                            mensaje: "El estado se cargo correctamente"
+                        })
+                    }
+                })
+            }
+        })
+    }
 })
 
 // modificar los estados
@@ -112,23 +111,23 @@ routeEstado.put('/modificarEstado/:id_estados', verificationToken, bodyparser.js
         })
     }
 
-    jwt.verify(req.token, 'Pase', (error, valido)=>{
-        if(error){
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
             res.sendStatus(403);
-        }else{
+        } else {
             mysqlconnecction.query('update estados set nombre_estados = ?, codigo = ? where id_estados =?', [nombre_estado, codigo, id_estados], (err, registro) => {
 
                 if (err) {
-        
+
                     console.log("Error en la base de datos al modificar el estado --> ", err);
-        
+
                 } else {
-        
+
                     res.json({
                         status: true,
                         mensaje: "El estado se a modificado de manera correcta"
                     })
-        
+
                 }
             })
         }
@@ -140,23 +139,23 @@ routeEstado.delete('/borrarEstado/:id_estados', verificationToken, (req, res) =>
 
     const { id_estados } = req.params;
 
-    jwt.verify(req.token, 'Pase', (error, valido)=>{
-        if(error){
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
             res.sendStatus(403);
-        }else{
+        } else {
             mysqlconnecction.query('delete from estados where id_estados =?', [id_estados], (err, registro) => {
 
                 if (err) {
-        
+
                     console.log("Error en la base de datos al borrar un estado --> ", err);
-        
+
                 } else {
                     res.json({
                         status: true,
                         mensaje: "El registro se borro correctamente"
                     })
                 }
-            })        
+            })
         }
     })
 })

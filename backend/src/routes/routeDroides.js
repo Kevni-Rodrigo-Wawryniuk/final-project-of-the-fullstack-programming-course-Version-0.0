@@ -50,8 +50,6 @@ routeDroides.get('/verDriode/:id_droides', verificationToken, (req, res) => {
         }
     })
 })
-
-
 // Cargar datos de los droides
 routeDroides.post('/cargarDroides', verificationToken, bodyparser.json(), (req, res) => {
 
@@ -62,35 +60,34 @@ routeDroides.post('/cargarDroides', verificationToken, bodyparser.json(), (req, 
             status: false,
             mensaje: "El codigo es un campo obligatorio"
         })
-    }
-
-    if (!nombre_droides) {
+    } else if (!nombre_droides) {
 
         res.json({
 
             status: false,
             mensaje: "El nombre del Droide es un campo obligatorio"
         })
+    } else {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('insert into droides (nombre_droides, codigo) value (?,?)', [nombre_droides, codigo], (err, registro) => {
+
+                    if (err) {
+
+                        console.log('Error al cargar el dato al cargar un droide --> ', err);
+
+                    } else {
+                        res.json({
+                            status: true,
+                            mensaje: "El Droide se cargo correctamente"
+                        })
+                    }
+                })
+            }
+        })
     }
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('insert into droides (nombre_droides, codigo) value (?,?)', [nombre_droides, codigo], (err, registro) => {
-
-                if (err) {
-
-                    console.log('Error al cargar el dato al cargar un droide --> ', err);
-
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El Droide se cargo correctamente"
-                    })
-                }
-            })
-        }
-    })
 })
 
 // modificar datos de los droides
@@ -106,37 +103,37 @@ routeDroides.put('/modificarDroides/:id_droide', verificationToken, bodyparser.j
             mensaje: "El nombre de estado es un campo obligatorio"
         })
 
-    }
-    if (!nombre_droides) {
+    } else if (!nombre_droides) {
 
         res.json({
             status: false,
             mensaje: "El nuevo estado es un campo obligatorio"
         })
+    } else {
+
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+
+                mysqlconnecction.query('update droides set nombre_droides = ?, codigo =? where id_droides =?', [nombre_droides, codigo, id_droide], (err, registro) => {
+
+                    if (err) {
+
+                        console.log("Error en la base de datos al modificar el droide --> ", err);
+
+                    } else {
+
+                        res.json({
+                            status: true,
+                            mensaje: "El droide se a modificado de manera correcta"
+                        })
+
+                    }
+                })
+            }
+        })
     }
-
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-
-            mysqlconnecction.query('update droides set nombre_droides = ?, codigo =? where id_droides =?', [nombre_droides, codigo, id_droide], (err, registro) => {
-
-                if (err) {
-
-                    console.log("Error en la base de datos al modificar el droide --> ", err);
-
-                } else {
-
-                    res.json({
-                        status: true,
-                        mensaje: "El droide se a modificado de manera correcta"
-                    })
-
-                }
-            })
-        }
-    })
 })
 
 // borrar Droides

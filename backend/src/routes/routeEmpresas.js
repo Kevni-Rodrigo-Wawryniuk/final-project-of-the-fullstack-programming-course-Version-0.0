@@ -55,50 +55,45 @@ routeEmpresas.post('/cargarEmpresas', verificationToken, bodyparser.json(), (req
             status: false,
             mensaje: "El modelo es un campo obligatorio"
         })
-    }
-    if (!id_droides) {
+    } else if (!id_droides) {
         res.json({
             status: false,
             mensaje: "El droide es un campo obligatorio"
         })
-    }
-    if (!id_vehiculos) {
+    } else if (!id_vehiculos) {
         res.json({
             status: false,
             mensaje: "El Vehiculo es un campo obligatorio"
         })
-    }
-    if (!id_estado) {
+    } else if (!id_estado) {
         res.json({
             status: false,
             mensaje: "El estado es un campo obligatorio"
         })
-    }
-    if (!id_tipo_producto) {
+    } else if (!id_tipo_producto) {
         res.json({
             status: false,
             mensaje: "El tipo de producto es un campo obligatorio"
         })
+    } else {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('insert into empresas (nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto) value (?,?,?,?,?,?)', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto], (err, reg) => {
+
+                    if (err) {
+                        console.log("Error en la base de datos al cargar una nueva empresa --> ", err);
+                    } else {
+                        res.json({
+                            status: true,
+                            mensaje: "La empresa se acargado de manera correcta"
+                        })
+                    }
+                })
+            }
+        })
     }
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('insert into empresas (nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto) value (?,?,?,?,?,?)', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto], (err, reg) => {
-
-                if (err) {
-                    console.log("Error en la base de datos al cargar una nueva empresa --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "La empresa se acargado de manera correcta"
-                    })
-                }
-            })
-        }
-    })
-
-
 })
 
 // MODIFICAR LOS DATOS DE LAS EMPRESAS
@@ -106,14 +101,20 @@ routeEmpresas.put('/modificarEmpresas/:idempresas', verificationToken, bodyparse
 
     const { idempresas } = req.params;
     const { nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto } = req.body;
-
-    mysqlconnecction.query('update empresas set nombre_empresa = ?, id_modelo = ?, id_droides = ?, id_vehiculos = ?, id_estado = ?, id_tipo_producto = ? where idempresas = ?', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto, idempresas], (err, reg) => {
-        if (err) {
-            console.log("Error en la base de datos al modificar una empresa --> ", err);
+    
+    jwt.verify(req.token, 'Pase', (error, valido) => {
+        if (error) {
+            res.sendStatus(403);
         } else {
-            res.json({
-                status: true,
-                mensaje: "La empresa se modifico de manera correcta"
+            mysqlconnecction.query('update empresas set nombre_empresa = ?, id_modelo = ?, id_droides = ?, id_vehiculos = ?, id_estado = ?, id_tipo_producto = ? where idempresas = ?', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto, idempresas], (err, reg) => {
+                if (err) {
+                    console.log("Error en la base de datos al modificar una empresa --> ", err);
+                } else {
+                    res.json({
+                        status: true,
+                        mensaje: "La empresa se modifico de manera correcta"
+                    })
+                }
             })
         }
     })

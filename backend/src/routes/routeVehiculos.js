@@ -55,35 +55,35 @@ routeVehiculos.post('/cargarVehiculos', verificationToken, bodyparser.json(), (r
 
     if (!nombre_vehiculos) {
         res.json({
-            status: false,
+            //status: false,
             mensaje: "El nombre del vehiculo es un campo obligatorio"
         })
-    }
-    if (!codigo) {
+    } else if (!codigo) {
         res.json({
-            status: false,
+            //status: false,
             mensaje: "El codigo es un campo obligatorio"
         })
+    } else {
+
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+
+                mysqlconnecction.query('insert into vehiculos (nombre_vehiculos, codigo) value (?,?)', [nombre_vehiculos, codigo], (err, reg) => {
+
+                    if (err) {
+                        console.log("Error en la base de datos al cargar un vehiculo --> ", err);
+                    } else {
+                        res.json({
+                            status: true,
+                            mensaje: "El vehiculo se cargo correctamente"
+                        })
+                    }
+                })
+            }
+        })
     }
-
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-
-            mysqlconnecction.query('insert into vehiculos (nombre_vehiculos, codigo) value (?,?)', [nombre_vehiculos, codigo], (err, reg) => {
-
-                if (err) {
-                    console.log("Error en la base de datos al cargar un vehiculo --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El vehiculo se cargo correctamente"
-                    })
-                }
-            })
-        }
-    })
 })
 
 // modificar modelos
@@ -98,30 +98,30 @@ routeVehiculos.put('/modificarVehiculos/:id_vehiculos', verificationToken, bodyp
             status: false,
             mensaje: "El nombre es un campo obligatorio"
         })
-    }
-    if (!codigo) {
+    } else if (!codigo) {
         res.json({
             status: false,
             mensaje: "El codigo es un campo obligatorio"
         })
-    }
+    } else {
 
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('update vehiculos set nombre_vehiculos =?, codigo =? where id_vehiculos =?', [nombre_vehiculos, codigo, id_vehiculos], (err, reg) => {
-                if (err) {
-                    console.log("Error en la base de datos al modificar un Vehiculo --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El vehiculo se modifico de manera correcta"
-                    })
-                }
-            })
-        }
-    })
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('update vehiculos set nombre_vehiculos =?, codigo =? where id_vehiculos =?', [nombre_vehiculos, codigo, id_vehiculos], (err, reg) => {
+                    if (err) {
+                        console.log("Error en la base de datos al modificar un Vehiculo --> ", err);
+                    } else {
+                        res.json({
+                            status: true,
+                            mensaje: "El vehiculo se modifico de manera correcta"
+                        })
+                    }
+                })
+            }
+        })
+    }
 })
 
 // borrar modelos
