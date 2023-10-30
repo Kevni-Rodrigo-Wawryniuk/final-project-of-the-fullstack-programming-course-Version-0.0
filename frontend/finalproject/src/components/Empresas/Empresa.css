@@ -1,11 +1,20 @@
-body{
-    background-image: url(../images/Atardecer.jpg);
+
+.containeBodyEmpresa1{
+    background-image: url(../images/777.jpeg);
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:cover;
     
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
-
+.maincarga{
+    margin: auto;
+}
 
 .containeBodyEmpresa{
 
@@ -18,7 +27,7 @@ body{
     position: fixed;
     top: 0%;
 
-    background-color: gray;
+    background-image: url(/frontend/finalproject/src/components/images/estrella-muertejpg.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -32,7 +41,7 @@ body{
     right: unset;
     bottom: unset;
     
-    color: black;
+    color: white;
     text-decoration: underline;
 }
 .containeButtonsEmpresa{

@@ -1,5 +1,14 @@
-.containtBodyDroides{
+body{
+    background-image: url(../images/777.jpeg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     
+}
+
+
+.containtBodyDroides{
+
     min-width: 50% auto;
     min-height: 50% auto;
 
@@ -9,6 +18,11 @@
     position: fixed;
     top: 0%;
 
+    background-image: url(/frontend/finalproject/src/components/images/estrella-muertejpg.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .containTituloDroides{
@@ -18,10 +32,9 @@
     right: unset;
     bottom: unset;
     
-    color: black;
+    color: white;
     text-decoration: underline;
 }
-
 .containeButtonsDroides{
     position: fixed;
     top: 10%;
@@ -41,8 +54,6 @@
     color: blue;
 }
 
-
-
 .containeButtonCargarDroides{
     width: 20%;
     position: fixed;
@@ -58,6 +69,7 @@
     background-color: aqua;
     color: blue;
 }
+
 
 .containeTablaDroides{
     position: fixed;
@@ -79,66 +91,14 @@
 
     color: black;
 }
-.containeTablaDroides button{
-    width: 30%;
-    margin-left: 5%;
-}
 .containeTablaDroides button:hover{
     background-color: aqua;
     color: blue;
 }
 .containeTablaDroides table{
     width: 100%;
-    height: 20%;
+    height: 50%;
 
-    align-items: center;
-    
-}
-
-.containeTituloDroides h2{
-    text-align: center;
-    
-
-    color: white;
-}
-.containeButtonsDroides{
-    position: relative;
-    top: 0px;
-    left: 20px;
-}
-.containeButtonsDroides button{
-    width: 190px;
-
-    margin-left: 20px;
-}
-
-.containeButtonCargarDroides{
-    position: relative;
-    top: 100px;
-}
-
-.containeTablaDroides{
-    position: relative;
-    top: 200px;
-
-    min-width: 320px;
-    min-height: 100vh;
-    max-width: 1366px;
-    
-    width: auto;
-    height: auto;
-
-    margin: 0;
-    padding: 0;
-
-    box-sizing: border-box;
-    
-    display: flex;
-    flex-direction: column;
-
-    color: yellow;
-}
-.containeTablaDroides table{
     align-items: center;
     justify-content: center;
     table-layout: fixed;
@@ -146,6 +106,8 @@
     font-size: 100%;
 
     border-collapse: collapse;
+
+    background-color: whitesmoke;
 }
 .containeTablaDroides th{
     width: 10%;
@@ -156,20 +118,14 @@
     text-align: center;
 
     text-transform: uppercase;
-
-    background-color: lightslategray;
 }
 .containeTablaDroides td{
     width: auto;
     height: auto;
 
     text-align: center;
-
+    
     border: 2px solid black;
-}
-.containeTablaDroides td:hover{
-    background-color: white;
-    color: black;
 }
 
 nav,
@@ -183,7 +139,9 @@ nav,
 }
 .scroll_page{
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100%;
+    align-items: center;
+
+    max-width: 800px;
+    height: 500px;
 }

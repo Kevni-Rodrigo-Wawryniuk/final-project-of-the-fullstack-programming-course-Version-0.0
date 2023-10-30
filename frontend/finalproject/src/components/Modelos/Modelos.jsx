@@ -50,7 +50,7 @@ function Modelos() {
                 </div>
                 <div className='containeButtonsModelos'>
                     <Link to='/Home'>
-                        <button> volver </button>
+                        <button> Volver </button>
                     </Link>
                     <Link to='/Empresas'>
                         <button> Empresas </button>
@@ -71,12 +71,13 @@ function Modelos() {
 
                 <div className='containeButtonCargarModelos'>
                     <Link to='/AgregarModelos'>
-                        <button> cargar </button>
+                        <button> Cargar </button>
                     </Link>
                 </div>
 
                 <div className='containeTablaModelos'>
                     <table>
+                        <nav>
                         <thead>
                             <tr>
                                 <th>Configuraciones</th>
@@ -97,6 +98,7 @@ function Modelos() {
                                 </tr>
                             ))}
                         </tbody>
+                        </nav>
                     </table>
                 </div>
             </div>

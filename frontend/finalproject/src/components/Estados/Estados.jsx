@@ -54,7 +54,7 @@ function Estados() {
                 </div>
                 <div className='containeButtonsEstados'>
                     <Link to='/Home'>
-                        <button> volver </button>
+                        <button> Volver </button>
                     </Link>
                     <Link to='/Empresas'>
                         <button> Empresas </button>
@@ -81,6 +81,7 @@ function Estados() {
 
                 <div className='containeTablaEstados'>
                     <table>
+                        <nav>
                         <thead>
                             <tr>
                                 <th>Configuraciones</th>
@@ -100,6 +101,7 @@ function Estados() {
                                 </tr>
                             ))}
                         </tbody>
+                        </nav>
                     </table>
                 </div>
             </div>

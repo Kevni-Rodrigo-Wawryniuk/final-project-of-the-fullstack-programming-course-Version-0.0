@@ -1,55 +1,85 @@
 body{
+    background-image: url(../images/777.jpeg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size:cover;
     
-    
+}
+
+
+.containeBodyEstados{
+
+    min-width: 50% auto;
+    min-height: 50% auto;
+
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    top: 0%;
+
+    background-image: url(/frontend/finalproject/src/components/images/estrella-muertejpg.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    
+    background-attachment: fixed;
 }
 
-.containeBodyEstados{
-    width: 993pt;
-    height: 501pt;
-
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
+.containeTituloEstados{
+    position: fixed;
+    top: 0;
+    left: 46%;
+    right: unset;
+    bottom: unset;
     
-}
-
-.containeTituloEstados h2{
-    text-align: center;
-    
-
     color: white;
+    text-decoration: underline;
 }
 .containeButtonsEstados{
-    position: relative;
-    top: 0px;
-    left: 20px;
+    position: fixed;
+    top: 10%;
+    left: 2%;
+    right: 2%;
 }
 .containeButtonsEstados button{
-    width: 190px;
+    width: 15%;
+    height: 10%;
 
-    margin-left: 20px;
+    border-radius: 20px;
+
+    margin-left: 1%;
+}
+.containeButtonsEstados button:hover{
+    background-color: aqua;
+    color: blue;
 }
 
 .containeButtonCargarEstados{
-    position: relative;
-    top: 100px;
+    width: 20%;
+    position: fixed;
+    top: 23%;
+    left: 40%;
+    right: 47%;
+}
+.containeButtonCargarEstados button{
+    width: 100%;
+    border-radius: 20px;
+}
+.containeButtonCargarEstados button:hover{
+    background-color: aqua;
+    color: blue;
 }
 
-.containeTablaEstados{
-    position: relative;
-    top: 200px;
 
-    min-width: 320px;
-    min-height: 100vh;
-    max-width: 1366px;
-    
-    width: auto;
-    height: auto;
+.containeTablaEstados{
+    position: fixed;
+    top: 30%;
+
+    min-width: 80%;
+    min-height: 100%;
+
+    width: 100%;
+    height: 140%;
 
     margin: 0;
     padding: 0;
@@ -59,32 +89,59 @@ body{
     display: flex;
     flex-direction: column;
 
-    color: yellow;
+    color: black;
+}
+.containeTablaEstados button:hover{
+    background-color: aqua;
+    color: blue;
 }
 .containeTablaEstados table{
+    width: 100%;
+    height: 50%;
+
     align-items: center;
     justify-content: center;
     table-layout: fixed;
     
-    font-size: 15px;
+    font-size: 100%;
 
     border-collapse: collapse;
+
+    background-color: whitesmoke;
 }
 .containeTablaEstados th{
-    
-    margin: 0;
-    padding: 20px 15px;
+    width: 10%;
+    height: 10%;
 
     border: 2px solid black;
+
+    text-align: center;
 
     text-transform: uppercase;
 }
 .containeTablaEstados td{
+    width: auto;
+    height: auto;
 
-
-    margin: 0;
-    padding: 26.2px;
-
+    text-align: center;
+    
     border: 2px solid black;
 }
 
+nav,
+.scroll_containe{
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    border: 1px solid black;
+}
+.scroll_page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 800px;
+    height: 500px;
+}

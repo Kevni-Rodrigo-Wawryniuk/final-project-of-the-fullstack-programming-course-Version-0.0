@@ -51,7 +51,7 @@ function TipoDeProductos() {
                 </div>
                 <div className='containeButtonsTipoDeProductos'>
                     <Link to='/Home'>
-                        <button> volver </button>
+                        <button> Volver </button>
                     </Link>
                     <Link to='/Empresas'>
                         <button> Empresas </button>
@@ -72,12 +72,13 @@ function TipoDeProductos() {
 
                 <div className='containeButtonCargarTipoDeProductos'>
                     <Link to='/AgregarTipoDeProductos'>
-                        <button> cargar </button>
+                        <button> Cargar </button>
                     </Link>
                 </div>
 
                 <div className='containeTablaTipoDeProductos'>
                     <table>
+                        <nav>
                         <thead>
                             <tr>
                                 <th>Configuraciones</th>
@@ -98,6 +99,7 @@ function TipoDeProductos() {
                                 </tr>
                             ))}
                         </tbody>
+                        </nav>
                     </table>
                 </div>
             </div>

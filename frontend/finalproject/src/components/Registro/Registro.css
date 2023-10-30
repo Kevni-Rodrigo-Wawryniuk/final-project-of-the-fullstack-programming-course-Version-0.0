@@ -1,18 +1,10 @@
-body{
-    background-image: url(../images/abstracto-nebulosa-ultra-detalladoavif.avif);
+.containeBodyRegistro{
+
+    background-image: url(../images/1079738.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
 
-    min-width: 1390px;
-    min-width: 1000px;
-
-    margin: 0%;
-    padding: 0%;
-}
-
-.containeBodyRegistro{
     min-width: 100%;
     min-height: 100%;
 

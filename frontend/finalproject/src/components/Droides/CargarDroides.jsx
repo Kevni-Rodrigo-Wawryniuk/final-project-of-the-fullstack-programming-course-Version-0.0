@@ -4,18 +4,18 @@ import * as API from '../Service/Service.js';
 import { useState } from 'react';
 
 function CargarDroides() {
-
+    
     const [nombre_droides, setDroides] = useState('');
     const [codigo, setCodigo] = useState('');
 
     const [mensaje, setmensaje] = useState('');
 
     const CargarDroide = async (event) => {
-
+       
         event.preventDefault();
 
         const respuesta = await API.postDroides({ nombre_droides, codigo })
-
+        console.log(respuesta);
         if (respuesta.status) {
             setmensaje(respuesta.mensaje);
             setTimeout(() => {

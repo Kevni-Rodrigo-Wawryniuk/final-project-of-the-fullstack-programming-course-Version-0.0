@@ -67,10 +67,10 @@ function Login() {
                         required
                     />
 
-                    <button type='submit'> ingresar </button>
+                    <button type='submit'> Ingresar </button>
 
                     <p>
-                        <a href="/OlvidelaContraseña"> olvidaste tu Contraseña </a>
+                        <a href="/OlvidelaContraseña"> Olvidaste tu Contraseña </a>
                     </p>
                 </form>
             </div>

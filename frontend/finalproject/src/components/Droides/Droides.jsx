@@ -54,7 +54,7 @@ function Droides() {
                 </div>
                 <div className='containeButtonsDroides'>
                     <Link to='/Home'>
-                        <button> volver </button>
+                        <button> Volver </button>
                     </Link>
                     <Link to='/Empresas'>
                         <button> Empresas </button>
@@ -75,17 +75,18 @@ function Droides() {
 
                 <div className='containeButtonCargarDroides'>
                     <Link to='/AgregarDroides'>
-                        <button> cargar </button>
+                        <button> Cargar </button>
                     </Link>
                 </div>
 
                 <div className='containeTablaDroides'>
                     <table>
-                        <nav>                        <thead>
+                        <nav>                        
+                        <thead>
                             <tr>
                                 <th>Configuraciones</th>
-                                <th>nombre</th>
-                                <th>codigo</th>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
                             </tr>
                         </thead>
                             <tbody>

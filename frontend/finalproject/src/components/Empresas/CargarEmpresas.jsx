@@ -55,7 +55,7 @@ export function CargarEmpresas() {
 
     return (
         <>
-            <div className='containeBodyEmpresa'>
+            <div className='containeBodyEmpresa1'>
                 <main className='maincarga'>
                     <form onSubmit={cargarEmpresas}>
                         <div>

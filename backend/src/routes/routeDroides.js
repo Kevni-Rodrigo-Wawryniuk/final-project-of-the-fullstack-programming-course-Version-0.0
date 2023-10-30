@@ -84,7 +84,7 @@ routeDroides.post('/cargarDroides', verificationToken, bodyparser.json(), (req, 
 
                 } else {
                     res.json({
-                        status: false,
+                        status: true,
                         mensaje: "El Droide se cargo correctamente"
                     })
                 }

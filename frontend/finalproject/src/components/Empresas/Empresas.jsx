@@ -54,7 +54,7 @@ function Empresas() {
             </div>
                 <div className='containeButtonsEmpresa'>
                     <Link to='/Home'>
-                        <button> volver </button>
+                        <button> Volver </button>
                     </Link>
                     <Link to='/Droides'>
                         <button> Droides </button>

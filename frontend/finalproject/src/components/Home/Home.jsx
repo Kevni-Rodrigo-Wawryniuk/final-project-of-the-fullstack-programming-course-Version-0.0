@@ -40,7 +40,7 @@ function Home() {
     return (
         <div className='containeBodyHome'>
 
-            <div>
+            <div className='usuario'>
                 <h3> EL usuario logeado es: {user} </h3>
             </div>
 

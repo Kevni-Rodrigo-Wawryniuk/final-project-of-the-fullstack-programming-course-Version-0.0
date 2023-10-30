@@ -53,7 +53,7 @@ function Vehiculos() {
                 </div>
                 <div className='containeButtonsVehiculos'>
                     <Link to='/Home'>
-                        <button> volver </button>
+                        <button> Volver </button>
                     </Link>
                     <Link to='/Empresas'>
                         <button> Empresas </button>
@@ -74,12 +74,13 @@ function Vehiculos() {
 
                 <div className='containeButtonCargarVehiculos'>
                     <Link to='/AgregarVehiculos'>
-                        <button> cargar </button>
+                        <button> Cargar </button>
                     </Link>
                 </div>
 
                 <div className='containeTablaVehiculos'>
                     <table>
+                        <nav>
                         <thead>
                             <tr>
                                 <th>Configuraciones</th>
@@ -100,6 +101,7 @@ function Vehiculos() {
                                 </tr>
                             ))}
                         </tbody>
+                        </nav>
                     </table>
                 </div>
             </div>
