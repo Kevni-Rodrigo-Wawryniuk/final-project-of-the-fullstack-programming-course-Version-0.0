@@ -29,28 +29,34 @@ function CargarTipoDeProductos() {
 
     return (
         <>
-            <div className='containtBodyTipoDeProductos'>
-                <h2> Cargar tipo de producto </h2>
-                <div>
+            <div className='containtBodyTipoDeProductos1'>
+                <div className='mensaje'>
+                    <h3> Cargar de Tipo de Productos</h3>
                     {mensaje}
+                </div>   
+                <div>
                     <form onSubmit={CargarTipoProduto}>
-                        <input
+                        <div className='cont4'>
+                        <input className='cont5'
                             type="text"
                             value={nombre_tipo_productos}
                             onChange={(event) => setTipo_Producto(event.target.value)}
                             placeholder='Nombre del Producto'
                         />
-
-                        <input
-                            type="number"
-                            pattern="[0-9]"
-                            value={codigo}
-                            onChange={(event) => setCodigo(event.target.value)}
-                            placeholder='Codigo'
-                        />
-
-                        <button type='submit'> Cargar </button>
-                        <Link to='/TipoDeProductos'> <button> volver </button> </Link>
+                        </div>
+                        <div className='cont4'>
+                            <input className='cont5'
+                                type="number"
+                                pattern="[0-9]"
+                                value={codigo}
+                                onChange={(event) => setCodigo(event.target.value)}
+                                placeholder='Codigo'
+                            />
+                        </div>
+                        <div className='cont4'>
+                            <button type='submit'> Cargar </button>
+                            <Link to='/TipoDeProductos'> <button> volver </button> </Link>
+                        </div>
                     </form>
                 </div>
             </div>

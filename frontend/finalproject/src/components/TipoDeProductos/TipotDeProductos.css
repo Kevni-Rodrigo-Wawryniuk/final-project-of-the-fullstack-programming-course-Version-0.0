@@ -5,7 +5,12 @@ body{
     background-size:cover;
     
 }
-
+.mensaje{
+    color: white;
+}
+.containtBodyTipoDeProductos1{
+    margin-top: 20%;
+}
 
 .containeBodyTipoDeProductos{
 

@@ -5,6 +5,12 @@ body{
     background-size:cover;
     
 }
+.mensaje{
+    color: white;
+}
+.containtBodyModelos1{
+    margin-top: 20%;
+}
 
 
 .containeBodyModelos{

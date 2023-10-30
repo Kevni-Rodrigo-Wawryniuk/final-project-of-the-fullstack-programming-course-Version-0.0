@@ -57,7 +57,11 @@ export function CargarEmpresas() {
         <>
             <div className='containeBodyEmpresa1'>
                 <main className='maincarga'>
+                    
                     <form onSubmit={cargarEmpresas}>
+                        <div className='mensaje'>
+                            <h3> Cargar de Empresa </h3>
+                        </div>   
                         <div className='cont12'>
                             {mensaje}
                         </div>
