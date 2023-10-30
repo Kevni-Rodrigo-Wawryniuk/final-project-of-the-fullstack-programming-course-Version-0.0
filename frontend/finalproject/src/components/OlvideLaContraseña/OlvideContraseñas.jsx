@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './OlvideContraseña.css';
 import * as API from '../Service/Service.js';
 
@@ -14,6 +14,8 @@ function OlvideContraseñas() {
         event.preventDefault();
 
         const cambio = await API.postCorreo({ correo });
+
+        localStorage.setItem('correo', correo);
 
         if (cambio.status) {
             setMensaje(cambio.mensaje);
@@ -37,25 +39,35 @@ function OlvideContraseñas() {
     const [contraseña, setcontraseña] = useState('');
 
     const nuevaContraseña = async (event) => {
-
         event.preventDefault();
 
-        const nuevacontraseña = await API.putContraseña({ contraseña, correo });
+        var dato = localStorage.getItem('correo');
+        console.log('', dato);
+
+        const nuevacontraseña = await API.putContraseña({ contraseña }, dato);
+
+        console.log('', dato);
 
         if (nuevacontraseña.status) {
+
+            console.log('', dato);
+
             setMensaje(nuevacontraseña.mensaje);
+
             setTimeout(() => {
+                
+            localStorage.removeItem('correo');
                 window.location.href = '/';
-            }, 2500);
+            }, 1000);
         } else {
             setMensaje(nuevacontraseña.mensaje);
         }
     }
 
-    const volverAlaPaginaLogin = async (event) =>{
+    const volverAlaPaginaLogin = async (event) => {
         event.preventDefault();
 
-        window.location.href='/';
+        window.location.href = '/';
     }
 
     return (
@@ -91,7 +103,7 @@ function OlvideContraseñas() {
                         maxLength={80}
                     />
                     <button type='submit'> cambiar contraseña </button>
-                    <button onClick={volver()}> volver </button>
+                    <button onClick={(event) => volver(event)}> volver </button>
                 </form>
             </div>
 

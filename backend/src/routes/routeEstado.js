@@ -101,37 +101,36 @@ routeEstado.put('/modificarEstado/:id_estados', verificationToken, bodyparser.js
             status: false,
             mensaje: "El codigo es un campo obligatorio"
         })
-    }
-
-    if (!nombre_estado) {
+    } else if (!nombre_estado) {
 
         res.json({
             status: false,
             mensaje: "El nuevo estado es un campo obligatorio"
         })
+    } else {
+
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('update estados set nombre_estados = ?, codigo = ? where id_estados =?', [nombre_estado, codigo, id_estados], (err, registro) => {
+
+                    if (err) {
+
+                        console.log("Error en la base de datos al modificar el estado --> ", err);
+
+                    } else {
+
+                        res.json({
+                            status: true,
+                            mensaje: "El estado se a modificado de manera correcta"
+                        })
+
+                    }
+                })
+            }
+        })
     }
-
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('update estados set nombre_estados = ?, codigo = ? where id_estados =?', [nombre_estado, codigo, id_estados], (err, registro) => {
-
-                if (err) {
-
-                    console.log("Error en la base de datos al modificar el estado --> ", err);
-
-                } else {
-
-                    res.json({
-                        status: true,
-                        mensaje: "El estado se a modificado de manera correcta"
-                    })
-
-                }
-            })
-        }
-    })
 })
 
 // Borrar datos

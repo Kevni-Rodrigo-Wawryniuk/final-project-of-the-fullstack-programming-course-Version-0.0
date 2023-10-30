@@ -70,7 +70,7 @@ export async function postCorreo(date){
     return dato;
 }
 
-export async function putContraseña(date){
+export async function putContraseña(date, correo){
 
     const Options={
         method:'PUT',
@@ -80,7 +80,7 @@ export async function putContraseña(date){
         }
     }
     
-    const request = await fetch(`${URL}/restaurar/${date}`, Options);
+    const request = await fetch(`${URL}/restaurar/${correo}`, Options);
 
     const dato = await request.json();
 

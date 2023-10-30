@@ -23,7 +23,6 @@ routelogin.get('/verRegistros', (req, res) => {
         }
     })
 })
-
 // registrar a los usuarios
 routelogin.post('/Registros', bodyparser.json(), (req, res) => {
 
@@ -103,7 +102,6 @@ routelogin.post('/Registros', bodyparser.json(), (req, res) => {
         })
     }
 })
-
 // logear usuario
 routelogin.post('/Login', bodyparser.json(), (req, res) => {
 
@@ -169,7 +167,6 @@ routelogin.post('/Login', bodyparser.json(), (req, res) => {
         })
     }
 })
-
 // borrar Registros
 routelogin.delete('/ClearLog', bodyparser.json(), (req, res) => {
 
@@ -196,7 +193,6 @@ routelogin.delete('/ClearLog', bodyparser.json(), (req, res) => {
         })
     }
 })
-
 // restaurar la contraseña
 // buscar el correo
 routelogin.post('/traerCorreo', bodyparser.json(), (req, res) => {
@@ -213,16 +209,22 @@ routelogin.post('/traerCorreo', bodyparser.json(), (req, res) => {
             if (err) {
                 console.log("Error en la base de datos ----> ", err);
             } else {
-                res.json({
-                    status: true,
-                    mensaje: "Se a encontrado el correo"
-                })
+                if (reg.length > 0) {
+                    res.json({
+                        status: true,
+                        mensaje: 'El correo esta correcto'
+                    })
+                } else {
+                    res.json({
+                        status: false,
+                        mensaje: 'El correo es incorrecto'
+                    })
+                }
             }
         })
     }
 
 })
-
 // traer id por correo 
 routelogin.get('/usuarios/:correo', (req, res) => {
 
@@ -249,7 +251,8 @@ routelogin.get('/usuarios/:correo', (req, res) => {
 // modificar contraseña
 routelogin.put('/restaurar/:correo', bodyparser.json(), (req, res) => {
 
-    const { contraseña, correo } = req.body;
+    const { contraseña } = req.body;
+    const { correo } = req.params;
 
     let hash = bcrypt.hashSync(contraseña, 10);
 
