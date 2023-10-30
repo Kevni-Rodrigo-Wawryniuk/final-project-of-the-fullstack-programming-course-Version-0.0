@@ -58,31 +58,31 @@ routeModelos.post('/cargarModelos', verificationToken, bodyparser.json(), (req, 
             status: false,
             mensaje: "El nombre del modelo es un campo obligatorio"
         })
-    }
-    if (!codigo) {
+    } else if (!codigo) {
         res.json({
             status: false,
             mensaje: "El codigo es un campo obligatorio"
         })
+    } else {
+
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('insert into modelos (nombre_modelos, codigo) value (?,?)', [nombre_modelos, codigo], (err, reg) => {
+
+                    if (err) {
+                        console.log("Error en la base de datos al cargar un modelo --> ", err);
+                    } else {
+                        res.json({
+                            status: true,
+                            mensaje: "El modelo se cargo correctamente"
+                        })
+                    }
+                })
+            }
+        })
     }
-
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('insert into modelos (nombre_modelos, codigo) value (?,?)', [nombre_modelos, codigo], (err, reg) => {
-
-                if (err) {
-                    console.log("Error en la base de datos al cargar un modelo --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El modelo se cargo correctamente"
-                    })
-                }
-            })
-        }
-    })
 })
 
 // modificar modelos
@@ -97,31 +97,30 @@ routeModelos.put('/modificarModelo/:id_modelos', verificationToken, bodyparser.j
             status: false,
             mensaje: "El nombre es un campo obligatorio"
         })
-    }
-    if (!codigo) {
+    } else if (!codigo) {
         res.json({
             status: false,
             mensaje: "El codigo es un campo obligatorio"
         })
+    } else {
+
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('update modelos set nombre_modelos =?, codigo =? where id_modelos =?', [nombre_modelos, codigo, id_modelos], (err, reg) => {
+                    if (err) {
+                        console.log("Error en la base de datos al modificar un modelo --> ", err);
+                    } else {
+                        res.json({
+                            status: true,
+                            mensaje: "El modelo se modifico de manera correcta"
+                        })
+                    }
+                })
+            }
+        })
     }
-
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('update modelos set nombre_modelos =?, codigo =? where id_modelos =?', [nombre_modelos, codigo, id_modelos], (err, reg) => {
-                if (err) {
-                    console.log("Error en la base de datos al modificar un modelo --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El modelo se modifico de manera correcta"
-                    })
-                }
-            })
-        }
-    })
-
 })
 
 // borrar modelos

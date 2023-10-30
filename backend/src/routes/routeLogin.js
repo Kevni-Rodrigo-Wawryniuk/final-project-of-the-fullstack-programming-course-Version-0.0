@@ -39,78 +39,69 @@ routelogin.post('/Registros', bodyparser.json(), (req, res) => {
             status: false,
             mensaje: "El nombre es un campo obligatorio"
         })
-    }
-
-    if (!apellido) {
+    } else if (!apellido) {
         res.json({
             status: false,
             mensaje: "El apellido es un campo obligatorio"
         })
-    }
-
-    if (!edad) (
+    } else if (!edad) {
         res.json({
             status: false,
             mensaje: "La edad es un campo obligatorio"
         })
-    )
-
-    if (!usuario) {
+    } else if (!usuario) {
         res.json({
             status: false,
             mensaje: "El usuaio es un campo obligatorio"
         })
-    }
-
-    if (!correo) {
+    } else if (!correo) {
         res.json({
             status: false,
             mensaje: "El correo es un campo obligatorio"
         })
-    }
-
-    if (!contraseña) {
+    } else if (!contraseña) {
         res.json({
             status: false,
             mensaje: "La contraseña es un campo obligatorio"
         })
-    }
+    } else {
 
 
-    // buscar los registros y comparar 
-    mysqlconnecction.query('select * from usuario where correo =?', [correo], (err, reg) => {
+        // buscar los registros y comparar 
+        mysqlconnecction.query('select * from usuario where correo =?', [correo], (err, reg) => {
 
-        if (err) {
+            if (err) {
 
-            console.log('Error en la base de datos al buscar los registros --> ', err);
-
-        } else {
-
-            if (reg.length > 0) {
-                res.json({
-                    status: false,
-                    mensaje: "El registro ya existe"
-                })
+                console.log('Error en la base de datos al buscar los registros --> ', err);
 
             } else {
 
-                mysqlconnecction.query('insert into usuario(nombre, apellido, edad, usuario, correo, contraseña, roles) value (?,?,?,?,?,?,?)', [nombre, apellido, edad, usuario, correo, hash, hash_roles], (err, reg) => {
+                if (reg.length > 0) {
+                    res.json({
+                        status: false,
+                        mensaje: "El Correo ya existe"
+                    })
 
-                    if (err) {
+                } else {
 
-                        console.log('Error en la base de datos al registrar un nuevo usuario --> ', err);
+                    mysqlconnecction.query('insert into usuario(nombre, apellido, edad, usuario, correo, contraseña, roles) value (?,?,?,?,?,?,?)', [nombre, apellido, edad, usuario, correo, hash, hash_roles], (err, reg) => {
 
-                    } else {
+                        if (err) {
 
-                        res.json({
-                            status: true,
-                            mensaje: "El registro a sido exitoso"
-                        })
-                    }
-                })
+                            console.log('Error en la base de datos al registrar un nuevo usuario --> ', err);
+
+                        } else {
+
+                            res.json({
+                                status: true,
+                                mensaje: "El registro a sido exitoso"
+                            })
+                        }
+                    })
+                }
             }
-        }
-    })
+        })
+    }
 })
 
 // logear usuario
@@ -189,21 +180,21 @@ routelogin.delete('/ClearLog', bodyparser.json(), (req, res) => {
             status: false,
             mensaje: "El correo es un campo obligatorio"
         })
-    }
-    if (!contraseña) {
+    } else if (!contraseña) {
         res.json({
             status: false,
             mensaje: "La contraseña es un campo obligatorio"
         })
-    }
+    } else {
 
-    mysqlconnecction.query('delete from usuario where correo =? ', [correo], (err, reg) => {
-        if (err) {
-            console.log('Error en la base de datos al borrar al ususario --> ', err);
-        } else {
-            res.send('El registro se borro de forma exitosa');
-        }
-    })
+        mysqlconnecction.query('delete from usuario where correo =? ', [correo], (err, reg) => {
+            if (err) {
+                console.log('Error en la base de datos al borrar al ususario --> ', err);
+            } else {
+                res.send('El registro se borro de forma exitosa');
+            }
+        })
+    }
 })
 
 // restaurar la contraseña
@@ -243,7 +234,7 @@ routelogin.get('/usuarios/:correo', (req, res) => {
             mensaje: 'falta usuario'
         })
     } else {
-        console.log( 'buscando usuario');
+        console.log('buscando usuario');
 
         mysqlconnecction.query('select * from usuario where correo =?', [correo], (err, reg) => {
 
