@@ -1,6 +1,6 @@
 import './TipotDeProductos.css';
 import * as API from '../Service/Service.js';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 function CargarTipoDeProductos() {
@@ -20,12 +20,13 @@ function CargarTipoDeProductos() {
             setmensaje(request.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href = '/TipoDeProductos';
-            }, 2500);
+                window.location.href = `/TipoDeProductos/${usuario}`;
+            }, 1000);
         } else {
             setmensaje(request.mensaje);
         }
     }
+    const {usuario} = useParams();
 
     return (
         <>
@@ -55,7 +56,7 @@ function CargarTipoDeProductos() {
                         </div>
                         <div className='cont4'>
                             <button type='submit'> Cargar </button>
-                            <Link to='/TipoDeProductos'> <button> volver </button> </Link>
+                            <Link to={`/TipoDeProductos/${usuario}`}> <button> volver </button> </Link>
                         </div>
                     </form>
                 </div>

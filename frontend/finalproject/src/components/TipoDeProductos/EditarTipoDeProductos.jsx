@@ -26,8 +26,8 @@ function EditarTipoDeProductos() {
             setmensaje(request.menasje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href = '/TipoDeProductos';
-            }, 2500);
+                window.location.href = `/TipoDeProductos/${usuario}`;
+            }, 1000);
         } else {
             setmensaje(request.menasje);
         }
@@ -46,6 +46,8 @@ function EditarTipoDeProductos() {
     useEffect(() => {
         traerDatos();
     });
+
+    const {usuario} = useParams();
 
     return (
         <>
@@ -83,7 +85,7 @@ function EditarTipoDeProductos() {
                     />
 
                     <button type='submit'> Editar </button>
-                    <Link to='/TipoDeProductos'> <button> Volver </button> </Link>
+                    <Link to={`/TipoDeProductos/${usuario}`}> <button> Volver </button> </Link>
                 </form>
             </div>
         </>

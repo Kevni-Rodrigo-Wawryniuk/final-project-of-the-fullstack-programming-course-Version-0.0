@@ -1,5 +1,5 @@
 import './Home.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import * as API from '../Service/Service.js';
 
 function Home() {
@@ -13,29 +13,24 @@ function Home() {
         localStorage.removeItem('usuario');
         window.location.href = '/';
     }
+
+    const {usuario} = useParams();
+
     // verificar usuarios
     const userVerification = async () => {
 
-        let correo;
-        let token;
-        let usuario;
+        
+        const verUsuario = await API.postUsuario(usuario);
 
-        usuario = localStorage.getItem('usuario');
-        correo = localStorage.getItem('correo');
-        token = localStorage.getItem('token');
-
-        const traerCorreo = await API.postCorreo({ correo });
-        console.log('', usuario);
-
-        if (traerCorreo.status && token) {
+        if (verUsuario.status) {
             console.log('El usuario esta logeado');
 
         } else {
-            window.location.href = '/';
+            //window.location.href = '/';
 
-            localStorage.removeItem('correo');
-            localStorage.removeItem('usuario');
-            localStorage.removeItem('token');
+            //localStorage.removeItem('correo');
+            //localStorage.removeItem('usuario');
+            //localStorage.removeItem('token');
 
             console.log('El usuario no esta logeado');
         }
@@ -44,8 +39,7 @@ function Home() {
     document.addEventListener('DOMContentLoaded', userVerification());
 
     // traer al usuario para mostrarlo
-    const user = localStorage.getItem('usuario');
-
+    const user = sessionStorage.getItem('usuario');
 
     return (
         <div className='containeBodyHome'>
@@ -58,32 +52,32 @@ function Home() {
 
                 <h2> Tablas </h2>
                 <div className='re'>
-                    <Link to='/Empresas'>
+                    <Link to={`/Empresas/${usuario}`}>
                         <button>Empresas</button>
                     </Link>
                 </div>
                 <div className='re'>
-                    <Link to='/Droides'>
+                    <Link to={`/Droides/${usuario}`}>
                         <button>Droides</button>
                     </Link>
                 </div>
                 <div className='re'>
-                    <Link to='/Vehiculos'>
+                    <Link to={`/Vehiculos/${usuario}`}>
                         <button>Vehiculos</button>
                     </Link>
                 </div>
                 <div className='re'>
-                    <Link to='/Modelos'>
+                    <Link to={`/Modelos/${usuario}`}>
                         <button>Modelos</button>
                     </Link>
                 </div>
                 <div className='re'>
-                    <Link to='/TipoDeProductos'>
+                    <Link to={`/TipoDeProductos/${usuario}`}>
                         <button>Tipos de productos</button>
                     </Link>
                 </div>
                 <div className='re'>
-                    <Link to='/Estados'>
+                    <Link to={`/Estados/${usuario}`}>
                         <button>Estados</button>
                     </Link>
                 </div>

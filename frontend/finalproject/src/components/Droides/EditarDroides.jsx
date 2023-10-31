@@ -23,8 +23,8 @@ function EditarDroides() {
             setmensaje(request.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href = '/Droides';
-            }, 2500);
+                window.location.href = `/Droides/${usuario}`;
+            }, 1000);
         } else {
             setmensaje(request.mensaje);
         }
@@ -46,6 +46,9 @@ function EditarDroides() {
 
     // mensaje de si la edicion se realizo 
     const [mensaje, setmensaje] = useState('');
+
+    // usuario editando dato
+    const {usuario} = useParams();
 
     return (
         <>
@@ -83,7 +86,7 @@ function EditarDroides() {
                     />
 
                     <button type='submit'> Editar </button>
-                    <Link to='/Droides' > <button> volver </button> </Link>
+                    <Link to={`/Droides/${usuario}`} > <button> volver </button> </Link>
                 </form>
             </div>
         </>

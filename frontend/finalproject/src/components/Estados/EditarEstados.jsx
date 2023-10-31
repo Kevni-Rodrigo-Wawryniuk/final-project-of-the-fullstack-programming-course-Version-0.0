@@ -36,12 +36,14 @@ function EditarEstados() {
             setmensaje(request.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href = '/Estados'
-            }, 2500);
+                window.location.href = `/Estados/${usuario}`
+            }, 1000);
         }else{
             setmensaje(request.mensaje);
         }
     }
+
+    const {usuario} = useParams();
 
     return (
         <>
@@ -79,7 +81,7 @@ function EditarEstados() {
                         />
 
                         <button type='submit'> Guardar Edicion</button>
-                        <Link to='/Estados'>
+                        <Link to={`/Estados/${usuario}`}>
                             <button > Volver </button>
                         </Link>
                     </form>

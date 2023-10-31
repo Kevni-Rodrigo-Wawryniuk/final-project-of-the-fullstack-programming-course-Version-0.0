@@ -69,12 +69,15 @@ function EditarEmpresas() {
             setMensaje(request.mensaje);
             setTimeout(() => {
                 setMensaje('');
-                window.location.href='/Empresas';
+                window.location.href=`/Empresas/${usuario}`;
             }, 2500);
         }else{
             setMensaje(request.mensaje);
         }
     }
+
+    // usuario editando el dato
+    const {usuario} = useParams();
 
     return (
         <>
@@ -120,6 +123,7 @@ function EditarEmpresas() {
                         </select>
 
                         <select onChange={(event) => setDroide (event.target.value)}>
+                            <option value="" selected> Seleccione un Droide </option>
                             {droide.map((d)=>(
                                 <option value={d.id_droides}>{d.nombre_droides}</option>
                             ))}
@@ -150,7 +154,7 @@ function EditarEmpresas() {
                         </select>
 
                         <button type='submit'> Editar </button>
-                        <Link to='/Empresas'> <button> volver </button></Link>
+                        <Link to={`/Empresas/${usuario}`}> <button> volver </button></Link>
                     </form>
                 </div>
             </div>

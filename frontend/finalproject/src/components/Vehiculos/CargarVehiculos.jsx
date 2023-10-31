@@ -1,6 +1,6 @@
 import './Vehiculos.css';
 import * as API from '../Service/Service.js';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 function CargarVehiculos(){
@@ -20,12 +20,14 @@ function CargarVehiculos(){
             setmensaje(request.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href='/Vehiculos';
-            }, 2500);
+                window.location.href=`/Vehiculos/${usuario}`;
+            }, 1000);
         }else{
             setmensaje(request.mensaje);
         }
     }
+
+    const {usuario} = useParams();
 
     return(
         <>
@@ -55,7 +57,7 @@ function CargarVehiculos(){
                         </div>  
                         <div className='cont4'>
                             <button type='submit' > Cargar </button>
-                            <Link to='/Vehiculos'> <button> Volver </button> </Link>
+                            <Link to={`/Vehiculos/${usuario}`}> <button> Volver </button> </Link>
                         </div>
                     </form>
                 </div>

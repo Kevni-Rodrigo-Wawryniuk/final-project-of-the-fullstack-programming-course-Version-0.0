@@ -18,14 +18,16 @@ function EditarModelos() {
 
         event.preventDefault();
 
-        const request = await API.putModelos(id_modelos, { nombre_modelos, codigo });
+        let token = localStorage.getItem('correo');
 
-        if (request.status) {
+        const request = await API.putModelos({ nombre_modelos, codigo }, id_modelos);
+
+        if (request.status && token) {
             setmensaje(request.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href = '/Modelos';
-            }, 2500);
+                window.location.href = `/Modelos/${usuario}`;
+            }, 1000);
         } else {
             setmensaje(request.mensaje);
         }
@@ -45,6 +47,7 @@ function EditarModelos() {
         traerDatos();
     });
 
+    const {usuario} = useParams();
     return (
         <>
             <div className='containtBodyModelos'>
@@ -73,13 +76,13 @@ function EditarModelos() {
                         />
 
                         <input
-                            type="text"
+                            type="number"
                             value={codigo}
                             onChange={(event) => setcodigo(event.target.value)}
                             placeholder='Codigo'
                         />
                         <button type='submit' > Editar </button>
-                        <Link to='/Modelos'> <button> volver </button> </Link>
+                        <Link to={`/Modelos/${usuario}`}> <button> volver </button> </Link>
                     </form>
                 </div>
             </div>

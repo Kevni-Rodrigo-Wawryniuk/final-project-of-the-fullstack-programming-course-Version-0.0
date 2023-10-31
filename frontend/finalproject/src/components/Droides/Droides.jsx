@@ -1,7 +1,7 @@
 import './Droides.css';
 import * as API from '../Service/Service.js';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function Droides() {
 
@@ -21,18 +21,19 @@ function Droides() {
         // eslint-disable-next-line no-unused-vars
         const request = await API.deleteDroides(id_Droide);
 
-        window.location.href = '/Droides';
+        setInterval("location.reload()",1000);
     }
     // verificar usuarios
+
+    const {usuario} = useParams();
+
     const userVerification = async () => {
 
-        let correo;
         let token;
 
-        correo = localStorage.getItem('correo');
         token = localStorage.getItem('token');
 
-        const traerCorreo = await API.postCorreo({ correo });
+        const traerCorreo = await API.postUsuario(usuario );
 
         if (traerCorreo.status && token) {
             console.log('El usuario esta logeado');
@@ -53,28 +54,28 @@ function Droides() {
                     <h2>Droides</h2>
                 </div>
                 <div className='containeButtonsDroides'>
-                    <Link to='/Home'>
+                <Link to={`/Home/${usuario}`}>
                         <button> Volver </button>
                     </Link>
-                    <Link to='/Empresas'>
+                    <Link to={`/Empresas/${usuario}`}>
                         <button> Empresas </button>
                     </Link>
-                    <Link to='/Vehiculos'>
+                    <Link to={`/Vehiculos/${usuario}`}>
                         <button> Vehiculos </button>
                     </Link>
-                    <Link to='/Estados'>
+                    <Link to={`/Estados/${usuario}`}>
                         <button> Estado </button>
                     </Link>
-                    <Link to='/Modelos'>
+                    <Link to={`/Modelos/${usuario}`}>
                         <button> Modelos </button>
                     </Link>
-                    <Link to='/TipoDeProductos'>
+                    <Link to={`/TipoDeProductos/${usuario}`}>
                         <button> Tipo de productos </button>
                     </Link>
                 </div>
 
                 <div className='containeButtonCargarDroides'>
-                    <Link to='/AgregarDroides'>
+                    <Link to={`/AgregarDroides/${usuario}`}>
                         <button> Cargar </button>
                     </Link>
                 </div>
@@ -94,7 +95,7 @@ function Droides() {
                                     // eslint-disable-next-line react/jsx-key
                                     <tr>
                                         <td>
-                                            <Link to={`/ModificarDroides/${droid.id_droides}`}> <button> Editar </button> </Link>
+                                            <Link to={`/ModificarDroides/${droid.id_droides}/${usuario}`}> <button> Editar </button> </Link>
                                             <button onClick={(event) => borrarDroide(event, droid.id_droides)}> Borrar </button>
                                         </td>
                                         <td>{droid.nombre_droides}</td>

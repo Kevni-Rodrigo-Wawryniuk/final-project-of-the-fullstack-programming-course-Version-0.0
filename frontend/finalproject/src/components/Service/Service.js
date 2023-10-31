@@ -69,6 +69,22 @@ export async function postCorreo(date){
     return dato;
 }
 
+export async function postUsuario(usuario){
+
+    const Options={
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    }
+
+    const request = await fetch(`${URL}/verUsuario/${usuario}`, Options);
+
+    const dato = await request.json();
+
+    return dato;
+}
+
 export async function putContraseña(date, correo){
 
     const Options={
@@ -86,7 +102,7 @@ export async function putContraseña(date, correo){
     return dato;
 }
 
-export async function getUsuario(date){
+export async function getUsuario(correo){
    
     const Options={
         method:'GET',
@@ -95,7 +111,7 @@ export async function getUsuario(date){
         }
     }
 
-    const request = await fetch(`${URL}/usuarios/${date}`, Options);
+    const request = await fetch(`${URL}/usuarios/${correo}`, Options);
  
     const dato = await request.json();
  
@@ -499,7 +515,7 @@ export async function postModelos(date){
     return dato;
 }
 // MODIFICAR DATOS
-export async function putModelos(id_modelos, date){
+export async function putModelos(date, id_modelos){
     
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
@@ -507,7 +523,7 @@ export async function putModelos(id_modelos, date){
         body: JSON.stringify(date),
         headers:{
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token},`
+            'Authorization': `Bearer ${token}`,
         }
     } 
     const request = await fetch(`${URL}/modificarModelo/${id_modelos}`, Options);

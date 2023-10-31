@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './OlvideContraseña.css';
 import * as API from '../Service/Service.js';
 

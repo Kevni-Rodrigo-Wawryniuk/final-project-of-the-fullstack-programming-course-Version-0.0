@@ -1,5 +1,5 @@
 import './Droides.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import * as API from '../Service/Service.js';
 import { useState } from 'react';
 
@@ -20,12 +20,14 @@ function CargarDroides() {
             setmensaje(respuesta.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href ='/Droides';
+                window.location.href =`/Droides/${usuario}`;
             }, 2500);
         } else {
             setmensaje(respuesta.mensaje);
         }
     }
+
+    const {usuario} = useParams();
 
     return (
         <>
@@ -55,7 +57,7 @@ function CargarDroides() {
                         </div>
                         <div className='cont4'>
                         <button type='submit'> Cargar </button>
-                        <Link to='/Droides'> <button> Volver </button></Link>
+                        <Link to={`/Droides/${usuario}`}> <button> Volver </button></Link>
                         </div>
                     </form>
                 </div>

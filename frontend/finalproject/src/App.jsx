@@ -14,31 +14,31 @@ function App() {
         <Route path='/Registro' element={<Registros />} />
         <Route path='/OlvidelaContraseña' element={<OlvideContraseñas />} />
 
-        <Route path='/Home' element={<Homes />} />
+        <Route path='/Home/:usuario' element={<Homes />} />
 
-        <Route path='/Empresas' element={<Empresa />} />
-        <Route path='/AgregarEmpresas' element={<CargarEmpresa />} />
-        <Route path='/ModificarEmpresas/:idempresas' element={<EditarEmpresa />} />
+        <Route path='/Empresas/:usuario' element={<Empresa />} />
+        <Route path='/AgregarEmpresas/:usuario' element={<CargarEmpresa />} />
+        <Route path='/ModificarEmpresas/:idempresas/:usuario' element={<EditarEmpresa />} />
 
-        <Route path='/Droides' element={<Droide />} />
-        <Route path='/AgregarDroides' element={<CargarDroide />} />
-        <Route path='/ModificarDroides/:id_droides' element={<EditarDroide />} />
+        <Route path='/Droides/:usuario' element={<Droide />} />
+        <Route path='/AgregarDroides/:usuario' element={<CargarDroide />} />
+        <Route path='/ModificarDroides/:id_droides/:usuario' element={<EditarDroide />} />
 
-        <Route path='/Estados' element={<Estado />} />
-        <Route path='/AgregarEstados' element={<CargarEstado />} />
-        <Route path='/ModificarEstados/:id_estados' element={<EditarEstado />} />
+        <Route path='/Estados/:usuario' element={<Estado />} />
+        <Route path='/AgregarEstados/:usuario' element={<CargarEstado />} />
+        <Route path='/ModificarEstados/:id_estados/:usuario' element={<EditarEstado />} />
 
-        <Route path='/Vehiculos' element={<Vehiculo />} />
-        <Route path='/AgregarVehiculos' element={<CargarVehiculo />} />
-        <Route path='/ModificarVehiculos/:id_vehiculos' element={<EditarVehiculo />} />
+        <Route path='/Vehiculos/:usuario' element={<Vehiculo />} />
+        <Route path='/AgregarVehiculos/:usuario' element={<CargarVehiculo />} />
+        <Route path='/ModificarVehiculos/:id_vehiculos/:usuario' element={<EditarVehiculo />} />
 
-        <Route path='/Modelos' element={<Modelo />} />
-        <Route path='/AgregarModelos' element={<CargarModelo />} />;
-        <Route path='/ModificarModelos/:id_modelos' element={<EditarModelo />} />
+        <Route path='/Modelos/:usuario' element={<Modelo />} />
+        <Route path='/AgregarModelos/:usuario' element={<CargarModelo />} />;
+        <Route path='/ModificarModelos/:id_modelos/:usuario' element={<EditarModelo />} />
 
-        <Route path='/TipoDeProductos' element={<TipoDeProducto />} />
-        <Route path='/AgregarTipoDeProductos' element={<CargarTipoDeProducto />} />
-        <Route path='/ModificarTipoDeProductos/:id_tipo_productos' element={<EditarTipoDeProducto />} />
+        <Route path='/TipoDeProductos/:usuario' element={<TipoDeProducto />} />
+        <Route path='/AgregarTipoDeProductos/:usuario' element={<CargarTipoDeProducto />} />
+        <Route path='/ModificarTipoDeProductos/:id_tipo_productos/:usuario' element={<EditarTipoDeProducto />} />
 
       </Routes>
     </>

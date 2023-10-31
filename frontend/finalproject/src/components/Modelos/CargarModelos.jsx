@@ -1,6 +1,6 @@
 import './Modelos.css';
 import * as API from '../Service/Service.js';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 function CargarModelos(){
@@ -20,12 +20,14 @@ function CargarModelos(){
             setmensaje(request.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href='/Modelos';
-            }, 2500);
+                window.location.href=`/Modelos/${usuario}`;
+            }, 1000);
         }else{
             setmensaje(request.mensaje);
         }
     }
+
+    const {usuario} = useParams();
     return(
         <>
             <div className='containtBodyModelos1'>
@@ -54,7 +56,7 @@ function CargarModelos(){
                         </div>
                         <div className='cont4'>
                             <button type='submit'> Cargar </button>
-                            <Link to='/Modelos'> <button> volver </button> </Link>
+                            <Link to={`/Modelos/${usuario}`}> <button> volver </button> </Link>
                         </div>
                     </form>
                 </div>

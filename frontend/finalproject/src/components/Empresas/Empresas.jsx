@@ -1,5 +1,5 @@
 import './Empresa.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import * as API from '../Service/Service.js';
 import { useEffect, useState } from 'react';
 
@@ -25,16 +25,14 @@ function Empresas() {
         //window.location.href = '/Empresas';
     }
 
+    const {usuario} = useParams();
+
     // verificar usuarios
     const userVerification = async () => {
 
-        let correo;
-        let token;
+        let token = localStorage.getItem('token');
 
-        correo = localStorage.getItem('correo');
-        token = localStorage.getItem('token');
-
-        const traerCorreo = await API.postCorreo({ correo });
+        const traerCorreo = await API.postUsuario( usuario );
 
         if (traerCorreo.status && token) {
             console.log('El usuario esta logeado');
@@ -53,27 +51,27 @@ function Empresas() {
                 <h2> Empresas </h2>
             </div>
                 <div className='containeButtonsEmpresa'>
-                    <Link to='/Home'>
+                    <Link to={`/Home/${usuario}`}>
                         <button> Volver </button>
                     </Link>
-                    <Link to='/Droides'>
+                    <Link to={`/Droides/${usuario}`}>
                         <button> Droides </button>
                     </Link>
-                    <Link to='/Vehiculos'>
+                    <Link to={`/Vehiculos/${usuario}`}>
                         <button> Vehiculos </button>
                     </Link>
-                    <Link to='/Estados'>
+                    <Link to={`/Estados/${usuario}`}>
                         <button> Estado </button>
                     </Link>
-                    <Link to='/Modelos'>
+                    <Link to={`/Modelos/${usuario}`}>
                         <button> Modelos </button>
                     </Link>
-                    <Link to='/TipoDeProductos'>
+                    <Link to={`/TipoDeProductos/${usuario}`}>
                         <button> Tipo de productos </button>
                     </Link>
                 </div>
             <div className='containeButtonCargarEmpresa'>
-                <Link to='/AgregarEmpresas'> <button> Cargar </button> </Link>
+                <Link to={`/AgregarEmpresas/${usuario}`}> <button> Cargar </button> </Link>
             </div>
             <div className='containeTablaEmpresa'>
                 <table>
@@ -96,7 +94,7 @@ function Empresas() {
                                 // eslint-disable-next-line react/jsx-key
                                 <tr>
                                     <td>
-                                        <Link to={`/ModificarEmpresas/${emps.idempresas}`}> <button> Editar </button> </Link>
+                                        <Link to={`/ModificarEmpresas/${emps.idempresas}/${usuario}`}> <button> Editar </button> </Link>
                                         <button onClick={(event) => borrarEmpresa(event, emps.idempresas)}> Borrar </button>
                                     </td>
                                     <td>{emps.nombre_empresa}</td>

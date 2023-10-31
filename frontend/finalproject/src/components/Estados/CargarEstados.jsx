@@ -1,6 +1,6 @@
 import './Estados.css';
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as API from '../Service/Service.js';
 
 function CargarEstados() {
@@ -20,13 +20,15 @@ function CargarEstados() {
             setmensaje(respuesta.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href = '/Estados';
+                window.location.href = `/Estados/${usuario}`;
             }, 2500);
         } else {
             setmensaje(respuesta.mensaje);
         }
     }
 
+    const {usuario} = useParams();
+    
     return (
         <>
             <div className='containtBodyEstados1'>
@@ -55,7 +57,7 @@ function CargarEstados() {
                         </div>
                         <div className='cont4'>
                             <button type='submit'> Cargar </button>
-                            <Link to='/Estados'> <button> volver </button> </Link>
+                            <Link to={`/Estados/${usuario}`}> <button> volver </button> </Link>
                         </div>
                     </form>
                 </div>

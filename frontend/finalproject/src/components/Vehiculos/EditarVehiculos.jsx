@@ -23,12 +23,14 @@ function EditarVehiculos() {
             setmensaje(request.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href ='/Vehiculos';
-            }, 2500);
+                window.location.href =`/Vehiculos/${usuario}`;
+            }, 1000);
         }else{
             setmensaje(request.mensaje);
         }
     }
+
+    const { usuario} = useParams();
 
     // dato a editar 
     const [nombre_A_Editar, setnombreAEditar] = useState('');
@@ -84,7 +86,7 @@ function EditarVehiculos() {
                         />
 
                         <button type='submit'> Editar </button>
-                        <Link to='/Vehiculos'> <button> volver </button> </Link>
+                        <Link to={`/Vehiculos/${usuario}`}> <button> volver </button> </Link>
                     </form>
                 </div>
             </div>

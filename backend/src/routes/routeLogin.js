@@ -195,35 +195,80 @@ routelogin.delete('/ClearLog', bodyparser.json(), (req, res) => {
 // buscar el correo
 routelogin.post('/traerCorreo', bodyparser.json(), (req, res) => {
 
-    const { usuario } = req.body;
+    const { correo } = req.body;
 
-    mysqlconnecction.query('select * from usuario where usuario =?', [usuario], (err, reg) => {
-        if (err) {
-            console.log("Error en la base de datos ----> ", err);
-        } else {
-            res.json({
-                status: true,
-                mensaje: 'El correo esta correcto'
-            })
-        }
-    })
+    if (!correo) {
+        res.json({
+            status: false,
+            mensaje: 'Falta el correo'
+        })
+    } else {
+        mysqlconnecction.query('select * from usuario where correo =?', [correo], (err, reg) => {
+            if (err) {
+                console.log("Error en la base de datos ----> ", err);
+            } else {
+                if (reg.length > 0) {
+                    res.json({
+                        status: true,
+                        mensaje: 'El correo esta correcto'
+                    })
+                } else {
+                    res.json({
+                        status: false,
+                        mensaje: 'El correo no existe'
+                    })
+                }
+            }
+        })
+    }
+})
+routelogin.post('/verUsuario/:usuario', bodyparser.json(), (req, res)=>{
+    const {usuario} = req.params;
 
+    if(!usuario){
+        res.json({
+            status:false,
+            mensaje:'Falta un usuario'
+        })
+    } else {
+
+        mysqlconnecction.query('select * from usuario where usuario =?', [usuario], (err, reg)=>{
+
+            if(err){
+                console.log('error en la base de datos ---> ', err);
+            } else {
+                if(reg.length > 0){
+                    res.json({
+                        status:true,
+                        mensaje: 'El usuario existe'
+                    })
+                } else {
+                    res.json({
+                        status:false,
+                        mensaje:'El usuario no existe'
+                    })
+                }
+            }
+        })
+    }
 })
 // traer id por correo 
-routelogin.get('/usuarios/:correo', (req, res) => {
+routelogin.get('/usuarios/:correo', bodyparser.json(), (req, res) => {
 
     const { correo } = req.params;
 
     if (!correo) {
         res.json({
             status: false,
-            mensaje: 'falta correo'
+            mensaje: 'falta un correo'
         })
     } else {
         mysqlconnecction.query('select * from usuario where correo =?', [correo], (err, reg) => {
 
             if (err) {
+
                 console.log('Error en la base de datos --->', err);
+
             } else {
                 res.json(reg);
             }
@@ -231,7 +276,7 @@ routelogin.get('/usuarios/:correo', (req, res) => {
     }
 })
 // modificar contraseña
-routelogin.put('/restaurar', bodyparser.json(), (req, res) => {
+routelogin.put('/restaurar/:correo', bodyparser.json(), (req, res) => {
 
     const { contraseña } = req.body;
     const { correo } = req.params;

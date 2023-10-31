@@ -25,9 +25,8 @@ function Login() {
             //alert('Pase Señor');
             window.localStorage.setItem('correo', JSON.stringify(ingreos.dato[0]));
             window.localStorage.setItem('token', JSON.stringify(ingreos.token));
-            window.localStorage.setItem('usuario', JSON.stringify(user.usuario));
 
-            window.location.href = '/Home';
+            window.location.href = `/Home/${user.usuario}`;
 
         } else {
             alert(ingreos.mensaje);

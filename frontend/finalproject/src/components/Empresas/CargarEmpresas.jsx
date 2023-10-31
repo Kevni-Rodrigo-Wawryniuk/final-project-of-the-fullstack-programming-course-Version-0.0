@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import './Empresa.css';
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as API from '../Service/Service.js';
 
 
@@ -46,12 +46,15 @@ export function CargarEmpresas() {
 
             setTimeout(() => {
                 setmensaje('')
-                window.location.href = '/Empresas';
+                window.location.href = `/Empresas/${usuario}`;
             }, 2500);
         } else {
             setmensaje(request.mensaje);
         }
     }
+
+    // usuario cargando el dato
+    const { usuario } = useParams();
 
     return (
         <>
@@ -120,7 +123,7 @@ export function CargarEmpresas() {
                         </div>
                         <div className='cont1'>
                             <button type='submit'> Cargar </button>
-                            <Link to='/Empresas'> <button> Volver </button> </Link>
+                            <Link to={`/Empresas/${usuario}`}> <button> Volver </button> </Link>
                         </div>
                     </form>
                 </main>
