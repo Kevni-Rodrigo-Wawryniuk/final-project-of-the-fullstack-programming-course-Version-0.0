@@ -5,7 +5,9 @@ import * as API from '../Service/Service.js';
 function Home() {
 
     // salir del sistema
-    const LoqOut = () => {
+    const LoqOut = async (event) => {
+        event.preventDefault();
+
         localStorage.removeItem('correo');
         localStorage.removeItem('token');
         localStorage.removeItem('usuario');
@@ -16,17 +18,25 @@ function Home() {
 
         let correo;
         let token;
+        let usuario;
 
+        usuario = localStorage.getItem('usuario');
         correo = localStorage.getItem('correo');
         token = localStorage.getItem('token');
 
         const traerCorreo = await API.postCorreo({ correo });
-
+        console.log('', usuario);
 
         if (traerCorreo.status && token) {
             console.log('El usuario esta logeado');
+
         } else {
             window.location.href = '/';
+
+            localStorage.removeItem('correo');
+            localStorage.removeItem('usuario');
+            localStorage.removeItem('token');
+
             console.log('El usuario no esta logeado');
         }
     }
@@ -48,37 +58,37 @@ function Home() {
 
                 <h2> Tablas </h2>
                 <div className='re'>
-                <Link to='/Empresas'>
-                    <button>Empresas</button>
-                </Link>
+                    <Link to='/Empresas'>
+                        <button>Empresas</button>
+                    </Link>
                 </div>
                 <div className='re'>
-                <Link to='/Droides'>
-                    <button>Droides</button>
-                </Link>
+                    <Link to='/Droides'>
+                        <button>Droides</button>
+                    </Link>
                 </div>
                 <div className='re'>
-                <Link to='/Vehiculos'>
-                    <button>Vehiculos</button>
-                </Link>
+                    <Link to='/Vehiculos'>
+                        <button>Vehiculos</button>
+                    </Link>
                 </div>
                 <div className='re'>
-                <Link to='/Modelos'>
-                    <button>Modelos</button>
-                </Link>
+                    <Link to='/Modelos'>
+                        <button>Modelos</button>
+                    </Link>
                 </div>
                 <div className='re'>
-                <Link to='/TipoDeProductos'>
-                    <button>Tipos de productos</button>
-                </Link>
+                    <Link to='/TipoDeProductos'>
+                        <button>Tipos de productos</button>
+                    </Link>
                 </div>
                 <div className='re'>
-                <Link to='/Estados'>
-                    <button>Estados</button>
-                </Link>
+                    <Link to='/Estados'>
+                        <button>Estados</button>
+                    </Link>
                 </div>
                 <div className='re'>
-                <button onClick={(event) => LoqOut(event)}> Salir </button>
+                    <button onClick={(event) => LoqOut(event)}> Salir </button>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 //import React,{useState} from "react";
 import './Login.css';
 // esto es para redireccionar a otra pagina
-import { Link, json } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useState } from 'react';
 

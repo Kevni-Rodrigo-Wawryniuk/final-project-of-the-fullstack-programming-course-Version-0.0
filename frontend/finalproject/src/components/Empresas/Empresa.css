@@ -53,7 +53,7 @@ form{
     position: fixed;
     top: 0%;
 
-    background-image: url(/frontend/finalproject/src/components/images/estrella-muertejpg.jpg);
+    background-image: url('../images/777.jpeg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

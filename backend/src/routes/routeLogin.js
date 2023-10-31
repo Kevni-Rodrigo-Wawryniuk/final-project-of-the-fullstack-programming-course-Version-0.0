@@ -107,8 +107,6 @@ routelogin.post('/Login', bodyparser.json(), (req, res) => {
 
     const { correo, contraseña } = req.body;
 
-    console.log(correo);
-
     if (!correo) {
 
         res.json({
@@ -197,32 +195,18 @@ routelogin.delete('/ClearLog', bodyparser.json(), (req, res) => {
 // buscar el correo
 routelogin.post('/traerCorreo', bodyparser.json(), (req, res) => {
 
-    const { correo } = req.body;
+    const { usuario } = req.body;
 
-    if (!correo) {
-        res.json({
-            status: false,
-            mensaje: "El correo es un campo obligatorio"
-        })
-    } else {
-        mysqlconnecction.query("select * from usuario where correo =?", [correo], (err, reg) => {
-            if (err) {
-                console.log("Error en la base de datos ----> ", err);
-            } else {
-                if (reg.length > 0) {
-                    res.json({
-                        status: true,
-                        mensaje: 'El correo esta correcto'
-                    })
-                } else {
-                    res.json({
-                        status: false,
-                        mensaje: 'El correo es incorrecto'
-                    })
-                }
-            }
-        })
-    }
+    mysqlconnecction.query('select * from usuario where usuario =?', [usuario], (err, reg) => {
+        if (err) {
+            console.log("Error en la base de datos ----> ", err);
+        } else {
+            res.json({
+                status: true,
+                mensaje: 'El correo esta correcto'
+            })
+        }
+    })
 
 })
 // traer id por correo 
@@ -233,11 +217,9 @@ routelogin.get('/usuarios/:correo', (req, res) => {
     if (!correo) {
         res.json({
             status: false,
-            mensaje: 'falta usuario'
+            mensaje: 'falta correo'
         })
     } else {
-        console.log('buscando usuario');
-
         mysqlconnecction.query('select * from usuario where correo =?', [correo], (err, reg) => {
 
             if (err) {
@@ -249,7 +231,7 @@ routelogin.get('/usuarios/:correo', (req, res) => {
     }
 })
 // modificar contraseña
-routelogin.put('/restaurar/:correo', bodyparser.json(), (req, res) => {
+routelogin.put('/restaurar', bodyparser.json(), (req, res) => {
 
     const { contraseña } = req.body;
     const { correo } = req.params;

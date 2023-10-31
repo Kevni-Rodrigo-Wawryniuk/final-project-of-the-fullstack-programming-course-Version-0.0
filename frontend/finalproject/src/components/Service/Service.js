@@ -54,16 +54,15 @@ export async function registrar(date){
 
 export async function postCorreo(date){
     
-    const options={
-
+    const Options={
         method:'POST',
-        body:JSON.stringify(date),
+        body: JSON.stringify(date),
         headers:{
             'Content-Type': 'application/json',
         }
     }
 
-    const request = await fetch(`${URL}/traerCorreo`,options);
+    const request = await fetch(`${URL}/traerCorreo`,Options);
 
     const dato = await request.json();
 
