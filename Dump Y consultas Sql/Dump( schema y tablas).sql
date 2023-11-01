@@ -30,6 +30,7 @@ id_estado int,
 id_tipo_producto int,
 primary key(idempresas)
 );
+
 select * from stockst.empresas;
 
 -- tabla Droides

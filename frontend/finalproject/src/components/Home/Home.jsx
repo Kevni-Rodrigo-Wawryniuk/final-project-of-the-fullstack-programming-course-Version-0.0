@@ -10,7 +10,6 @@ function Home() {
 
         localStorage.removeItem('correo');
         localStorage.removeItem('token');
-        localStorage.removeItem('usuario');
         window.location.href = '/';
     }
 
@@ -26,11 +25,10 @@ function Home() {
             console.log('El usuario esta logeado');
 
         } else {
-            //window.location.href = '/';
+            window.location.href = '/';
 
-            //localStorage.removeItem('correo');
-            //localStorage.removeItem('usuario');
-            //localStorage.removeItem('token');
+            localStorage.removeItem('correo');
+            localStorage.removeItem('token');
 
             console.log('El usuario no esta logeado');
         }
@@ -38,14 +36,11 @@ function Home() {
 
     document.addEventListener('DOMContentLoaded', userVerification());
 
-    // traer al usuario para mostrarlo
-    const user = sessionStorage.getItem('usuario');
-
     return (
         <div className='containeBodyHome'>
 
             <div className='usuario'>
-                <h3> Usuario: {user} </h3>
+                <h3> Usuario: {usuario} </h3>
             </div>
 
             <div className='containeHomeButtons'>

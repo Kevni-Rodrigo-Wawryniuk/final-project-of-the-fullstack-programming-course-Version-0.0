@@ -38,6 +38,10 @@ function Vehiculos() {
 
         } else {
             window.location.href = '/';
+            
+            localStorage.removeItem('correo');
+            localStorage.removeItem('token');
+            
             console.log('El usuario no esta logeado');
         }
     }
