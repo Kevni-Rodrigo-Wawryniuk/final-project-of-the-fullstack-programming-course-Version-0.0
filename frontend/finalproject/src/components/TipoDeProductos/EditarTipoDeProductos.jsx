@@ -68,7 +68,7 @@ function EditarTipoDeProductos() {
                         </div>
                         <div className='cont4'>
                         <input className='cont5'
-                            type="text"
+                            type="number"
                             value={codigo}
                             onChange={(event) => setCodigo(event.target.value)}
                             placeholder={codigo_A_editar}
