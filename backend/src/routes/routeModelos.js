@@ -95,7 +95,7 @@ routeModelos.put('/modificarModelo/:id_modelos', verificationToken, bodyparser.j
     if (!nombre_modelos) {
         res.json({
             status: false,
-            mensaje: "El nombre es un campo obligatorio"
+            mensaje: "El nombre del modelo es un campo obligatorio"
         })
     } else if (!codigo) {
         res.json({
@@ -128,22 +128,46 @@ routeModelos.delete('/BorrarModelo/:id_modelos', verificationToken, bodyparser.j
 
     const { id_modelos } = req.params;
 
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('delete from modelos where id_modelos =?', [id_modelos], (err, reg) => {
-                if (err) {
-                    console.log("Error en la base de datos al borrar un modelo --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El modelo se borro correctamente"
-                    })
-                }
-            })
-        }
-    })
+    if (!id_modelos) {
+        res.json({
+            status: false,
+            mensaje: 'El id es un campo necesaro'
+        })
+    } else {
+
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+
+                mysqlconnecction.query('select * from modelos as model left join empresas as emp on model.id_modelos = emp.id_modelo where emp.id_modelo =?', [id_modelos], (err, reg) => {
+
+                    if (err) {
+                        console.log('Error en la base de datos --->', err);
+                    } else {
+                        if (reg.length > 0) {
+                            res.json({
+                                status: false,
+                                mensaje: ' El modelo esta en uso '
+                            });
+                        } else {
+                            -  mysqlconnecction.query('delete from modelos where id_modelos =?', [id_modelos], (err, reg) => {
+                                if (err) {
+                                    console.log("Error en la base de datos al borrar un modelo --> ", err);
+                                } else {
+                                    res.json({
+                                        status: true,
+                                        mensaje: "El modelo se borro correctamente"
+                                    })
+                                }
+                            })
+                        }
+                    }
+                })
+
+            }
+        })
+    }
 })
 
 // verificar el token del usuario

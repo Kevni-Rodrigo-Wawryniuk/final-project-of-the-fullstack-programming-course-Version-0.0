@@ -18,8 +18,7 @@ function Droides() {
 
     useEffect(() => {
         API.getDroides().then(setDroides)
-    }, [])
-    // 
+    }, []);
 
     // borrar los datos
     const borrarDroide = async (event, id_Droide) => {
@@ -30,6 +29,7 @@ function Droides() {
         const request = await API.deleteDroides(id_Droide);
 
         setInterval("location.reload()",1000);
+
     }
     // verificar usuarios
 
@@ -41,13 +41,17 @@ function Droides() {
 
         token = localStorage.getItem('token');
 
-        const traerCorreo = await API.postUsuario(usuario );
+        const traerCorreo = await API.postUsuario(usuario);
 
         if (traerCorreo.status && token) {
             console.log('El usuario esta logeado');
 
         } else {
             window.location.href = '/';
+            
+            localStorage.removeItem('correo');
+            localStorage.removeItem('token');
+            
             console.log('El usuario no esta logeado');
         }
     }

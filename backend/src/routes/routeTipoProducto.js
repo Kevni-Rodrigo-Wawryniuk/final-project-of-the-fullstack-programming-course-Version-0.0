@@ -125,22 +125,46 @@ routeTipo_producto.delete('/BorrarTipoProducto/:id_tipo_productos', verification
 
     const { id_tipo_productos } = req.params;
 
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('delete from tipo_productos where id_tipo_productos =?', [id_tipo_productos], (err, reg) => {
-                if (err) {
-                    console.log("Error en la base de datos al borrar un tipo de producto --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El tipo de producto se borro correctamente"
-                    })
-                }
-            })
-        }
-    })
+    if (!id_tipo_productos) {
+        res.json({
+            status: false,
+            mensaje: 'El id es un campo obligatorio'
+        })
+    } else {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+
+                mysqlconnecction.query('select * from tipo_productos as tp left join empresas as emp on tp.id_tipo_productos = emp.id_tipo_producto where emp.id_tipo_producto =?', [id_tipo_productos], (err, reg) => {
+
+                    if (err) {
+                        console.log('error en la base de datos ---> ', err);
+                    } else {
+                        if (reg.length > 0) {
+                            res.json({
+                                status: false,
+                                mensaje: ' EL producto esta en uso'
+                            });
+                        } else {
+
+                            mysqlconnecction.query('delete from tipo_productos where id_tipo_productos =?', [id_tipo_productos], (err, reg) => {
+                                if (err) {
+                                    console.log("Error en la base de datos al borrar un tipo de producto --> ", err);
+                                } else {
+                                    res.json({
+                                        status: true,
+                                        mensaje: "El tipo de producto se borro correctamente"
+                                    })
+                                }
+                            })
+                        }
+                    }
+                })
+
+            }
+        })
+    }
 })
 
 // verificar el token del usuario

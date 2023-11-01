@@ -10,7 +10,6 @@ function Home() {
 
         localStorage.removeItem('correo');
         localStorage.removeItem('token');
-        localStorage.removeItem('usuario');
         window.location.href = '/';
     }
 
@@ -26,20 +25,16 @@ function Home() {
             console.log('El usuario esta logeado');
 
         } else {
-            //window.location.href = '/';
+            window.location.href = '/';
 
-            //localStorage.removeItem('correo');
-            //localStorage.removeItem('usuario');
-            //localStorage.removeItem('token');
+            localStorage.removeItem('correo');
+            localStorage.removeItem('token');
 
             console.log('El usuario no esta logeado');
         }
     }
 
     document.addEventListener('DOMContentLoaded', userVerification());
-
-    // traer al usuario para mostrarlo
-    
 
     return (
         <div className='containeBodyHome'>

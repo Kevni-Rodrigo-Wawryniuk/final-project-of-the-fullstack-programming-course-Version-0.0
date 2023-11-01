@@ -72,6 +72,7 @@ export function CargarEmpresas() {
                             value={nombre_empresa}
                             onChange={(event) => setNombre(event.target.value)}
                             placeholder=" Nombre de la empresa "
+                            required
                         />
                         </div>
                         <div className='cont4'>

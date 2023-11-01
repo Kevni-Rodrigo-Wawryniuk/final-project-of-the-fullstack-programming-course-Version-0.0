@@ -138,25 +138,49 @@ routeEstado.delete('/borrarEstado/:id_estados', verificationToken, (req, res) =>
 
     const { id_estados } = req.params;
 
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('delete from estados where id_estados =?', [id_estados], (err, registro) => {
+    if (!id_estados) {
+        res.json({
+            status: false,
+            mensaje: ' el id es un campo obligatorio'
+        })
+    } else {
 
-                if (err) {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
 
-                    console.log("Error en la base de datos al borrar un estado --> ", err);
+                mysqlconnecction.query('select * from estados as estad left join empresas as emp on estad.id_estados = emp.id_estado where emp.id_estado =?', [id_estados], (err, reg)=>{
 
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El registro se borro correctamente"
-                    })
-                }
-            })
-        }
-    })
+                    if(err){
+                        console.log('Error en la base de datos ---> ', err);
+                    }else{
+                        if(reg.length > 0){
+                            res.json({
+                                status:false,
+                                mensaje:' El estado esta en uso'
+                            })
+                        }else{
+                            mysqlconnecction.query('delete from estados where id_estados =?', [id_estados], (err, registro) => {
+
+                                if (err) {
+            
+                                    console.log("Error en la base de datos al borrar un estado --> ", err);
+            
+                                } else {
+                                    res.json({
+                                        status: true,
+                                        mensaje: "El registro se borro correctamente"
+                                    })
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
+
 })
 
 // verificar el token del usuario

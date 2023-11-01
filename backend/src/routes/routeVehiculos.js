@@ -96,7 +96,7 @@ routeVehiculos.put('/modificarVehiculos/:id_vehiculos', verificationToken, bodyp
     if (!nombre_vehiculos) {
         res.json({
             status: false,
-            mensaje: "El nombre es un campo obligatorio"
+            mensaje: "El nombre del vehiculo es un campo obligatorio"
         })
     } else if (!codigo) {
         res.json({
@@ -129,23 +129,42 @@ routeVehiculos.delete('/BorrarVehiculo/:id_vehiculos', verificationToken, (req, 
 
     const { id_vehiculos } = req.params;
 
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-
-            mysqlconnecction.query('delete from vehiculos where id_vehiculos =?', [id_vehiculos], (err, reg) => {
-                if (err) {
-                    console.log("Error en la base de datos al borrar un vehiculo --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "El vehiculo se borro correctamente"
-                    })
-                }
-            })
-        }
-    })
+    if (!id_vehiculos) {
+        re.json({
+            status: false,
+            mensaje: 'el id es un campo obligatorio'
+        })
+    } else {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('select * from vehiculos as vehi left join empresas as emp on vehi.id_vehiculos = emp.id_vehiculos where emp.id_vehiculos =?', [id_vehiculos], (err, reg) => {
+                    if (err) {
+                        console.log('Error en la base de datos -----> ', err);
+                    } else {
+                        if (reg.length > 0) {
+                            res.json({
+                                status: false,
+                                mensaje: ' El vehiculo esta siendo usado'
+                            })
+                        } else {
+                            mysqlconnecction.query('delete from vehiculos where id_vehiculos =?', [id_vehiculos], (err, reg) => {
+                                if (err) {
+                                    console.log("Error en la base de datos al borrar un vehiculo --> ", err);
+                                } else {
+                                    res.json({
+                                        status: true,
+                                        mensaje: "El vehiculo se borro correctamente"
+                                    })
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
 })
 
 // verificar el token del usuario
