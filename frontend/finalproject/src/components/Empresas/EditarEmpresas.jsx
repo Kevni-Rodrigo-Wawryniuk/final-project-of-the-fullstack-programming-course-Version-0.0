@@ -119,7 +119,7 @@ function EditarEmpresas() {
                         <select onChange={(event) => setModelo(event.target.value)}>
                             <option value="" selected> Seleccione un Modelo </option>
                             {modelo.map((m)=>(
-                                <option value={m.id_modelos}>{m.nombre_modelos}</option>
+                                <option value={m.id_modelos} required>{m.nombre_modelos}</option>
                             ))}
                         </select>
 

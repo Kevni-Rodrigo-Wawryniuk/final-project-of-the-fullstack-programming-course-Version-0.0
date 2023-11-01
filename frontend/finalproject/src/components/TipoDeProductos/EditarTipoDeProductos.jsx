@@ -23,13 +23,13 @@ function EditarTipoDeProductos() {
         const request = await API.putTipoDeProductos(id_tipo_productos, { nombre_tipo_productos, codigo });
 
         if (request.status) {
-            setmensaje(request.menasje);
+            setmensaje(request.mensaje);
             setTimeout(() => {
                 setmensaje('');
                 window.location.href = `/TipoDeProductos/${usuario}`;
             }, 1000);
         } else {
-            setmensaje(request.menasje);
+            setmensaje(request.mensaje);
         }
     }
 

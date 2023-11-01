@@ -96,7 +96,7 @@ routeVehiculos.put('/modificarVehiculos/:id_vehiculos', verificationToken, bodyp
     if (!nombre_vehiculos) {
         res.json({
             status: false,
-            mensaje: "El nombre es un campo obligatorio"
+            mensaje: "El nombre del vehiculo es un campo obligatorio"
         })
     } else if (!codigo) {
         res.json({

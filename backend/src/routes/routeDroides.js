@@ -100,14 +100,14 @@ routeDroides.put('/modificarDroides/:id_droide', verificationToken, bodyparser.j
 
         res.json({
             status: false,
-            mensaje: "El nombre de estado es un campo obligatorio"
+            mensaje: "El codigo es un campo obligatorio"
         })
 
     } else if (!nombre_droides) {
 
         res.json({
             status: false,
-            mensaje: "El nuevo estado es un campo obligatorio"
+            mensaje: "El nombre del droide es un campo obligatorio"
         })
     } else {
 

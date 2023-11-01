@@ -101,23 +101,59 @@ routeEmpresas.put('/modificarEmpresas/:idempresas', verificationToken, bodyparse
 
     const { idempresas } = req.params;
     const { nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto } = req.body;
-    
-    jwt.verify(req.token, 'Pase', (error, valido) => {
-        if (error) {
-            res.sendStatus(403);
-        } else {
-            mysqlconnecction.query('update empresas set nombre_empresa = ?, id_modelo = ?, id_droides = ?, id_vehiculos = ?, id_estado = ?, id_tipo_producto = ? where idempresas = ?', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto, idempresas], (err, reg) => {
-                if (err) {
-                    console.log("Error en la base de datos al modificar una empresa --> ", err);
-                } else {
-                    res.json({
-                        status: true,
-                        mensaje: "La empresa se modifico de manera correcta"
-                    })
-                }
-            })
-        }
-    })
+    if (!idempresas) {
+        res.json({
+            status: false,
+            mensaje: 'El id de la empresa es un campo obligatorio'
+        })
+    } else if (!nombre_empresa) {
+        res.json({
+            status: false,
+            mensaje: 'El nombre de la empresa es un campo obligatorio'
+        })
+    } else if (!id_modelo) {
+        res.json({
+            status: false,
+            mensaje: 'El modelo de la empresa es un campo obligatorio'
+        })
+    } else if (!id_droides) {
+        res.json({
+            status: false,
+            mensaje: 'El droide de la empresa es un campo obligatorio'
+        })
+    } else if (!id_vehiculos) {
+        res.json({
+            status: false,
+            mensaje: 'El vehiculo de la empresa es un campo obligatorio'
+        })
+    } else if (!id_estado) {
+        res.json({
+            status: false,
+            mensaje: 'El estado de la empresa es un campo obligatorio'
+        })
+    } else if (!id_tipo_producto) {
+        res.json({
+            status: false,
+            mensaje: 'El tipo de producto de la empresa es un campo obligatorio'
+        })
+    } else {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('update empresas set nombre_empresa = ?, id_modelo = ?, id_droides = ?, id_vehiculos = ?, id_estado = ?, id_tipo_producto = ? where idempresas = ?', [nombre_empresa, id_modelo, id_droides, id_vehiculos, id_estado, id_tipo_producto, idempresas], (err, reg) => {
+                    if (err) {
+                        console.log("Error en la base de datos al modificar una empresa --> ", err);
+                    } else {
+                        res.json({
+                            status: true,
+                            mensaje: "La empresa se modifico de manera correcta"
+                        })
+                    }
+                })
+            }
+        })
+    }
 })
 
 // BORRAR LOS DATOS DE LAS EMPRESAS

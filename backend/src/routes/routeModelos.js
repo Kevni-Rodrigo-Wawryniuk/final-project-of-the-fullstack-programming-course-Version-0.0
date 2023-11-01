@@ -95,7 +95,7 @@ routeModelos.put('/modificarModelo/:id_modelos', verificationToken, bodyparser.j
     if (!nombre_modelos) {
         res.json({
             status: false,
-            mensaje: "El nombre es un campo obligatorio"
+            mensaje: "El nombre del modelo es un campo obligatorio"
         })
     } else if (!codigo) {
         res.json({
