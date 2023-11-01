@@ -3,6 +3,14 @@ import './TipotDeProductos.css';
 import { Link, useParams } from 'react-router-dom';
 import * as API from '../Service/Service.js';
 
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+
 function TipoDeProductos() {
 
     const [tipoProductos, setTipoDeProducto] = useState([]);
@@ -50,57 +58,53 @@ function TipoDeProductos() {
                     <h2> Tipo de Productos </h2>
                 </div>
                 <div className='containeButtonsTipoDeProductos'>
-                <Link to={`/Home/${usuario}`}>
-                        <button> Volver </button>
-                    </Link>
-                    <Link to={`/Empresas/${usuario}`}>
-                        <button> Empresas </button>
-                    </Link>
-                    <Link to={`/Vehiculos/${usuario}`}>
-                        <button> Vehiculos </button>
-                    </Link>
-                    <Link to={`/Estados/${usuario}`}>
-                        <button> Estado </button>
-                    </Link>
-                    <Link to={`/Modelos/${usuario}`}>
-                        <button> Modelos </button>
-                    </Link>
-                    <Link to={`/Droides/${usuario}`}>
-                        <button> Droides </button>
-                    </Link>
+
+                    <Navbar bg="dark" data-bs-theme="dark">
+                        <Container>
+                            <Navbar.Brand href={`/Home/${usuario}`}>Volver</Navbar.Brand>
+                            <Nav className="justify-content-center">
+                                <Nav.Link href={`/Empresas/${usuario}`}>Empresas</Nav.Link>
+                                <Nav.Link href={`/Vehiculos/${usuario}`}>Vehiculos</Nav.Link>
+                                <Nav.Link href={`/Estados/${usuario}`}>Estado</Nav.Link>
+                                <Nav.Link href={`/Modelos/${usuario}`}>Modelos</Nav.Link>
+                                <Nav.Link href={`/Droides/${usuario}`}>Droides</Nav.Link>
+                            </Nav>
+                        </Container>
+                    </Navbar>
                 </div>
 
                 <div className='containeButtonCargarTipoDeProductos'>
                     <Link to={`/AgregarTipoDeProductos/${usuario}`}>
-                        <button> Cargar </button>
+                    <Button variant="dark">Cargar Tipo de productos</Button>
                     </Link>
                 </div>
 
                 <div className='containeTablaTipoDeProductos'>
-                    <table>
-                        <nav>
+                    <Table responsive="md">
                         <thead>
                             <tr>
-                                <th>Configuraciones</th>
+                                
                                 <th>nombre</th>
                                 <th>codigo</th>
+                                <th>Configuraciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {tipoProductos.map((tipoProd) => (
                                 // eslint-disable-next-line react/jsx-key
                                 <tr>
-                                    <td>
-                                        <Link to={`/ModificarTipoDeProductos/${tipoProd.id_tipo_productos}/${usuario}`}> <button> Editar </button> </Link>
-                                        <button onClick={(event) => borrarTipoDeProductos(event, tipoProd.id_tipo_productos)} > Borrar </button>
-                                    </td>
+                                    
                                     <td>{tipoProd.nombre_tipo_productos}</td>
                                     <td>{tipoProd.codigo}</td>
+                                    <td>
+                                        <Link to={`/ModificarTipoDeProductos/${tipoProd.id_tipo_productos}/${usuario}`}> <Button variant="warning">Editar</Button>{' '} </Link>
+                                        <Button variant="danger" onClick={(event) => borrarTipoDeProductos(event, tipoProd.id_tipo_productos)} > Borrar </Button>{' '}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
-                        </nav>
-                    </table>
+                        
+                    </Table>
                 </div>
             </div>
         </>

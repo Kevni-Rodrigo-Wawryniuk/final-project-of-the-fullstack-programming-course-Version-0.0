@@ -1,4 +1,4 @@
-import './Droides.css';
+import '../css/carga.css';
 import { Link, useParams } from 'react-router-dom';
 import * as API from '../Service/Service.js';
 import { useState } from 'react';
@@ -31,13 +31,15 @@ function CargarDroides() {
 
     return (
         <>
-            <div className='containtBodyDroides1'>
-                <div className='mensaje'>
-                    <h3> Cargar de Droides</h3>
-                    {mensaje}
-                </div>   
-                <div>
+            <div className='containeBody'>
+                   
+                <main className='maincarga'>
+                
                     <form onSubmit={CargarDroide}>
+                        <div className='mensaje'>
+                            <h3> Cargar de Droides</h3>
+                            {mensaje}
+                        </div>
                         <div className='cont4'>
                         <input className='cont5'
                             type="text"
@@ -60,7 +62,8 @@ function CargarDroides() {
                         <Link to={`/Droides/${usuario}`}> <button> Volver </button></Link>
                         </div>
                     </form>
-                </div>
+                
+            </main>
             </div>
         </>
     );

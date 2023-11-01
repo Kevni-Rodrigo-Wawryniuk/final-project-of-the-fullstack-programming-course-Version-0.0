@@ -25,6 +25,10 @@ form{
     align-items: center;
     justify-content: center;
     text-align: center;
+    background-color:black;
+    opacity: 0.8;
+    border-radius: 15px;
+    
 }
 .cont1{
     width: 400px;
@@ -126,6 +130,7 @@ form{
 
     color: black;
 }
+/*
 .containeTablaEmpresa button:hover{
     background-color: aqua;
     color: blue;
@@ -162,7 +167,7 @@ form{
     
     border: 2px solid black;
 }
-
+*/
 nav,
 .scroll_containe{
     display: block;

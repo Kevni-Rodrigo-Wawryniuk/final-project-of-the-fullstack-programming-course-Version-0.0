@@ -1,4 +1,4 @@
-import './Estados.css';
+import '../css/carga.css';
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import * as API from '../Service/Service.js';
@@ -31,13 +31,14 @@ function CargarEstados() {
     
     return (
         <>
-            <div className='containtBodyEstados1'>
-                <div className='mensaje'>
-                    <h3> Cargar Estados </h3>
-                    {mensaje}
-                </div>    
-                <div>
+            <div className='containeBody'>
+            <main className='maincarga'>
+
                     <form onSubmit={GuardarEstados}>
+                        <div className='mensaje'>
+                            <h3> Cargar Estados </h3>
+                            {mensaje}
+                        </div>    
                         <div className='cont4'>
                         <input className='cont5'
                             type='text'
@@ -60,7 +61,7 @@ function CargarEstados() {
                             <Link to={`/Estados/${usuario}`}> <button> volver </button> </Link>
                         </div>
                     </form>
-                </div>
+                    </main>
             </div>
         </>
     );

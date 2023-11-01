@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import './Empresa.css';
+import '../css/carga.css';
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import * as API from '../Service/Service.js';
@@ -58,26 +58,24 @@ export function CargarEmpresas() {
 
     return (
         <>
-            <div className='containeBodyEmpresa1'>
+            <div className='containeBody'>
                 <main className='maincarga'>
                     
                     <form onSubmit={cargarEmpresas}>
                         <div className='mensaje'>
                             <h3> Cargar de Empresa </h3>
-                        </div>   
-                        <div className='cont12'>
                             {mensaje}
-                        </div>
-                        <div className='cont1'>
-                        <input className='cont'
+                        </div>   
+                        <div className='cont4'>
+                        <input className='cont5'
                             type="text"
                             value={nombre_empresa}
                             onChange={(event) => setNombre(event.target.value)}
                             placeholder=" Nombre de la empresa "
                         />
                         </div>
-                        <div className='cont1'>
-                        <select className='cont' onChange={(event) => setModelo(event.target.value)}>
+                        <div className='cont4'>
+                        <select className='cont5' onChange={(event) => setModelo(event.target.value)}>
 
                             <option value="" selected> Seleccione un Modelo </option>
                             {modelos.map((M) => (
@@ -85,8 +83,8 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <div className='cont1'>
-                        <select className='cont' onChange={(event) => setDroide(event.target.value)}>
+                        <div className='cont4'>
+                        <select className='cont5' onChange={(event) => setDroide(event.target.value)}>
 
                             <option value="" selected> Seleccione un Droide </option>
                             {droides.map((D) => (
@@ -94,8 +92,8 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <div className='cont1'>
-                        <select className='cont' onChange={(event) => setVehiculo(event.target.value)}>
+                        <div className='cont4'>
+                        <select className='cont5' onChange={(event) => setVehiculo(event.target.value)}>
 
                             <option value="" selected> Seleccione un Vehiculo </option>
                             {vehiculos.map((V) => (
@@ -103,8 +101,8 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <div className='cont1'>
-                        <select className='cont' onChange={(event) => setEstado(event.target.value)}>
+                        <div className='cont4'>
+                        <select className='cont5' onChange={(event) => setEstado(event.target.value)}>
 
                             <option value="" selected> Seleccione un Estado </option>
                             {estados.map((E) => (
@@ -112,8 +110,8 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <div className='cont1'>
-                        <select className='cont' onChange={(event) => setTipoProducto(event.target.value)}>
+                        <div className='cont4'>
+                        <select className='cont5' onChange={(event) => setTipoProducto(event.target.value)}>
 
                             <option value="" selected> Seleccione un Tipo de Producto </option>
                             {tipoDeProducto.map((T) => (
@@ -121,7 +119,7 @@ export function CargarEmpresas() {
                             ))}
                         </select>
                         </div>
-                        <div className='cont1'>
+                        <div className='cont4'>
                             <button type='submit'> Cargar </button>
                             <Link to={`/Empresas/${usuario}`}> <button> Volver </button> </Link>
                         </div>

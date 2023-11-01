@@ -4,6 +4,13 @@ import * as API from '../Service/Service.js';
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 function Estados() {
 
     // Esto es para mostrar los datos en pantalla
@@ -54,56 +61,51 @@ function Estados() {
                     <h2>Estados</h2>
                 </div>
                 <div className='containeButtonsEstados'>
-                <Link to={`/Home/${usuario}`}>
-                        <button> Volver </button>
-                    </Link>
-                    <Link to={`/Empresas/${usuario}`}>
-                        <button> Empresas </button>
-                    </Link>
-                    <Link to={`/Vehiculos/${usuario}`}>
-                        <button> Vehiculos </button>
-                    </Link>
-                    <Link to={`/Droides/${usuario}`}>
-                        <button> Droides </button>
-                    </Link>
-                    <Link to={`/Modelos/${usuario}`}>
-                        <button> Modelos </button>
-                    </Link>
-                    <Link to={`/TipoDeProductos/${usuario}`}>
-                        <button> Tipo de productos </button>
-                    </Link>
+                <Navbar bg="dark" data-bs-theme="dark">
+                    <Container>
+                        <Navbar.Brand href={`/Home/${usuario}`}>Volver</Navbar.Brand>
+                        <Nav className="justify-content-center">
+                            <Nav.Link href={`/Empresas/${usuario}`}>Empresas</Nav.Link>
+                            <Nav.Link href={`/Droides/${usuario}`}>Droides</Nav.Link>
+                            <Nav.Link href={`/Vehiculos/${usuario}`}>Vehiculos</Nav.Link>
+                            <Nav.Link href={`/Modelos/${usuario}`}>Modelos</Nav.Link>
+                            <Nav.Link href={`/TipoDeProductos/${usuario}`}>Tipo de productos</Nav.Link>
+                        </Nav>
+                    </Container>
+                </Navbar>
                 </div>
 
                 <div className='containeButtonCargarEstados'>
                     <Link to={`/AgregarEstados/${usuario}`}>
-                        <button>Cargar</button>
+                    <Button variant="dark">Cargar Estado</Button>
                     </Link>
                 </div>
 
                 <div className='containeTablaEstados'>
-                    <table>
-                        <nav>
+                    <Table responsive="md">
+                        
                         <thead>
                             <tr>
-                                <th>Configuraciones</th>
+                                
                                 <th>nombre</th>
                                 <th>codigo</th>
+                                <th>Configuraciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {estados.map((estad) => (
                                 <tr>
-                                    <td>
-                                        <Link to={`/ModificarEstados/${estad.id_estados}/${usuario}`}> <button> Editar </button> </Link>
-                                        <button onClick={(event) => borrarEstado(event, estad.id_estados)} > Borrar </button>
-                                    </td>
-                                    <td>{estad.nombre_estados}</td>
+                                   <td>{estad.nombre_estados}</td>
                                     <td>{estad.codigo}</td>
+                                    <td>
+                                        <Link to={`/ModificarEstados/${estad.id_estados}/${usuario}`}> <Button variant="warning">Editar</Button>{' '}</Link>
+                                        <Button variant="danger" onClick={(event) => borrarEstado(event, estad.id_estados)} > Borrar</Button>{' '} 
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
-                        </nav>
-                    </table>
+                        
+                    </Table>
                 </div>
             </div>
         </>

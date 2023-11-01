@@ -39,13 +39,13 @@ function Home() {
     document.addEventListener('DOMContentLoaded', userVerification());
 
     // traer al usuario para mostrarlo
-    const user = sessionStorage.getItem('usuario');
+    
 
     return (
         <div className='containeBodyHome'>
 
             <div className='usuario'>
-                <h3> Usuario: {user} </h3>
+                <h3> Usuario: {usuario} </h3>
             </div>
 
             <div className='containeHomeButtons'>

@@ -1,4 +1,4 @@
-import './Droides.css';
+import '../css/pantallas.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -52,7 +52,7 @@ function EditarDroides() {
 
     return (
         <>
-            <div className='containtBodyDroides'>
+            <div className='contaiteBody'>
                 <table>
                     <thead>
                         <tr>

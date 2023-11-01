@@ -112,11 +112,11 @@ function EditarEmpresas() {
                             type="text"
                             value={nombre_empresa}
                             onChange={(event)=> setEmpresas(event.target.value)}
-                            placeholder='Nuevo nombre de empresa'
+                            placeholder={nombre_empresa_A_Editar}
                         />
 
                         <select onChange={(event) => setModelo(event.target.value)}>
-                            <option value="" selected> Seleccione un Modelo </option>
+                            <option value="" selected> {nombre_modelo_A_Editar} </option>
                             {modelo.map((m)=>(
                                 <option value={m.id_modelos}>{m.nombre_modelos}</option>
                             ))}

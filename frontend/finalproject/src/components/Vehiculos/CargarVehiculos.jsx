@@ -1,4 +1,4 @@
-import './Vehiculos.css';
+import '../css/carga.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
@@ -31,13 +31,14 @@ function CargarVehiculos(){
 
     return(
         <>
-            <div className='containtBodyVehiculos1'>
-                <div className='mensaje'>
-                    <h3> Cargar Vehiculos </h3>
-                    {mensaje}
-                </div>    
-                <div>
+            <div className='containeBody'>
+               
+                <main className='maincarga'>
                     <form onSubmit={CargarVehiculo}>
+                        <div className='mensaje'>
+                            <h3> Cargar Vehiculos </h3>
+                            {mensaje}
+                         </div>    
                         <div className='cont4'>
                             <input className='cont5'
                             type="text"
@@ -60,7 +61,7 @@ function CargarVehiculos(){
                             <Link to={`/Vehiculos/${usuario}`}> <button> Volver </button> </Link>
                         </div>
                     </form>
-                </div>
+                </main>
             </div>
         </>
     )

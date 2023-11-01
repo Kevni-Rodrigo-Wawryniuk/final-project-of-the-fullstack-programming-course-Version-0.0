@@ -1,4 +1,4 @@
-import './TipotDeProductos.css';
+import '../css/carga.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
@@ -30,13 +30,14 @@ function CargarTipoDeProductos() {
 
     return (
         <>
-            <div className='containtBodyTipoDeProductos1'>
-                <div className='mensaje'>
-                    <h3> Cargar de Tipo de Productos</h3>
-                    {mensaje}
-                </div>   
-                <div>
+            <div className='containeBody'>
+               
+                <main className='maincarga'>
                     <form onSubmit={CargarTipoProduto}>
+                        <div className='mensaje'>
+                            <h3> Cargar de Tipo de Productos</h3>
+                            {mensaje}
+                        </div>  
                         <div className='cont4'>
                         <input className='cont5'
                             type="text"
@@ -59,7 +60,7 @@ function CargarTipoDeProductos() {
                             <Link to={`/TipoDeProductos/${usuario}`}> <button> volver </button> </Link>
                         </div>
                     </form>
-                </div>
+                </main>
             </div>
         </>
     )
