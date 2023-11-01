@@ -113,6 +113,7 @@ function EditarEmpresas() {
                             value={nombre_empresa}
                             onChange={(event)=> setEmpresas(event.target.value)}
                             placeholder='Nuevo nombre de empresa'
+                            required
                         />
 
                         <select onChange={(event) => setModelo(event.target.value)}>
