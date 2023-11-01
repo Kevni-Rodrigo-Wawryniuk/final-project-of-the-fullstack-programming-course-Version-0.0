@@ -60,7 +60,7 @@ function EditarVehiculos() {
                             type="text"
                             value={nombre_vehiculos}
                             onChange={(event) => setVehiculos(event.target.value)}
-                            placeholder='Nombre del vehiculo'
+                            placeholder={nombre_A_Editar}
                         />
                         </div>
                         <div className='cont4'>
@@ -68,7 +68,7 @@ function EditarVehiculos() {
                             type="number"
                             value={codigo}
                             onChange={(event) => setCodigo(event.target.value)}
-                            placeholder='Codigo'
+                            placeholder={codigoAEditar}
                         />
                         </div>
                         <div className='cont4'>

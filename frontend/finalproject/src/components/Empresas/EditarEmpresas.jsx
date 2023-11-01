@@ -94,6 +94,7 @@ function EditarEmpresas() {
                             value={nombre_empresa}
                             onChange={(event)=> setEmpresas(event.target.value)}
                             placeholder={nombre_empresa_A_Editar}
+                            required
                         />
                         </div>
                         <div className='cont4'>
@@ -106,7 +107,7 @@ function EditarEmpresas() {
                         </div>
                         <div className='cont4'>
                         <select className='cont5' onChange={(event) => setDroide (event.target.value)}>
-                            <option value="" selected> Seleccione un Droide </option>
+                            <option value="" selected>{nombre_droide_A_Editar}</option>
                             {droide.map((d)=>(
                                 <option value={d.id_droides}>{d.nombre_droides}</option>
                             ))}
@@ -115,7 +116,7 @@ function EditarEmpresas() {
                         <div className='cont4'>
                         <select  className='cont5' onChange={(event) => setVehiculos(event.target.value)}>
                             
-                        <option value="" selected> Seleccione un Vehiculo </option>
+                        <option value="" selected>{nombre_vehiculo_A_Editar}</option>
                             {vehiculo.map((v)=>(
                                 <option value={v.id_vehiculos}>{v.nombre_vehiculos}</option>
                             ))}
@@ -124,7 +125,7 @@ function EditarEmpresas() {
                         <div className='cont4'>
                         <select className='cont5' onChange={(event) => setEstados(event.target.value)}>
                             
-                        <option value="" selected> Seleccione un Estado </option>
+                        <option value="" selected>{nombre_estado_A_Editar}</option>
                             {estado.map((e)=>(
                                 <option value={e.id_estados}>{e.nombre_estados}</option>
                             ))}
@@ -134,7 +135,7 @@ function EditarEmpresas() {
 
                         <select className='cont5' onChange={(event)=>setTipoProductos(event.target.value)}>
                             
-                        <option value="" selected> Seleccione un Tipo de Producto </option>
+                        <option value="" selected>{nombre_tipo_de_producto_A_Editar}</option>
                             {tipodeproducto.map((tp)=>(
                                 <option value={tp.id_tipo_productos}>{tp.nombre_tipo_productos}</option>
                             ))}

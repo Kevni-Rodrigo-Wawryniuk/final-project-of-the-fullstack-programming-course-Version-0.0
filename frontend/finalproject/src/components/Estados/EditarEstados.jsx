@@ -59,7 +59,7 @@ function EditarEstados() {
                             type="text"
                             value={nombre_estado}
                             onChange={(event) => setNombre_Estados(event.target.value)}
-                            placeholder='Nombre del Estado'
+                            placeholder={estadoNombre}
                         />
                         </div>
                         <div className='cont4'>
@@ -67,7 +67,7 @@ function EditarEstados() {
                             type="number"
                             value={codigo}
                             onChange={(event) => setCodigos(event.target.value)}
-                            placeholder='Codgigo'
+                            placeholder={estadoCodigo}
                         />
                         </div>
                         <div className='cont4'>
