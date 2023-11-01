@@ -11,6 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
+
+
 function Droides() {
 
     // ver los datos cargados
@@ -58,10 +60,9 @@ function Droides() {
 
     document.addEventListener('DOMContentLoaded', userVerification());
 
-
     return (
         <>
-            <div className='containtBody'>
+            <div className='containeBody'>
                 <div className='containeTitulo'>
                     <h2>Droides</h2>
                 </div>
@@ -82,6 +83,8 @@ function Droides() {
                 </div>
 
                 <div className='containeButtonCargar'>
+
+  
                     <Link to={`/AgregarDroides/${usuario}`}>
                     <Button variant="dark">Cargar Droide</Button>
                     </Link>

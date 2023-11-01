@@ -1,4 +1,4 @@
-import './Modelos.css';
+import '../css/pantallas.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -50,12 +50,12 @@ function EditarModelos() {
     const {usuario} = useParams();
     return (
         <>
-            <div className='containtBodyModelos'>
+            <div className='containtBody'>
                 <table>
                     <thead>
                         <tr>
-                            <td> modelo </td>
-                            <td> codigo </td>
+                            <td> Modelo </td>
+                            <td> Codigo </td>
                         </tr>
                     </thead>
                     <tbody>

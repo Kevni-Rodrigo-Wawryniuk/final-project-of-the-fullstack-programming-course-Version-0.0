@@ -1,4 +1,4 @@
-import './Vehiculos.css';
+import '../css/pantallas.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -48,7 +48,7 @@ function EditarVehiculos() {
 
     return (
         <>
-            <div className='containtBodyVehiculos'>
+            <div className='containtBody'>
                 <div>
                     <h3> Editar Vehiculo </h3>
                 </div>

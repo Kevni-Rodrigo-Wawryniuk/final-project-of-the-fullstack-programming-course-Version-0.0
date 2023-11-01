@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import './Estados.css';
+import '../css/pantallas.css';
 import * as API from '../Service/Service.js';
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -56,11 +56,11 @@ function Estados() {
 
     return (
         <>
-            <div className='containeBodyEstados'>
-                <div className='containeTituloEstados'>
+            <div className='containeBody'>
+                <div className='containeTitulo'>
                     <h2>Estados</h2>
                 </div>
-                <div className='containeButtonsEstados'>
+                <div className='containeButtons'>
                 <Navbar bg="dark" data-bs-theme="dark">
                     <Container>
                         <Navbar.Brand href={`/Home/${usuario}`}>Volver</Navbar.Brand>
@@ -75,13 +75,13 @@ function Estados() {
                 </Navbar>
                 </div>
 
-                <div className='containeButtonCargarEstados'>
+                <div className='containeButtonCargar'>
                     <Link to={`/AgregarEstados/${usuario}`}>
                     <Button variant="dark">Cargar Estado</Button>
                     </Link>
                 </div>
 
-                <div className='containeTablaEstados'>
+                <div className='containeTabla'>
                     <Table responsive="md">
                         
                         <thead>

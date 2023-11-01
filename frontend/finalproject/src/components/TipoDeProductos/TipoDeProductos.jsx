@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './TipotDeProductos.css';
+import '../css/pantallas.css';
 import { Link, useParams } from 'react-router-dom';
 import * as API from '../Service/Service.js';
 
@@ -57,11 +57,11 @@ function TipoDeProductos() {
     
     return (
         <>
-            <div className='containtBodyTipoDeProductos'>
-                <div className='containeTituloTipoDeProductos'>
+            <div className='containeBody'>
+                <div className='containeTitulo'>
                     <h2> Tipo de Productos </h2>
                 </div>
-                <div className='containeButtonsTipoDeProductos'>
+                <div className='containeButtons'>
 
                     <Navbar bg="dark" data-bs-theme="dark">
                         <Container>
@@ -77,13 +77,13 @@ function TipoDeProductos() {
                     </Navbar>
                 </div>
 
-                <div className='containeButtonCargarTipoDeProductos'>
+                <div className='containeButtonCargar'>
                     <Link to={`/AgregarTipoDeProductos/${usuario}`}>
                     <Button variant="dark">Cargar Tipo de productos</Button>
                     </Link>
                 </div>
 
-                <div className='containeTablaTipoDeProductos'>
+                <div className='containeTabla'>
                     <Table responsive="md">
                         <thead>
                             <tr>

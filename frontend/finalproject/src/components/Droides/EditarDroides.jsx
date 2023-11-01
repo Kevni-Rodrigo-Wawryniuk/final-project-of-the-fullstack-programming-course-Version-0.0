@@ -1,4 +1,4 @@
-import '../css/pantallas.css';
+import '../css/carga.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -53,41 +53,49 @@ function EditarDroides() {
     return (
         <>
             <div className='contaiteBody'>
-                <table>
-                    <thead>
-                        <tr>
-                            <td> nombre </td>
-                            <td> codigo </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{nombre_A_editar}</td>
-                            <td>{codigo_A_editar}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>
-                    {mensaje}
-                </div>
-                <form onSubmit={editarDroide}>
-                    <input
+
+                <main className='maincarga'>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Nombre </td>
+                                <td>Codigo </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{nombre_A_editar}</td>
+                                <td>{codigo_A_editar}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form onSubmit={editarDroide}>
+                    <div className='mensaje'>
+                        <h3> Editar Droides</h3>
+                        {mensaje}
+                    </div>
+                    <div className='cont4'>
+                    <input className='cont5'
                         type="text"
                         value={nombre_droides}
                         onChange={(event) => setDroide(event.target.value)}
                         placeholder='Nombre del droide'
                     />
-
-                    <input
+                    </div>
+                    <div className='cont4'>
+                    <input className='cont5'
                         type="text"
                         value={codigo}
                         onChange={(event) => setCodigo(event.target.value)}
                         placeholder='codigo'
                     />
-
+                    </div>
+                    <div className='cont4'>
                     <button type='submit'> Editar </button>
                     <Link to={`/Droides/${usuario}`} > <button> volver </button> </Link>
+                    </div>
                 </form>
+                </main>
             </div>
         </>
     );

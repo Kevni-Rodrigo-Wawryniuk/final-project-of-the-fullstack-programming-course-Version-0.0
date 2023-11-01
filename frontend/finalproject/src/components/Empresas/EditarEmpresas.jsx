@@ -1,4 +1,4 @@
-import './Empresa.css';
+import '../css/carga.css';
 import * as API from '../Service/Service.js';
 import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
@@ -81,82 +81,72 @@ function EditarEmpresas() {
 
     return (
         <>
-            <div className='containeBodyEmpresa'>
-                <h2>Empresa a Editar</h2>
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td> Empresa </td>
-                                <td> Modelo </td>
-                                <td> Droide </td>
-                                <td> Vehiculo </td>
-                                <td> Estado </td>
-                                <td> Tipo de producto </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{nombre_empresa_A_Editar}</td>
-                                <td>{nombre_modelo_A_Editar}</td>
-                                <td>{nombre_droide_A_Editar}</td>
-                                <td>{nombre_vehiculo_A_Editar}</td>
-                                <td>{nombre_estado_A_Editar}</td>
-                                <td>{nombre_tipo_de_producto_A_Editar}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div>{mensaje}</div>
+            <div className='contaiteBody'>
+                <main className='maincarga'>
                     <form onSubmit={editarempresas}>
-                        <input
+                        <div className='mensaje'>
+                            <h3> Editar Empresa</h3>
+                            {mensaje}
+                        </div>
+                        <div className='cont4'>
+                        <input className='cont5'
                             type="text"
                             value={nombre_empresa}
                             onChange={(event)=> setEmpresas(event.target.value)}
                             placeholder={nombre_empresa_A_Editar}
                         />
-
-                        <select onChange={(event) => setModelo(event.target.value)}>
+                        </div>
+                        <div className='cont4'>
+                        <select className='cont5' onChange={(event) => setModelo(event.target.value)}>
                             <option value="" selected> {nombre_modelo_A_Editar} </option>
                             {modelo.map((m)=>(
                                 <option value={m.id_modelos} required>{m.nombre_modelos}</option>
                             ))}
                         </select>
-
-                        <select onChange={(event) => setDroide (event.target.value)}>
+                        </div>
+                        <div className='cont4'>
+                        <select className='cont5' onChange={(event) => setDroide (event.target.value)}>
                             <option value="" selected> Seleccione un Droide </option>
                             {droide.map((d)=>(
                                 <option value={d.id_droides}>{d.nombre_droides}</option>
                             ))}
                         </select>
-
-                        <select onChange={(event) => setVehiculos(event.target.value)}>
+                        </div>
+                        <div className='cont4'>
+                        <select  className='cont5' onChange={(event) => setVehiculos(event.target.value)}>
                             
                         <option value="" selected> Seleccione un Vehiculo </option>
                             {vehiculo.map((v)=>(
                                 <option value={v.id_vehiculos}>{v.nombre_vehiculos}</option>
                             ))}
                         </select>
-
-                        <select onChange={(event) => setEstados(event.target.value)}>
+                        </div>
+                        <div className='cont4'>
+                        <select className='cont5' onChange={(event) => setEstados(event.target.value)}>
                             
                         <option value="" selected> Seleccione un Estado </option>
                             {estado.map((e)=>(
                                 <option value={e.id_estados}>{e.nombre_estados}</option>
                             ))}
                         </select>
+                        </div>
+                        <div className='cont4'>
 
-                        <select onChange={(event)=>setTipoProductos(event.target.value)}>
+                        <select className='cont5' onChange={(event)=>setTipoProductos(event.target.value)}>
                             
                         <option value="" selected> Seleccione un Tipo de Producto </option>
                             {tipodeproducto.map((tp)=>(
                                 <option value={tp.id_tipo_productos}>{tp.nombre_tipo_productos}</option>
                             ))}
                         </select>
+                        </div>
+                        <div className='cont4'>
 
                         <button type='submit'> Editar </button>
                         <Link to={`/Empresas/${usuario}`}> <button> volver </button></Link>
+                        </div>
                     </form>
-                </div>
+                </main>
             </div>
         </>
     )

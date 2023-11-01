@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import './Vehiculos.css';
+import '../css/pantallas.css';
 import { Link, useParams } from 'react-router-dom';
 import * as API from '../Service/Service.js';
 import { useEffect, useState } from 'react';
@@ -58,11 +58,11 @@ function Vehiculos() {
 
     return (
         <>
-            <div className='containtBodyVehiculos'>
-                <div className='containeTituloVehiculos'>
+            <div className='containeBody'>
+                <div className='containeTitulo'>
                     <h2>Vehiculos</h2>
                 </div>
-                <div className='containeButtonsVehiculos'>
+                <div className='containeButtons'>
 
                 <Navbar bg="dark" data-bs-theme="dark">
                     <Container>
@@ -78,13 +78,13 @@ function Vehiculos() {
                 </Navbar>
                 </div>
 
-                <div className='containeButtonCargarVehiculos'>
+                <div className='containeButtonCargar'>
                     <Link to={`/AgregarVehiculos/${usuario}`}>
                     <Button variant="dark">Cargar Vehiculos</Button>
                     </Link>
                 </div>
 
-                <div className='containeTablaVehiculos'>
+                <div className='containeTabla'>
                     <Table responsive="md">
                         <thead>
                             <tr>

@@ -1,4 +1,4 @@
-import './Estados.css';
+import '../css/pantallas.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -47,14 +47,14 @@ function EditarEstados() {
 
     return (
         <>
-            <div className='containeBodyEstados'>
+            <div className='containtBody'>
                 <h4> Estado a cambiar </h4>
                 <div>{mensaje}</div>
                 <table>
                     <thead>
                         <tr>
-                            <td> nombre </td>
-                            <td> codigo </td>
+                            <td> Nombre </td>
+                            <td> Codigo </td>
                         </tr>
                     </thead>
                     <tbody>

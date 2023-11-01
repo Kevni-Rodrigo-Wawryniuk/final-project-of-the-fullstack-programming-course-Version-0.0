@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './TipotDeProductos.css';
+import '../css/pantallas.css';
 import { useParams } from 'react-router';
 import * as API from '../Service/Service.js';
 import { Link } from 'react-router-dom';
@@ -51,7 +51,7 @@ function EditarTipoDeProductos() {
 
     return (
         <>
-            <div className='containtBodyTipoDeProductos'>
+            <div className='containtBody'>
                 <table>
                     <thead>
                         <tr>

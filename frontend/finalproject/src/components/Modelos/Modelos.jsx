@@ -1,4 +1,4 @@
-import './Modelos.css';
+import '../css/pantallas.css';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as API from '../Service/Service.js';
@@ -56,11 +56,11 @@ function Modelos() {
     document.addEventListener('DOMContentLoaded', userVerification());
     return (
         <>
-            <div className='containtBody'>
-                <div className='containeTituloModelos'>
+            <div className='containeBody'>
+                <div className='containeTitulo'>
                     <h2>Modelos</h2>
                 </div>
-                <div className='containeButtonsModelos'>
+                <div className='containeButtons'>
                 <Navbar bg="dark" data-bs-theme="dark">
                     <Container>
                         <Navbar.Brand href={`/Home/${usuario}`}>Volver</Navbar.Brand>
@@ -76,13 +76,13 @@ function Modelos() {
                 
                 </div>
 
-                <div className='containeButtonCargarModelos'>
+                <div className='containeButtonCargar'>
                     <Link to={`/AgregarModelos/${usuario}`}>
                     <Button variant="dark">Cargar Modelo</Button>
                     </Link>
                 </div>
 
-                <div className='containeTablaModelos'>
+                <div className='containeTabla'>
                     <Table responsive="md">
                         <thead>
                             <tr>
