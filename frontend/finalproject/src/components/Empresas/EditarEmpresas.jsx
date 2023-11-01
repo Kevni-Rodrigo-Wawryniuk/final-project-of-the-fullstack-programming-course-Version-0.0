@@ -81,7 +81,7 @@ function EditarEmpresas() {
 
     return (
         <>
-            <div className='contaiteBody'>
+            <div className='containeBody'>
                 <main className='maincarga'>
                     <form onSubmit={editarempresas}>
                         <div className='mensaje'>

@@ -1,4 +1,4 @@
-import '../css/pantallas.css';
+import '../css/carga.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -50,41 +50,35 @@ function EditarModelos() {
     const {usuario} = useParams();
     return (
         <>
-            <div className='containtBody'>
-                <table>
-                    <thead>
-                        <tr>
-                            <td> Modelo </td>
-                            <td> Codigo </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{nombre_A_editar}</td>
-                            <td>{codigo_A_editar}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>
-                    {mensaje}
+            <div className='containeBody'>
+                <main className='maincarga'>
                     <form onSubmit={editarModelo}>
-                        <input
+                        <div className='mensaje'>
+                            <h3> Editar Modelo</h3>
+                            {mensaje}
+                        </div>
+                        <div className='cont4'>
+                        <input className='cont5'
                             type="text"
                             value={nombre_modelos}
                             onChange={(event) => setmodelos(event.target.value)}
                             placeholder='Nombre del Modelo'
                         />
-
-                        <input
+                        </div>
+                        <div className='cont4'>
+                            <input className='cont5'
                             type="number"
                             value={codigo}
                             onChange={(event) => setcodigo(event.target.value)}
                             placeholder='Codigo'
                         />
-                        <button type='submit' > Editar </button>
-                        <Link to={`/Modelos/${usuario}`}> <button> volver </button> </Link>
+                        </div>
+                        <div className='cont4'>
+                            <button type='submit' > Editar </button>
+                            <Link to={`/Modelos/${usuario}`}> <button> volver </button> </Link>
+                        </div>
                     </form>
-                </div>
+                </main>
             </div>
         </>
     );

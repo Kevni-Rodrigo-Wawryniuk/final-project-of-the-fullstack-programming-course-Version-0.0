@@ -52,23 +52,9 @@ function EditarDroides() {
 
     return (
         <>
-            <div className='contaiteBody'>
+            <div className='containeBody'>
 
                 <main className='maincarga'>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Nombre </td>
-                                <td>Codigo </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{nombre_A_editar}</td>
-                                <td>{codigo_A_editar}</td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <form onSubmit={editarDroide}>
                     <div className='mensaje'>
                         <h3> Editar Droides</h3>
@@ -84,7 +70,7 @@ function EditarDroides() {
                     </div>
                     <div className='cont4'>
                     <input className='cont5'
-                        type="text"
+                        type="number"
                         value={codigo}
                         onChange={(event) => setCodigo(event.target.value)}
                         placeholder='codigo'

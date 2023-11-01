@@ -1,4 +1,4 @@
-import '../css/pantallas.css';
+import '../css/carga.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -47,45 +47,37 @@ function EditarEstados() {
 
     return (
         <>
-            <div className='containtBody'>
-                <h4> Estado a cambiar </h4>
-                <div>{mensaje}</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <td> Nombre </td>
-                            <td> Codigo </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{estadoNombre}</td>
-                            <td>{estadoCodigo}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div>
+            <div className='containeBody'>
+                <main className='maincarga'>            
                     <form onSubmit={editarEstado}>
-                        <input
+                        <div className='mensaje'>
+                            <h3> Editar Estado</h3>
+                            {mensaje}
+                        </div>
+                        <div className='cont4'>
+                        <input className='cont5'
                             type="text"
                             value={nombre_estado}
                             onChange={(event) => setNombre_Estados(event.target.value)}
                             placeholder='Nombre del Estado'
                         />
-                        <input
-                            type="text"
+                        </div>
+                        <div className='cont4'>
+                        <input className='cont5'
+                            type="number"
                             value={codigo}
                             onChange={(event) => setCodigos(event.target.value)}
                             placeholder='Codgigo'
                         />
-
-                        <button type='submit'> Guardar Edicion</button>
-                        <Link to={`/Estados/${usuario}`}>
-                            <button > Volver </button>
-                        </Link>
+                        </div>
+                        <div className='cont4'>
+                            <button type='submit'> Guardar Edicion</button>
+                            <Link to={`/Estados/${usuario}`}>
+                                <button > Volver </button>
+                            </Link>
+                        </div>
                     </form>
-                </div>
+                </main>
             </div>
         </>
     )

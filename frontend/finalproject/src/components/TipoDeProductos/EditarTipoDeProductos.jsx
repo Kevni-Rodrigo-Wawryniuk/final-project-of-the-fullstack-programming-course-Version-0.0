@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import '../css/pantallas.css';
+import '../css/carga.css';
 import { useParams } from 'react-router';
 import * as API from '../Service/Service.js';
 import { Link } from 'react-router-dom';
@@ -51,42 +51,36 @@ function EditarTipoDeProductos() {
 
     return (
         <>
-            <div className='containtBody'>
-                <table>
-                    <thead>
-                        <tr>
-                            <td> Tipo de Producto </td>
-                            <td> Codigo </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{nombre_A_editar}</td>
-                            <td>{codigo_A_editar}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>
-                    {mensaje}
-                </div>
-                <form onSubmit={editarTipoDeProducto}>
-                    <input
-                        type="text"
-                        value={nombre_tipo_productos}
-                        onChange={(event) => setTipoDeProductos(event.target.value)}
-                        placeholder='Nombre Del Producto'
-                    />
+            <div className='containeBody'>
+                <main className='maincarga'>
+                    <form onSubmit={editarTipoDeProducto}>
+                        <div className='mensaje'>
+                            <h3> Editar Tipo de producto</h3>
+                            {mensaje}
+                        </div>
+                        <div className='cont4'>
+                        <input className='cont5'
+                            type="text"
+                            value={nombre_tipo_productos}
+                            onChange={(event) => setTipoDeProductos(event.target.value)}
+                            placeholder='Nombre Del Producto'
+                        />
+                        </div>
+                        <div className='cont4'>
+                        <input className='cont5'
+                            type="text"
+                            value={codigo}
+                            onChange={(event) => setCodigo(event.target.value)}
+                            placeholder='Codigo'
+                        />
+                        </div>
+                        <div className='cont4'>
 
-                    <input
-                        type="text"
-                        value={codigo}
-                        onChange={(event) => setCodigo(event.target.value)}
-                        placeholder='Codigo'
-                    />
-
-                    <button type='submit'> Editar </button>
-                    <Link to={`/TipoDeProductos/${usuario}`}> <button> Volver </button> </Link>
-                </form>
+                        <button type='submit'> Editar </button>
+                        <Link to={`/TipoDeProductos/${usuario}`}> <button> Volver </button> </Link>
+                        </div>
+                    </form>
+                </main>
             </div>
         </>
     )
