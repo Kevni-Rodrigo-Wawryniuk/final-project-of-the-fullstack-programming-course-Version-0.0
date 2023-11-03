@@ -39,15 +39,23 @@ function EditarModelos() {
 
     const traerDatos = async () => {
         const datos = await API.getModelosByID(id_modelos);
-        setnombreAEditar(datos.nombre_modelos);
-        setcodigoAEditar(datos.codigo);
+        if (nombre_modelos === '') {
+            setnombreAEditar(datos.nombre_modelos);
+            let valorN = document.getElementById('nombreM').value = nombre_A_editar;
+            setmodelos(valorN);
+        }
+        if (codigo === '') {
+            setcodigoAEditar(datos.codigo);
+            let valorC = document.getElementById('codigoM').value = codigo_A_editar;
+            setcodigo(valorC);
+        }
     }
 
     useEffect(() => {
         traerDatos();
     });
 
-    const {usuario} = useParams();
+    const { usuario } = useParams();
     return (
         <>
             <div className='containeBody'>
@@ -58,20 +66,20 @@ function EditarModelos() {
                             {mensaje}
                         </div>
                         <div className='cont4'>
-                        <input className='cont5'
-                            type="text"
-                            value={nombre_modelos}
-                            onChange={(event) => setmodelos(event.target.value)}
-                            placeholder={nombre_A_editar}
-                        />
+                            <input className='cont5'
+                                type="text"
+                                id='nombreM'
+                                value={nombre_modelos}
+                                onChange={(event) => setmodelos(event.target.value)}                              
+                            />
                         </div>
                         <div className='cont4'>
                             <input className='cont5'
-                            type="number"
-                            value={codigo}
-                            onChange={(event) => setcodigo(event.target.value)}
-                            placeholder={codigo_A_editar}
-                        />
+                                type="number"
+                                id='codigoM'
+                                value={codigo}
+                                onChange={(event) => setcodigo(event.target.value)}
+                            />
                         </div>
                         <div className='cont4'>
                             <button type='submit' > Editar </button>

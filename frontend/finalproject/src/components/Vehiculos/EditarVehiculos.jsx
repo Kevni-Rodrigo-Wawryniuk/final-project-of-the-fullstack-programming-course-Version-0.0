@@ -10,27 +10,27 @@ function EditarVehiculos() {
     const [codigo, setCodigo] = useState('');
 
     const [mensaje, setmensaje] = useState('');
-    
+
     // lugar del dato a editar
     const { id_vehiculos } = useParams();
 
-    const editarVehiculo = async (event) =>{
+    const editarVehiculo = async (event) => {
         event.preventDefault();
 
-        const request = await API.putVehiculos(id_vehiculos, {nombre_vehiculos, codigo});
+        const request = await API.putVehiculos(id_vehiculos, { nombre_vehiculos, codigo });
 
-        if(request.status){
+        if (request.status) {
             setmensaje(request.mensaje);
             setTimeout(() => {
                 setmensaje('');
-                window.location.href =`/Vehiculos/${usuario}`;
+                window.location.href = `/Vehiculos/${usuario}`;
             }, 1000);
-        }else{
+        } else {
             setmensaje(request.mensaje);
         }
     }
 
-    const { usuario} = useParams();
+    const { usuario } = useParams();
 
     // dato a editar 
     const [nombre_A_Editar, setnombreAEditar] = useState('');
@@ -38,8 +38,16 @@ function EditarVehiculos() {
 
     const traerDatos = async () => {
         const datos = await API.getVehiculosByID(id_vehiculos);
-        setnombreAEditar(datos.nombre_vehiculos);
-        setcodigoAEditar(datos.codigo);
+        if (nombre_vehiculos === '') {
+            setnombreAEditar(datos.nombre_vehiculos);
+            let valorN = document.getElementById('nombreV').value = nombre_A_Editar;
+            setVehiculos(valorN);
+        }
+        if (codigo === '') {
+            setcodigoAEditar(datos.codigo);
+            let valorC = document.getElementById('codigoV').value = codigoAEditar;
+            setCodigo(valorC);
+        }
     }
 
     useEffect(() => {
@@ -56,20 +64,20 @@ function EditarVehiculos() {
                             {mensaje}
                         </div>
                         <div className='cont4'>
-                        <input className='cont5'
-                            type="text"
-                            value={nombre_vehiculos}
-                            onChange={(event) => setVehiculos(event.target.value)}
-                            placeholder={nombre_A_Editar}
-                        />
+                            <input className='cont5'
+                                type="text"
+                                id='nombreV'
+                                value={nombre_vehiculos}
+                                onChange={(event) => setVehiculos(event.target.value)}
+                            />
                         </div>
                         <div className='cont4'>
-                        <input className='cont5'
-                            type="number"
-                            value={codigo}
-                            onChange={(event) => setCodigo(event.target.value)}
-                            placeholder={codigoAEditar}
-                        />
+                            <input className='cont5'
+                                type="number"
+                                id='codigoV'
+                                value={codigo}
+                                onChange={(event) => setCodigo(event.target.value)}
+                            />
                         </div>
                         <div className='cont4'>
                             <button type='submit'> Editar </button>

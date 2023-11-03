@@ -1,7 +1,7 @@
 import '../css/carga.css';
 import * as API from '../Service/Service.js';
 import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function EditarEstados() {
 
@@ -16,15 +16,22 @@ function EditarEstados() {
 
     const { id_estados } = useParams();
 
-    useEffect(() => {
-        traerDatos();
-    });
-
     const traerDatos = async () => {
         const dato = await API.getEstadosByID(id_estados);
-        setEstadoNombre(dato.nombre_estados);
-        setEstadosCodigo(dato.codigo);
+
+        if(nombre_estado === ''){
+            setEstadoNombre(dato.nombre_estados);
+            let valorE = document.getElementById('nombreE').value = estadoNombre;
+            setNombre_Estados(valorE);
+        }
+        if(codigo === ''){
+            setEstadosCodigo(dato.codigo);
+            let valorC = document.getElementById('codigoE').value = estadoCodigo;
+            setCodigos(valorC);
+        }
     }
+
+    document.addEventListener('DOMContentLoaded', traerDatos());
 
     const editarEstado = async (event) => {
 
@@ -57,17 +64,17 @@ function EditarEstados() {
                         <div className='cont4'>
                         <input className='cont5'
                             type="text"
+                            id='nombreE'
                             value={nombre_estado}
                             onChange={(event) => setNombre_Estados(event.target.value)}
-                            placeholder={estadoNombre}
                         />
                         </div>
                         <div className='cont4'>
                         <input className='cont5'
                             type="number"
+                            id='codigoE'
                             value={codigo}
                             onChange={(event) => setCodigos(event.target.value)}
-                            placeholder={estadoCodigo}
                         />
                         </div>
                         <div className='cont4'>

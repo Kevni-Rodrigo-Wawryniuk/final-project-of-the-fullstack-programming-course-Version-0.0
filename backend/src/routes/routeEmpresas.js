@@ -32,7 +32,7 @@ routeEmpresas.get('/VerEmpresas/:idempresas', verificationToken, (req, res) => {
         if (error) {
             res.sendStatus(403);
         } else {
-            mysqlconnecction.query('select emp.idempresas, emp.nombre_empresa, model.nombre_modelos, droid.nombre_droides, vehi.nombre_vehiculos, esta.nombre_estados, tipoprod.nombre_tipo_productos from empresas as emp inner join modelos as model on model.id_modelos = emp.id_modelo inner join droides as droid on droid.id_droides = emp.id_droides inner join vehiculos as vehi on vehi.id_vehiculos = emp.id_vehiculos inner join estados as esta on esta.id_estados = emp.id_estado inner join tipo_productos as tipoprod on tipoprod.id_tipo_productos = emp.id_tipo_producto where emp.idempresas =?', [idempresas], (err, reg) => {
+            mysqlconnecction.query('select emp.idempresas, emp.nombre_empresa, model.nombre_modelos, model.id_modelos, droid.nombre_droides, droid.id_droides, vehi.nombre_vehiculos, vehi.id_vehiculos, esta.nombre_estados, esta.id_estados, tipoprod.nombre_tipo_productos, tipoprod.id_tipo_productos from empresas as emp right join modelos as model on model.id_modelos = emp.id_modelo right join droides as droid on droid.id_droides = emp.id_droides right join vehiculos as vehi on vehi.id_vehiculos = emp.id_vehiculos right join estados as esta on esta.id_estados = emp.id_estado right join tipo_productos as tipoprod on tipoprod.id_tipo_productos = emp.id_tipo_producto where emp.idempresas =?;', [idempresas], (err, reg) => {
 
                 if (err) {
                     console.log("Error en la base de datos al buscar todos los registros por los codigos --> ", err);

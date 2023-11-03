@@ -39,15 +39,23 @@ function EditarTipoDeProductos() {
 
     const traerDatos = async () => {
         const datos = await API.getTipoDeProductosByID(id_tipo_productos);
-        setnombreAEditar(datos.nombre_tipo_productos);
-        setcodigoAEditar(datos.codigo);
+        if (nombre_tipo_productos === '') {
+            setnombreAEditar(datos.nombre_tipo_productos);
+            let valorN = document.getElementById('nombreTP').value = nombre_A_editar;
+            setTipoDeProductos(valorN);
+        }
+        if (codigo === '') {
+            setcodigoAEditar(datos.codigo);
+            let valorC = document.getElementById('codigoTP').value = codigo_A_editar;
+            setCodigo(valorC);
+        }
     }
 
     useEffect(() => {
         traerDatos();
     });
 
-    const {usuario} = useParams();
+    const { usuario } = useParams();
 
     return (
         <>
@@ -59,25 +67,25 @@ function EditarTipoDeProductos() {
                             {mensaje}
                         </div>
                         <div className='cont4'>
-                        <input className='cont5'
-                            type="text"
-                            value={nombre_tipo_productos}
-                            onChange={(event) => setTipoDeProductos(event.target.value)}
-                            placeholder={nombre_A_editar}
-                        />
+                            <input className='cont5'
+                                type="text"
+                                id='nombreTP'
+                                value={nombre_tipo_productos}
+                                onChange={(event) => setTipoDeProductos(event.target.value)}
+                            />
                         </div>
                         <div className='cont4'>
-                        <input className='cont5'
-                            type="number"
-                            value={codigo}
-                            onChange={(event) => setCodigo(event.target.value)}
-                            placeholder={codigo_A_editar}
-                        />
+                            <input className='cont5'
+                                type="number"
+                                id='codigoTP'
+                                value={codigo}
+                                onChange={(event) => setCodigo(event.target.value)}
+                            />
                         </div>
                         <div className='cont4'>
 
-                        <button type='submit'> Editar </button>
-                        <Link to={`/TipoDeProductos/${usuario}`}> <button> Volver </button> </Link>
+                            <button type='submit'> Editar </button>
+                            <Link to={`/TipoDeProductos/${usuario}`}> <button> Volver </button> </Link>
                         </div>
                     </form>
                 </main>
