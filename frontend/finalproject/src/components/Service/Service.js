@@ -1,46 +1,46 @@
-const URL ='http://localhost:2000';
+const URL = 'http://localhost:2000';
 
 ///////////////////////// LOGEO Y REGISTRO DE USUARIO /////////////////////
-export async function getRegistros(){
-   
-    const Options={
-        method:'GET',
-        headers:{
+export async function getRegistros() {
+
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
         }
     }
 
     const request = await fetch(`${URL}/verRegistros`, Options);
- 
+
     const dato = await request.json();
- 
+
     return dato;
 }
 
-export async function logeo(date){
+export async function logeo(date) {
 
-    const options={
+    const options = {
 
-        method:'POST',
-        body:JSON.stringify(date),
-        headers:{
+        method: 'POST',
+        body: JSON.stringify(date),
+        headers: {
             'Content-Type': 'application/json',
         }
     }
 
-    const request = await fetch(`${URL}/login`,options);
+    const request = await fetch(`${URL}/login`, options);
 
     const dato = await request.json();
 
     return dato;
 }
 
-export async function registrar(date){
+export async function registrar(date) {
 
-    const Options={
-        method:'POST',
+    const Options = {
+        method: 'POST',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
         }
     }
@@ -52,28 +52,28 @@ export async function registrar(date){
     return dato;
 }
 
-export async function postCorreo(date){
-    
-    const Options={
-        method:'POST',
+export async function postCorreo(date) {
+
+    const Options = {
+        method: 'POST',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
         }
     }
 
-    const request = await fetch(`${URL}/traerCorreo`,Options);
+    const request = await fetch(`${URL}/traerCorreo`, Options);
 
     const dato = await request.json();
 
     return dato;
 }
 
-export async function postUsuario(usuario){
+export async function postUsuario(usuario) {
 
-    const Options={
-        method:'POST',
-        headers:{
+    const Options = {
+        method: 'POST',
+        headers: {
             'Content-Type': 'application/json',
         }
     }
@@ -85,16 +85,16 @@ export async function postUsuario(usuario){
     return dato;
 }
 
-export async function putContraseña(date, correo){
+export async function putContraseña(date, correo) {
 
-    const Options={
-        method:'PUT',
+    const Options = {
+        method: 'PUT',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
         }
     }
-    
+
     const request = await fetch(`${URL}/restaurar/${correo}`, Options);
 
     const dato = await request.json();
@@ -102,19 +102,19 @@ export async function putContraseña(date, correo){
     return dato;
 }
 
-export async function getUsuario(correo){
-   
-    const Options={
-        method:'GET',
-        headers:{
+export async function getUsuario(correo) {
+
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
         }
     }
 
     const request = await fetch(`${URL}/usuarios/${correo}`, Options);
- 
+
     const dato = await request.json();
- 
+
     return dato[0];
 }
 ///////////////////////////////////////////////////////////////////////////
@@ -124,15 +124,15 @@ export async function getUsuario(correo){
 
 ///////////////////////// DATOS DE LOS ESTADOS //////////
 // TRAER LOS DATOS DE LOS ESTADOS
-export async function getEstados(){
+export async function getEstados() {
 
     // verificar token
     const token = JSON.parse(localStorage.getItem('token'));
 
     // traer lod datos
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -142,35 +142,35 @@ export async function getEstados(){
     return dato;
 }
 // CARGAR DATOS DE LOS ESTADOS
-export async function postEstados(date){
+export async function postEstados(date) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'POST',
+    const Options = {
+        method: 'POST',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
     }
 
-    const request = await fetch(`${URL}/cargarEstado`,Options);
+    const request = await fetch(`${URL}/cargarEstado`, Options);
     const dato = await request.json();
     return dato;
 }
 // MODIFICAR LOS DATOS DE LOS ESTADOS
-export async function putEstados(id_estados, date){
-    
+export async function putEstados(id_estados, date) {
+
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'PUT',
+    const Options = {
+        method: 'PUT',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
     }
-    
+
     const request = await fetch(`${URL}/modificarEstado/${id_estados}`, Options);
 
     const dato = await request.json();
@@ -178,30 +178,46 @@ export async function putEstados(id_estados, date){
     return dato;
 }
 // LLEVAR DATOS POR ID
-export async function getEstadosByID(id_estados){
-   
+export async function getEstadosByID(id_estados) {
+
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
-            'Authorization':`Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
         }
     }
 
     const request = await fetch(`${URL}/verEstado/${id_estados}`, Options);
- 
+
     const dato = await request.json();
- 
+
     return dato[0];
 }
 // BORRAR LOS DATOS POR ID
-export async function deleteEstados(id_estados){
+export async function postEstadosPermisoByID(id_estados){
+    const token = JSON.parse(localStorage.getItem('token'));
+    const Options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    }
+
+    const request = await fetch(`${URL}/permisoEstado/${id_estados}`, Options);
+
+    const dato = await request.json();
+
+    return dato;
+}
+export async function deleteEstados(id_estados) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'DELETE',
-        headers:{
+    const Options = {
+        method: 'DELETE',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -219,31 +235,31 @@ export async function deleteEstados(id_estados){
 
 //////////////////////// DATOS DE LOS DROIDES //////////
 // TRAER LOS DATOS DE LOS DROIDES
-export async function getDroides(){
+export async function getDroides() {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
     }
 
     const request = await fetch(`${URL}/verDriodes`, Options);
-    
+
     const dato = await request.json();
 
-    return dato;    
+    return dato;
 }
 // CARGAR DATOS DE LOS DROIDES
-export async function postDroides(date){
+export async function postDroides(date) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options ={
-        method:'POST',
+    const Options = {
+        method: 'POST',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -254,12 +270,12 @@ export async function postDroides(date){
     return dato;
 }
 // BORRAR LOS DATOS POR ID
-export async function deleteDroides(id_Droides){
+export async function deleteDroides(id_Droides) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'DELETE',
-        headers:{
+    const Options = {
+        method: 'DELETE',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -270,19 +286,35 @@ export async function deleteDroides(id_Droides){
 
     return dato[0];
 }
-// MODIFICAR DATOS POR ID
-export async function putDroides(id_Droide, date){
-    
+export async function postDroidesAndEmpresasByID(id_droide) {
+
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'PUT',
-        body: JSON.stringify(date),
-        headers:{
+    const Options = {
+        method: 'POST',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
     }
-    
+    const request = await fetch(`${URL}/review/${id_droide}`, Options);
+
+    const dato = await request.json();
+
+    return dato;
+}
+// MODIFICAR DATOS POR ID
+export async function putDroides(id_Droide, date) {
+
+    const token = JSON.parse(localStorage.getItem('token'));
+    const Options = {
+        method: 'PUT',
+        body: JSON.stringify(date),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    }
+
     const request = await fetch(`${URL}/modificarDroides/${id_Droide}`, Options);
 
     const dato = await request.json();
@@ -290,21 +322,21 @@ export async function putDroides(id_Droide, date){
     return dato;
 }
 // LLEVAR DATOS POR ID
-export async function getDroidesByID(id_droide){
-   
+export async function getDroidesByID(id_droide) {
+
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
     }
 
     const request = await fetch(`${URL}/verDriode/${id_droide}`, Options);
- 
+
     const dato = await request.json();
- 
+
     return dato[0];
 }
 ////////////////////////////////////////////////////////
@@ -313,12 +345,12 @@ export async function getDroidesByID(id_droide){
 
 
 /////////////////////////// DATOS DE LOS VEHICULOS //////////
-export async function getVehiculos(){
+export async function getVehiculos() {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -328,13 +360,13 @@ export async function getVehiculos(){
     return dato;
 }
 // CARGAR DATOS DE LOS VEHICULOS
-export async function postVehiculos(date){
+export async function postVehiculos(date) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'POST',
-        body:JSON.stringify(date),
-        headers:{
+    const Options = {
+        method: 'POST',
+        body: JSON.stringify(date),
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -344,29 +376,29 @@ export async function postVehiculos(date){
     return dato;
 }
 // MODIFICAR DATOS POR ID
-export async function putVehiculos(id_Vehiculos, date){
+export async function putVehiculos(id_Vehiculos, date) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'PUT',
+    const Options = {
+        method: 'PUT',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
     }
 
-    const request = await fetch(`${URL}/modificarVehiculos/${id_Vehiculos}`,Options);
+    const request = await fetch(`${URL}/modificarVehiculos/${id_Vehiculos}`, Options);
     const dato = await request.json();
     return dato;
 }
 // LLEVAR DATOS POR ID
-export async function getVehiculosByID(id_vehiculos){
-   
+export async function getVehiculosByID(id_vehiculos) {
+
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -377,12 +409,12 @@ export async function getVehiculosByID(id_vehiculos){
     return dato[0];
 }
 // BORRAR DATOS POR ID
-export async function deleteVehiculos(id_vehiculo){
+export async function deleteVehiculos(id_vehiculo) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options ={
-        method:'DELETE',
-        headers:{
+    const Options = {
+        method: 'DELETE',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -392,18 +424,32 @@ export async function deleteVehiculos(id_vehiculo){
     const dato = await request.json();
     return dato;
 }
+export async function postvehiculosPermisoByID(id_vehiculo) {
+
+    const token = JSON.parse(localStorage.getItem('token'));
+    const Options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    }
+    const request = await fetch(`${URL}/permisoVehiculos/${id_vehiculo}`, Options);
+    const dato = await request.json();
+    return dato;
+}
 /////////////////////////////////////////////////////////////
 
 
 
 
 ////////////////////////// DATOS TIPO DE PRODUCTOS ////////
-export async function getTipoDeProductos(){
+export async function getTipoDeProductos() {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -413,13 +459,13 @@ export async function getTipoDeProductos(){
     return dato;
 }
 // CARGAT TIPO DE PRODUCTO
-export async function postTipoDeProductos(date){
+export async function postTipoDeProductos(date) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'POST',
-        body:JSON.stringify(date),
-        headers:{
+    const Options = {
+        method: 'POST',
+        body: JSON.stringify(date),
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -430,13 +476,13 @@ export async function postTipoDeProductos(date){
     return dato;
 }
 // MODIFICAR DATOS
-export async function putTipoDeProductos(id_tipo_productos, date){
-  
+export async function putTipoDeProductos(id_tipo_productos, date) {
+
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'PUT',
+    const Options = {
+        method: 'PUT',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -447,12 +493,12 @@ export async function putTipoDeProductos(id_tipo_productos, date){
     return dato;
 }
 // TRAER DATOS POR ID
-export async function getTipoDeProductosByID(id_tipo_productos){
+export async function getTipoDeProductosByID(id_tipo_productos) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-     const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -462,12 +508,25 @@ export async function getTipoDeProductosByID(id_tipo_productos){
     return dato[0];
 }
 // BORRAR DATOS POR ID
-export async function deleteTipoDeProductos(id_tipo_productos){
+export async function postTipoDeProductosPermisoByID(id_tipo_productos) {
+    const token = JSON.parse(localStorage.getItem('token'));
+    const Options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    }
+    const request = await fetch(`${URL}/permisoTP/${id_tipo_productos}`, Options);
+    const dato = await request.json();
+    return dato;
+}
+export async function deleteTipoDeProductos(id_tipo_productos) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-     const Options={
-        method:'DELETE',
-        headers:{
+    const Options = {
+        method: 'DELETE',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -482,12 +541,12 @@ export async function deleteTipoDeProductos(id_tipo_productos){
 
 
 ///////////////////////// DATOS DE MODELOS /////////////
-export async function getModelos(){
+export async function getModelos() {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -498,45 +557,45 @@ export async function getModelos(){
     return dato;
 }
 // CARGAR MODELO
-export async function postModelos(date){
+export async function postModelos(date) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'POST',
-        body:JSON.stringify(date),
-        headers:{
+    const Options = {
+        method: 'POST',
+        body: JSON.stringify(date),
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
     }
 
-    const request = await fetch(`${URL}/cargarModelos`,Options);
+    const request = await fetch(`${URL}/cargarModelos`, Options);
     const dato = await request.json();
     return dato;
 }
 // MODIFICAR DATOS
-export async function putModelos(date, id_modelos){
-    
+export async function putModelos(date, id_modelos) {
+
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'PUT',
+    const Options = {
+        method: 'PUT',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
-    } 
+    }
     const request = await fetch(`${URL}/modificarModelo/${id_modelos}`, Options);
     const dato = await request.json();
     return dato;
 }
 // TRAER MODELOS POR ID
-export async function getModelosByID(id_modelos){
+export async function getModelosByID(id_modelos) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -546,12 +605,25 @@ export async function getModelosByID(id_modelos){
     return dato[0];
 }
 // BORRAR MODELOS
-export async function deleteModelos(id_modelos){
+export async function postModelospermisoByID(id_modelos){
+    const token = JSON.parse(localStorage.getItem('token'));
+    const Options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    }
+    const request = await fetch(`${URL}/permisoModelo/${id_modelos}`, Options);
+    const dato = await request.json();
+    return dato;
+}
+export async function deleteModelos(id_modelos) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'DELETE',
-        headers:{
+    const Options = {
+        method: 'DELETE',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -568,46 +640,46 @@ export async function deleteModelos(id_modelos){
 ///////////////////////  DATOS DE LAS EMPRESAS ////////
 
 // TRAER Y MOSTRAR LOS DATOS
-export async function getEmpreas(){
-    
+export async function getEmpreas() {
+
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
     }
 
     const request = await fetch(`${URL}/verTodasLasEmpresas`, Options);
-    
+
     const dato = await request.json();
 
-    return dato;    
+    return dato;
 }
 // TRAER LOS DATOS POR ID
-export async function getEmpresasByID(id_Empresa){
+export async function getEmpresasByID(id_Empresa) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'GET',
-        headers:{
+    const Options = {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
     }
     const request = await fetch(`${URL}/VerEmpresas/${id_Empresa}`, Options);
     const dato = await request.json();
-    return dato [0];
+    return dato[0];
 }
 // MODIFICAR LOS DATOS
-export async function putEmpresas(id_Empresa, modificar){
+export async function putEmpresas(id_Empresa, modificar) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'PUT',
+    const Options = {
+        method: 'PUT',
         body: JSON.stringify(modificar),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -620,13 +692,13 @@ export async function putEmpresas(id_Empresa, modificar){
     return dato;
 }
 // CARGAR DATOS
-export async function postEmpresas(date){
+export async function postEmpresas(date) {
 
     const token = JSON.parse(localStorage.getItem('token'));
-    const Options={
-        method:'POST',
+    const Options = {
+        method: 'POST',
         body: JSON.stringify(date),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         }
@@ -639,11 +711,11 @@ export async function postEmpresas(date){
     return dato;
 }
 // BORRAR DATOS
-export async function deleteEmpresas(idempresa){
+export async function deleteEmpresas(idempresa) {
 
     const token = JSON.parse(localStorage.getItem('token'));
     const Options = {
-        method:'DELETE',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,

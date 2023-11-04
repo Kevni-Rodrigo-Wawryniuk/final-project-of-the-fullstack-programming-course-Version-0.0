@@ -120,6 +120,41 @@ routeTipo_producto.put('/modificarTipoProducto/:id_tipo_productos', verification
     }
 })
 
+// permiso para borrar dato
+routeTipo_producto.post('/permisoTP/:id_tipo_productos', verificationToken, (req, res) => {
+    const { id_tipo_productos } = req.params;
+
+    if (!id_tipo_productos) {
+        res.json({
+            status: false,
+            mensaje: 'falta un id'
+        })
+    } else {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('select emp.id_tipo_producto, tp.id_tipo_productos from tipo_productos as tp left join empresas as emp on tp.id_tipo_productos = emp.id_tipo_producto where emp.id_tipo_producto =?', [id_tipo_productos], (err, reg) => {
+                    if (err) {
+                        console.log('error en la base de datos --->', err);
+                    } else {
+                        if (reg.length > 0) {
+                            res.json({
+                                status: false,
+                                mensaje: 'el tipo de producto no se puede borrar '
+                            })
+                        } else {
+                            res.json({
+                                status: true,
+                                mensaje: 'el tipo de producto se puede borrar'
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
+})
 // borrar modelos
 routeTipo_producto.delete('/BorrarTipoProducto/:id_tipo_productos', verificationToken, bodyparser.json(), (req, res) => {
 
@@ -136,36 +171,21 @@ routeTipo_producto.delete('/BorrarTipoProducto/:id_tipo_productos', verification
                 res.sendStatus(403);
             } else {
 
-                mysqlconnecction.query('select * from tipo_productos as tp left join empresas as emp on tp.id_tipo_productos = emp.id_tipo_producto where emp.id_tipo_producto =?', [id_tipo_productos], (err, reg) => {
-
+                mysqlconnecction.query('delete from tipo_productos where id_tipo_productos =?', [id_tipo_productos], (err, reg) => {
                     if (err) {
-                        console.log('error en la base de datos ---> ', err);
+                        console.log("Error en la base de datos al borrar un tipo de producto --> ", err);
                     } else {
-                        if (reg.length > 0) {
-                            res.json({
-                                status: false,
-                                mensaje: ' EL producto esta en uso'
-                            });
-                        } else {
-
-                            mysqlconnecction.query('delete from tipo_productos where id_tipo_productos =?', [id_tipo_productos], (err, reg) => {
-                                if (err) {
-                                    console.log("Error en la base de datos al borrar un tipo de producto --> ", err);
-                                } else {
-                                    res.json({
-                                        status: true,
-                                        mensaje: "El tipo de producto se borro correctamente"
-                                    })
-                                }
-                            })
-                        }
+                        res.json({
+                            status: true,
+                            mensaje: "El tipo de producto se borro correctamente"
+                        })
                     }
                 })
-
             }
         })
     }
 })
+
 
 // verificar el token del usuario
 function verificationToken(req, res, next) {
@@ -184,4 +204,5 @@ function verificationToken(req, res, next) {
         res.send('Debe contener un token');
     }
 }
+
 module.exports = routeTipo_producto;

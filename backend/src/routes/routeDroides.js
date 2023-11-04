@@ -151,6 +151,39 @@ routeDroides.delete('/BorrarDroide/:id_droides', verificationToken, (req, res) =
             if (error) {
                 res.sendStatus(403);
             } else {
+
+                mysqlconnecction.query('delete from droides where id_droides =?', [id_droides], (err, reg) => {
+
+                    if (err) {
+                        console.log("Error en la base de datos al borrar el droide --> ", err);
+                    } else {
+
+                        res.json({
+                            status: true,
+                            mensaje: "El registro se borro correctamente"
+                        })
+                    }
+                })
+            }
+
+        })
+    }
+})
+
+// buscar datos a borrar 
+routeDroides.post('/review/:id_droides', verificationToken, (req, res) => {
+    const { id_droides } = req.params;
+
+    if (!id_droides) {
+        res.json({
+            status: false,
+            mensaje: 'El dato no contiene id '
+        })
+    } else {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
                 mysqlconnecction.query('select * from droides as droid left join empresas as emp on droid.id_droides = emp.id_droides where emp.id_droides =?', [id_droides], (err, reg) => {
                     if (err) {
                         console.log('error en la base de datos ----> ', err);
@@ -161,18 +194,9 @@ routeDroides.delete('/BorrarDroide/:id_droides', verificationToken, (req, res) =
                                 mensaje: "El droide se esta usando en la tabla empresa"
                             })
                         } else {
-
-                            mysqlconnecction.query('delete from droides where id_droides =?', [id_droides], (err, reg) => {
-
-                                if (err) {
-                                    console.log("Error en la base de datos al borrar el droide --> ", err);
-                                } else {
-
-                                    res.json({
-                                        status: true,
-                                        mensaje: "El registro se borro correctamente"
-                                    })
-                                }
+                            res.json({
+                                status: true,
+                                mensaje: 'El droide se puede borrar'
                             })
                         }
                     }

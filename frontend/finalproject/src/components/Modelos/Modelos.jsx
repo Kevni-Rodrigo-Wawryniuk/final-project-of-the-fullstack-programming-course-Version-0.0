@@ -16,6 +16,9 @@ function Modelos() {
     // ver los modelos
     const [modelos, setModelos] = useState([]);
 
+    // mensaje de permiso
+    const [mensaje, setmensaje] = useState('');
+
     useEffect(() => {
         API.getModelos().then(setModelos);
     }, []);
@@ -26,9 +29,16 @@ function Modelos() {
         event.preventDefault();
 
         // eslint-disable-next-line no-unused-vars
-        const request = await API.deleteModelos(id_modelos);
+        const request = await API.postModelospermisoByID(id_modelos);
 
-        setInterval("location.reload()", 1000);
+        if(request.status){
+            setmensaje(request.mensaje);
+            const borrar = await API.deleteModelos(id_modelos);
+            setInterval("location.reload()", 1000);
+        }else{
+            setmensaje(request.mensaje);
+        }
+        
     }
     // verificar usuarios
     const {usuario} = useParams();
@@ -80,6 +90,10 @@ function Modelos() {
                     <Link to={`/AgregarModelos/${usuario}`}>
                     <Button variant="dark">Cargar Modelo</Button>
                     </Link>
+                </div>
+
+                <div className='mensaje'>
+                    {mensaje}
                 </div>
 
                 <div className='containeTabla'>

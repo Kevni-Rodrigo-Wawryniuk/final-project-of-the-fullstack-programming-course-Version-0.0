@@ -22,16 +22,28 @@ function Droides() {
         API.getDroides().then(setDroides)
     }, []);
 
+    // mensajes de advertencia
+    const [mensaje, setmensaje] = useState('');
+
     // borrar los datos
     const borrarDroide = async (event, id_Droide) => {
 
         event.preventDefault();
 
-        // eslint-disable-next-line no-unused-vars
-        const request = await API.deleteDroides(id_Droide);
+        const request = await API.postDroidesAndEmpresasByID(id_Droide);
 
-        setInterval("location.reload()",1000);
+        console.log('el dato se puede borrar -- ',mensaje);
 
+        if(request.status){
+            setmensaje(request.mensaje);
+            const borrer = await API.deleteDroides(id_Droide);
+            setInterval("location.reload()",1000);
+            alert(mensaje);
+
+        }else{
+            setmensaje(request.mensaje);     
+            alert(mensaje);
+        }
     }
     // verificar usuarios
 
@@ -83,8 +95,6 @@ function Droides() {
                 </div>
 
                 <div className='containeButtonCargar'>
-
-  
                     <Link to={`/AgregarDroides/${usuario}`}>
                     <Button variant="dark">Cargar Droide</Button>
                     </Link>

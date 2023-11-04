@@ -16,6 +16,9 @@ function Estados() {
     // Esto es para mostrar los datos en pantalla
     const [estados, setEstados] = useState([]);
 
+    // mensaje de permiso 
+    const [mensaje, setmensaje] = useState('');
+
     useEffect(() => {
         API.getEstados().then(setEstados)
     }, []);
@@ -26,9 +29,17 @@ function Estados() {
         event.preventDefault();
 
         // eslint-disable-next-line no-unused-vars
-        const request = await API.deleteEstados(id_estados);
+        const request = await API.postEstadosPermisoByID(id_estados);
 
-        setInterval("location.reload()",1000);
+        if(request.status){
+            setmensaje(request.mensaje);
+            
+            const borrar = await API.deleteEstados(id_estados);
+
+            setInterval("location.reload()",1000);
+        }else{
+            setmensaje(request.mensaje);
+        }
     }
 
     // verificar usuarios
@@ -79,6 +90,10 @@ function Estados() {
                     <Link to={`/AgregarEstados/${usuario}`}>
                     <Button variant="dark">Cargar Estado</Button>
                     </Link>
+                </div>
+
+                <div className='mensaje'>
+                    {mensaje}
                 </div>
 
                 <div className='containeTabla'>

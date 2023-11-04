@@ -133,6 +133,42 @@ routeEstado.put('/modificarEstado/:id_estados', verificationToken, bodyparser.js
     }
 })
 
+// permiso para borrar archivo
+routeEstado.post('/permisoEstado/:id_estados', verificationToken, bodyparser.json(), (req, res) => {
+
+    const { id_estados } = req.params;
+
+    if (!id_estados) {
+        res.json({
+            status: false,
+            mensaje: 'falta un id'
+        })
+    } else {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('select emp.id_estado, esta.id_estados from estados as esta left join empresas as emp on esta.id_estados = emp.id_estado where emp.id_estado =?', [id_estados], (err, reg) => {
+                    if (err) {
+                        console.log('error en la base de datos ---->', err);
+                    } else {
+                        if (reg.length > 0) {
+                            res.json({
+                                status: false,
+                                mensaje: 'El estado esta usando en la tabla empresa'
+                            })
+                        } else {
+                            res.json({
+                                status: true,
+                                mensaje: 'El estado se puede borrar'
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
+})
 // Borrar datos
 routeEstado.delete('/borrarEstado/:id_estados', verificationToken, (req, res) => {
 
@@ -144,43 +180,26 @@ routeEstado.delete('/borrarEstado/:id_estados', verificationToken, (req, res) =>
             mensaje: ' el id es un campo obligatorio'
         })
     } else {
-
         jwt.verify(req.token, 'Pase', (error, valido) => {
             if (error) {
                 res.sendStatus(403);
             } else {
+                mysqlconnecction.query('delete from estados where id_estados =?', [id_estados], (err, registro) => {
 
-                mysqlconnecction.query('select * from estados as estad left join empresas as emp on estad.id_estados = emp.id_estado where emp.id_estado =?', [id_estados], (err, reg)=>{
+                    if (err) {
 
-                    if(err){
-                        console.log('Error en la base de datos ---> ', err);
-                    }else{
-                        if(reg.length > 0){
-                            res.json({
-                                status:false,
-                                mensaje:' El estado esta en uso'
-                            })
-                        }else{
-                            mysqlconnecction.query('delete from estados where id_estados =?', [id_estados], (err, registro) => {
+                        console.log("Error en la base de datos al borrar un estado --> ", err);
 
-                                if (err) {
-            
-                                    console.log("Error en la base de datos al borrar un estado --> ", err);
-            
-                                } else {
-                                    res.json({
-                                        status: true,
-                                        mensaje: "El registro se borro correctamente"
-                                    })
-                                }
-                            })
-                        }
+                    } else {
+                        res.json({
+                            status: true,
+                            mensaje: "El registro se borro correctamente"
+                        })
                     }
                 })
             }
         })
     }
-
 })
 
 // verificar el token del usuario

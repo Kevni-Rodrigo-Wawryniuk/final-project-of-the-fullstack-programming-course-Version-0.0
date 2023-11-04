@@ -15,6 +15,9 @@ function TipoDeProductos() {
 
     const [tipoProductos, setTipoDeProducto] = useState([]);
 
+    // mensaje de permiso
+    const [mensaje, setmensaje] = useState('');
+
     useEffect(() => {
         API.getTipoDeProductos().then(setTipoDeProducto);
     }, []);
@@ -25,13 +28,20 @@ function TipoDeProductos() {
         event.preventDefault();
 
         // eslint-disable-next-line no-unused-vars
-        const request = await API.deleteTipoDeProductos(id_tipo_productos);
+        const request = await API.postTipoDeProductosPermisoByID(id_tipo_productos);
 
-        setInterval("location.reload()", 1000);
+        if (request.status) {
+            setmensaje(request.mensaje);
+            const borrar = await API.deleteTipoDeProductos(id_tipo_productos);
+
+            setInterval("location.reload()", 1000);
+        }else{
+            setmensaje(request.mensaje);
+        }
     }
     // verificar usuarios
 
-    const {usuario} = useParams();
+    const { usuario } = useParams();
     const userVerification = async () => {
 
         let token;
@@ -45,16 +55,16 @@ function TipoDeProductos() {
 
         } else {
             window.location.href = '/';
-            
+
             localStorage.removeItem('correo');
             localStorage.removeItem('token');
-            
+
             console.log('El usuario no esta logeado');
         }
     }
 
     document.addEventListener('DOMContentLoaded', userVerification());
-    
+
     return (
         <>
             <div className='containeBody'>
@@ -79,15 +89,19 @@ function TipoDeProductos() {
 
                 <div className='containeButtonCargar'>
                     <Link to={`/AgregarTipoDeProductos/${usuario}`}>
-                    <Button variant="dark">Cargar Tipo de productos</Button>
+                        <Button variant="dark">Cargar Tipo de productos</Button>
                     </Link>
+                </div>
+
+                <div className='mensaje'>
+                    {mensaje}
                 </div>
 
                 <div className='containeTabla'>
                     <Table responsive="md">
                         <thead>
                             <tr>
-                                
+
                                 <th>nombre</th>
                                 <th>codigo</th>
                                 <th>Configuraciones</th>
@@ -97,7 +111,7 @@ function TipoDeProductos() {
                             {tipoProductos.map((tipoProd) => (
                                 // eslint-disable-next-line react/jsx-key
                                 <tr>
-                                    
+
                                     <td>{tipoProd.nombre_tipo_productos}</td>
                                     <td>{tipoProd.codigo}</td>
                                     <td>
@@ -107,7 +121,7 @@ function TipoDeProductos() {
                                 </tr>
                             ))}
                         </tbody>
-                        
+
                     </Table>
                 </div>
             </div>

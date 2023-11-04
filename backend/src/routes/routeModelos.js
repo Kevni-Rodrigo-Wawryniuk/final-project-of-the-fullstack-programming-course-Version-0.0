@@ -123,6 +123,42 @@ routeModelos.put('/modificarModelo/:id_modelos', verificationToken, bodyparser.j
     }
 })
 
+// permiso para borrar
+routeModelos.post('/permisoModelo/:id_modelos', verificationToken, (req, res) => {
+
+    const { id_modelos } = req.params;
+
+    if (!id_modelos) {
+        res.json({
+            status: false,
+            mensaje: 'falta un id'
+        })
+    } else {
+        jwt.verify(req.token, 'Pase', (error, valido) => {
+            if (error) {
+                res.sendStatus(403);
+            } else {
+                mysqlconnecction.query('select emp.id_modelo, models.id_modelos from modelos as models left join empresas as emp on models.id_modelos = emp.id_modelo where emp.id_modelo =?', [id_modelos], (err, reg) => {
+                    if (err) {
+                        console.log('error en la base de datos --->', err);
+                    } else {
+                        if (reg.length > 0) {
+                            res.json({
+                                status: false,
+                                mensaje: "El modelo se esta usando en la tabla empresas"
+                            })
+                        } else {
+                            res.json({
+                                status: true,
+                                mensaje: 'El modelo se puede borrar'
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
+})
 // borrar modelos
 routeModelos.delete('/BorrarModelo/:id_modelos', verificationToken, bodyparser.json(), (req, res) => {
 
@@ -139,36 +175,22 @@ routeModelos.delete('/BorrarModelo/:id_modelos', verificationToken, bodyparser.j
             if (error) {
                 res.sendStatus(403);
             } else {
-
-                mysqlconnecction.query('select * from modelos as model left join empresas as emp on model.id_modelos = emp.id_modelo where emp.id_modelo =?', [id_modelos], (err, reg) => {
-
+                mysqlconnecction.query('delete from modelos where id_modelos =?', [id_modelos], (err, reg) => {
                     if (err) {
-                        console.log('Error en la base de datos --->', err);
+                        console.log("Error en la base de datos al borrar un modelo --> ", err);
                     } else {
-                        if (reg.length > 0) {
-                            res.json({
-                                status: false,
-                                mensaje: ' El modelo esta en uso '
-                            });
-                        } else {
-                            -  mysqlconnecction.query('delete from modelos where id_modelos =?', [id_modelos], (err, reg) => {
-                                if (err) {
-                                    console.log("Error en la base de datos al borrar un modelo --> ", err);
-                                } else {
-                                    res.json({
-                                        status: true,
-                                        mensaje: "El modelo se borro correctamente"
-                                    })
-                                }
-                            })
-                        }
+                        res.json({
+                            status: true,
+                            mensaje: "El modelo se borro correctamente"
+                        })
                     }
                 })
-
             }
         })
     }
 })
+
+
 
 // verificar el token del usuario
 function verificationToken(req, res, next) {

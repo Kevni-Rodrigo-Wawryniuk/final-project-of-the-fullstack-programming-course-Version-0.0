@@ -16,6 +16,9 @@ function Vehiculos() {
     // ver datos de los vehiculos
     const [vehiculo, setVehiculos] = useState([]);
 
+    // mensaje de permisos
+    const [mensaje, setmensaje] = useState('');
+
     useEffect(() => {
         API.getVehiculos().then(setVehiculos);
     }, []);
@@ -25,13 +28,24 @@ function Vehiculos() {
 
         event.preventDefault();
 
-        const request = await API.deleteVehiculos(id_Vehiculo);
+        const request = await API.postvehiculosPermisoByID(id_Vehiculo);
 
-        setInterval("location.reload()",1000);
+        console.log('el dato se puede borrar -- ',mensaje);
+
+        if (request.status) {
+            setmensaje(request.mensaje);
+            
+            const re = await API.deleteVehiculos(id_Vehiculo);
+
+            setInterval("location.reload()", 1000);
+        } else {
+            setmensaje(request.mensaje);
+            
+        }
     }
     // verificar usuarios
 
-    const {usuario} = useParams();
+    const { usuario } = useParams();
     const userVerification = async () => {
 
         let token;
@@ -45,10 +59,10 @@ function Vehiculos() {
 
         } else {
             window.location.href = '/';
-            
+
             localStorage.removeItem('correo');
             localStorage.removeItem('token');
-            
+
             console.log('El usuario no esta logeado');
         }
     }
@@ -64,24 +78,28 @@ function Vehiculos() {
                 </div>
                 <div className='containeButtons'>
 
-                <Navbar bg="dark" data-bs-theme="dark">
-                    <Container>
-                        <Navbar.Brand href={`/Home/${usuario}`}>Volver</Navbar.Brand>
-                        <Nav className="justify-content-center">
-                            <Nav.Link href={`/Empresas/${usuario}`}>Empresas</Nav.Link>
-                            <Nav.Link href={`/Droides/${usuario}`}>Droides</Nav.Link>
-                            <Nav.Link href={`/Estados/${usuario}`}>Estado</Nav.Link>
-                            <Nav.Link href={`/Modelos/${usuario}`}>Modelos</Nav.Link>
-                            <Nav.Link href={`/TipoDeProductos/${usuario}`}>Tipo de productos</Nav.Link>
-                        </Nav>
-                    </Container>
-                </Navbar>
+                    <Navbar bg="dark" data-bs-theme="dark">
+                        <Container>
+                            <Navbar.Brand href={`/Home/${usuario}`}>Volver</Navbar.Brand>
+                            <Nav className="justify-content-center">
+                                <Nav.Link href={`/Empresas/${usuario}`}>Empresas</Nav.Link>
+                                <Nav.Link href={`/Droides/${usuario}`}>Droides</Nav.Link>
+                                <Nav.Link href={`/Estados/${usuario}`}>Estado</Nav.Link>
+                                <Nav.Link href={`/Modelos/${usuario}`}>Modelos</Nav.Link>
+                                <Nav.Link href={`/TipoDeProductos/${usuario}`}>Tipo de productos</Nav.Link>
+                            </Nav>
+                        </Container>
+                    </Navbar>
                 </div>
 
                 <div className='containeButtonCargar'>
                     <Link to={`/AgregarVehiculos/${usuario}`}>
-                    <Button variant="dark">Cargar Vehiculos</Button>
+                        <Button variant="dark">Cargar Vehiculos</Button>
                     </Link>
+                </div>
+                
+                <div className='mensaje'>
+                    {mensaje}
                 </div>
 
                 <div className='containeTabla'>
@@ -97,17 +115,17 @@ function Vehiculos() {
                             {vehiculo.map((vehi) => (
                                 // eslint-disable-next-line react/jsx-key
                                 <tr>
-                                    
+
                                     <td>{vehi.nombre_vehiculos}</td>
                                     <td>{vehi.codigo}</td>
                                     <td>
                                         <Link to={`/ModificarVehiculos/${vehi.id_vehiculos}/${usuario}`}> <Button variant="warning">Editar</Button>{' '}</Link>
-                                        <Button variant="danger" onClick={(event) => borrarDato(event, vehi.id_vehiculos)} > Borrar </Button>{' '} 
+                                        <Button variant="danger" onClick={(event) => borrarDato(event, vehi.id_vehiculos)} > Borrar </Button>{' '}
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
-                        
+
                     </Table>
                 </div>
             </div>
