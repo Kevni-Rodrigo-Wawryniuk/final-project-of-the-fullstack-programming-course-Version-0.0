@@ -31,8 +31,6 @@ id_tipo_producto int,
 primary key(idempresas)
 );
 
-select * from stockst.empresas;
-
 -- tabla Droides
 create table droides(
 id_droides int not null auto_increment,
@@ -80,7 +78,7 @@ primary key (id_tipo_productos)
 -- por problemas de coneccion 
 
 -- con esto se pueden ver los usuarios
-select user, plugin from mysql.user;
+ select user, plugin from mysql.user;
 
 -- con esto se puede moficicar el usuario y conteraseña
-alter user 'root'@'localhost' identified with mysql_native_password by 'root';
+ alter user 'root'@'localhost' identified with mysql_native_password by 'root';
